@@ -6,7 +6,13 @@
  * Date: 16/4/5
  * Time: 14:57
  */
-class AppTest extends PHPUnit_Framework_TestCase
+
+namespace app\test;
+
+class AppTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function testApp(){
+
+    }
 }

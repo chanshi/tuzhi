@@ -5,3 +5,11 @@
  * Date: 16/4/5
  * Time: 14:51
  */
+
+namespace tuzhi\route;
+
+
+class Control
+{
+    
+}

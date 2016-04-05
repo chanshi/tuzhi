@@ -12,5 +12,20 @@ class Configure {
 
     protected static $config;
 
-    
+
+    public static function load( $file )
+    {
+
+    }
+
+    public static function get($key)
+    {
+
+    }
+
+    public static function set($key,$value)
+    {
+
+    }
+
 }

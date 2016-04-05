@@ -5,3 +5,18 @@
  * Date: 16/4/2
  * Time: 15:01
  */
+
+
+namespace tuzhi\route;
+
+
+class Route
+{
+    protected $name;
+
+    protected $patten;
+
+    protected $cache;
+
+    protected $params;
+}

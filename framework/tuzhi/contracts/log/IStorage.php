@@ -8,7 +8,21 @@
 
 namespace tuzhi\contracts\log;
 
+/**
+ * Interface IStorage
+ * @package tuzhi\contracts\log
+ */
+interface IStorage
+{
+    /**
+     * @param $message
+     * @return mixed
+     */
+    public function record ( $message ,$type );
 
-interface IStorage {
-    
+    /**
+     * 清除
+     * @return mixed
+     */
+    public function clean($type);
 }

@@ -43,11 +43,19 @@ class Arr {
         return end($array);
     }
 
+    /**
+     * @param array $array
+     * @return mixed
+     */
     public static function length( array $array )
     {
         return count($array);
     }
 
+    /**
+     * @param array $array
+     * @return bool
+     */
     public static function isAssoc( array $array)
     {
         $key = array_keys( $array );

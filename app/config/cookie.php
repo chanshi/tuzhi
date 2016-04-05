@@ -5,3 +5,14 @@
  * Date: 16/4/5
  * Time: 11:54
  */
+
+
+return
+    [
+        'cookie'=>
+            [
+                'class'=>'tuzhi\web\cookie\CookieCollect',
+                'expire'=> 60 * 60 * 24,
+                'path' =>'/'
+            ]
+    ];

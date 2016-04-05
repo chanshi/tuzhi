@@ -5,3 +5,11 @@
  * Date: 16/4/5
  * Time: 09:54
  */
+
+namespace tuzhi\web;
+
+
+class Header
+{
+
+}

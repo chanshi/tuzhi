@@ -20,7 +20,7 @@ class Request {
 
     public function __construct()
     {
-        
+
     }
 
     public function getSchema()
@@ -29,6 +29,11 @@ class Request {
     }
 
     public function getHost()
+    {
+
+    }
+
+    public function getDomain()
     {
 
     }
@@ -47,6 +52,11 @@ class Request {
 
     }
 
+
+    public function isCli(){
+        return php_sapi_name() == 'cli';
+    }
+    
     public function isAjax()
     {
 

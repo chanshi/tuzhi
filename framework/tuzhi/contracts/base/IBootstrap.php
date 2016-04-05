@@ -9,6 +9,12 @@
 namespace tuzhi\contracts\base;
 
 
+/**
+ * Interface IBootstrap
+ * @package tuzhi\contracts\base
+ */
 interface IBootstrap {
 
+
+    public function boot(  $application );
 }

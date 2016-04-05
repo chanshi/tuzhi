@@ -5,3 +5,14 @@
  * Date: 16/4/5
  * Time: 15:33
  */
+
+namespace tuzhi\di;
+
+
+class ServiceLocator
+{
+
+    private static $serves = [];
+
+    
+}
