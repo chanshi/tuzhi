@@ -12,10 +12,46 @@ use Closure;
 
 class Arr {
 
-    public static function each( array $array ,Closure $closure ){
+    public static function each( array $array ,Closure $closure )
+    {
         //TODO  array_walk
         foreach( $array as $key=>$value){
             call_user_func_array( $closure,[$key,$value] );
         }
+    }
+
+    /**
+     * 取数组头部
+     *
+     * @param array $array
+     * @return mixed
+     */
+    public static function head( array $array )
+    {
+        $a = $array;
+        return current(reset($a));
+    }
+
+    /**
+     * 取数组尾部
+     *
+     * @param array $array
+     * @return mixed
+     */
+    public static function tail( array $array)
+    {
+        return end($array);
+    }
+
+    public static function length( array $array )
+    {
+        return count($array);
+    }
+
+    public static function isAssoc( array $array)
+    {
+        $key = array_keys( $array );
+
+        return array_keys($key) != $key;
     }
 }

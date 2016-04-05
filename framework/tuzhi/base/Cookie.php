@@ -5,3 +5,20 @@
  * Date: 16/4/2
  * Time: 15:18
  */
+
+namespace tuzhi\base;
+
+
+class Cookie {
+
+    public $name;
+
+    public $value;
+
+
+
+    public function __construct()
+    {
+
+    }
+}

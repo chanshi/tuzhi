@@ -9,16 +9,23 @@
 namespace tuzhi\web;
 
 
-class Application extends \tuzhi\base\Application {
+final class Application extends \tuzhi\base\Application {
 
     public $request;
 
     public $route;
 
-    public $respond;
+    public $response;
 
     public function __construct( $config = [] ){
+
         parent::__construct( $config );
+
+        $this->init();
+    }
+
+    public function init(){
+
     }
 
     public function run(){

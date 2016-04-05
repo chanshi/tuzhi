@@ -29,8 +29,16 @@ class Tuzhi {
         ];
 
 
-    public static function setAlias($aliasName ,$aliasValue){
+    public static function setAlias( $aliasName ,$aliasValue ){
 
+    }
+
+    public static function getAlias( $aliasName ){
+        $aliasName = '&'.ltrim($aliasName,'&');
+        if(array_key_exists($aliasName,Tuzhi::$alias)){
+            return Tuzhi::$alias[$aliasName];
+        }
+        return null;
     }
 
     public static function createObject( $name ,array $parameters = [] ){
@@ -38,7 +46,14 @@ class Tuzhi {
     }
 
     public static function autoload( $className ){
-
+        if($className){
+            $className = ltrim($className,'\\');
+            if( strpos($className,'\\') !==false ){
+                $alias = array_shift(explode('\\',$className));
+            }
+            return false;
+        }
+        return false;
     }
 
     public static function config($object , $properties ){

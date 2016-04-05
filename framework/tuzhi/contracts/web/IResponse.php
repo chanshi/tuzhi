@@ -5,3 +5,12 @@
  * Date: 16/4/2
  * Time: 14:38
  */
+
+namespace tuzhi\contracts\web;
+
+
+interface IResponse {
+
+    public function send();
+    
+}
