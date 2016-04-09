@@ -8,7 +8,15 @@
 
 namespace tuzhi\base;
 
-class Configure {
+/**
+ * 配置文件  注意  @分类
+ *
+ * Class Configure
+ * @package tuzhi\base
+ */
+class Configure extends Serve{
+
+    public $serveName = 'config';
 
     protected static $config;
 

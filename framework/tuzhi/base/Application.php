@@ -28,7 +28,7 @@ class Application extends Object  implements IApplication
     /**
      * @var 服务
      */
-    protected static $serves;
+    protected static $serves = [];
 
 
     protected function __construct( $config = [] )
@@ -57,13 +57,12 @@ class Application extends Object  implements IApplication
         return static::$instance;
     }
 
+
     /**
-     *  需要DI
      * @param Serve $serve
-     * @param $alias
      */
-    public function register( Serve $serve  , $alias){
-        static::$serves[$alias] =  $serve;
+    public function register( Serve $serve ){
+        static::$serves[$serve->getServeName()] =  $serve ;
     }
 
     public function run(){}
@@ -72,11 +71,14 @@ class Application extends Object  implements IApplication
     /**
      * @param $serve
      * @param $arguments
-     * @for example  App::log(); App::config()
+     * @return $this
      */
     public static function __callStatic ($serve ,$arguments)
     {
-
+        if( array_key_exists( $serve ,static::$serves ) ){
+            return static::$serves[$serve];
+        }
+        return self;
     }
 
     /**
@@ -89,7 +91,7 @@ class Application extends Object  implements IApplication
                 'log'    => ''
             ];
         Arr::each($core,function($key,$value) use ($this){
-            $this->register($value,$key);
+            $this->register($value);
         });
     }
 

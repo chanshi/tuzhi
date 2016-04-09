@@ -9,6 +9,8 @@
 
 defined('TUZHI_PATH') or define('TUZHI_PATH',__DIR__);
 
+use tuzhi\di\Container;
+
 /**
  * Class Tuzhi
  */
@@ -37,6 +39,29 @@ class Tuzhi {
             '&tuzhi'=> __DIR__
         ];
 
+    /**
+     * 初始化
+     */
+    public static function init()
+    {
+        /**
+         *  定义 autoload
+         */
+        spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
+
+        /**
+         *  获取容器
+         */
+        if( ! static::$container instanceof  Container){
+            static::$container = Container::getInstance();
+        }
+
+        /**
+         *  获取APP
+         */
+
+    }
+
 
     /**
      * 设置别名
@@ -46,7 +71,7 @@ class Tuzhi {
      */
     public static function setAlias( $aliasName ,$aliasValue = null  ){
         if( $aliasValue === null && file_exists($aliasName)){
-            $alias  = require $aliasName;
+            $alias  = (require $aliasName);
             static::$alias = array_merge( static::$alias ,$alias['alias'] );
         }else if( is_string($aliasName) && ! empty( $aliasValue ) ){
             $field = '&'.ltrim($aliasName,'&');
@@ -64,18 +89,29 @@ class Tuzhi {
         return isset( static::$alias[$alias] ) ? static::$alias[$alias] : null;
     }
 
+
     /**
      * @param $name
      * @param array $parameters
+     * @return mixed
      */
-    public static function createObject( $name ,array $parameters = [] ){
-        if( ! static::$container instanceof  tuzhi\di\Container){
-            static::$container = tuzhi\di\Container::getInstance();
-        }
+    public static function make( $name ,array $parameters = [] ){
+
         if( is_string($name) ){
 
-        }else if(is_callable( $name )){
+            return Tuzhi::$container->get( $name ,$parameters );
+
+        }else if( is_callable( $name ) ){
+
             return call_user_func_array($name ,$parameters);
+
+        }else if( is_array( $name ) ){
+
+            return Tuzhi::$container->bulid( $name ,$parameters );
+
+        }else {
+            //TODO  抛出异常
+            throw \Exception::class();
         }
     }
 
@@ -84,10 +120,10 @@ class Tuzhi {
      * @return bool
      */
     public static function autoload( $className ){
-        //echo $className;
         if( isset( static::$loadedClassFiles[$className] ) ) return true;
         if(  ( $pos = strpos($className,'\\') ) > 0){
-            $classFile = Tuzhi::getAlias('&'.substr($className,0,$pos)).'/'. substr( str_replace('\\','/',$className),$pos+1).'.php';
+            $classFile = Tuzhi::getAlias('&'.substr($className,0,$pos)).'/'
+                . substr( str_replace('\\','/',$className),$pos+1).'.php';
 
             if(file_exists( $classFile )){
                 include $classFile;
@@ -128,9 +164,13 @@ class Tuzhi {
     public static function frameAuthor(){
         return "吾色禅师<wuse@chanshi.me>";
     }
+
+    public static function frameVersion()
+    {
+        return '1.0';
+    }
 }
 
-/**
- *  定义 autoload
- */
-spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
+
+
+Tuzhi::init();

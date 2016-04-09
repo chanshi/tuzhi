@@ -8,13 +8,13 @@
 
 return
     [
-        // 别名吧
+        // 别名
         'alias'=>
             [
                 '&app' => __DIR__.'../',
                 '&public' => __DIR__.'../public/',
                 '&runtime' =>__DIR__.'../runtime/',
                 '&resource' => __DIR__.'../resource/',
-                '&view'=>__DIR__.'../resource/view'
+                '&view'=>__DIR__.'../resource/view/'
             ]
     ];

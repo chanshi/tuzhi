@@ -15,8 +15,45 @@ class Response implements IResponse{
 
     protected $header;
 
-    public function send()
+    protected $content;
+
+    public function sendHeader()
     {
 
+    }
+
+    public function sendContent()
+    {
+        if( $this->content ){
+            echo $this->content;
+        }
+        return;
+    }
+
+    public function send()
+    {
+        $this->sendHeader();
+        $this->sendContent();
+    }
+
+
+    /**
+     * Initializes HTTP request formats.
+     * @see \Symfony\Component\HttpFoundation\Request
+     */
+    protected static function initializeFormats()
+    {
+        static::$formats = array(
+            'html' => array('text/html', 'application/xhtml+xml'),
+            'txt' => array('text/plain'),
+            'js' => array('application/javascript', 'application/x-javascript', 'text/javascript'),
+            'css' => array('text/css'),
+            'json' => array('application/json', 'application/x-json'),
+            'xml' => array('text/xml', 'application/xml', 'application/x-xml'),
+            'rdf' => array('application/rdf+xml'),
+            'atom' => array('application/atom+xml'),
+            'rss' => array('application/rss+xml'),
+            'form' => array('application/x-www-form-urlencoded'),
+        );
     }
 }

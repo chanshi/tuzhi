@@ -19,7 +19,7 @@ Tuzhi::setAlias( __DIR__.'/../config/alias.php');
 /**
  * 创建应用
  */
-$app = Tuzhi::createObject(
+$app = Tuzhi::make(
     'tuzhi\web\Application',
     require __DIR__.'/../config/app.php'
 );

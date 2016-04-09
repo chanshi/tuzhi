@@ -9,9 +9,16 @@
 namespace tuzhi\base;
 
 
+/**
+ * Class Object
+ * @package tuzhi\base
+ */
 class Object
 {
 
+    /**
+     * @param array $config
+     */
     public function __configure(array $config = [])
     {
         if(!empty( $config )){
@@ -19,6 +26,9 @@ class Object
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function getClassName()
     {
         return get_class( __CLASS__ );

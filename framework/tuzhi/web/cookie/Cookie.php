@@ -11,19 +11,41 @@ namespace tuzhi\web\cookie;
 
 class Cookie {
 
+    /**
+     * @var
+     */
     public $name;
 
+    /**
+     * @var null
+     */
     public $value;
 
+    /**
+     * @var
+     */
     public $expire;
 
+    /**
+     * @var string
+     */
     public $path;
 
+    /**
+     * @var
+     */
     public $domain;
 
+    /**
+     * @var bool
+     */
     public $secure;
 
-    public $httponly;
+    /**
+     * @var bool
+     */
+    public $httpOnly;
+
 
     /**
      * Cookie constructor.
@@ -31,18 +53,18 @@ class Cookie {
      * @param null $value
      * @param int $expire
      * @param string $path
-     * @param $domain
+     * @param string $domain
      * @param bool $secure
-     * @param bool $httponly
+     * @param bool $httpOnly
      */
-    public function __construct($name , $value = null ,$expire = 0 ,$path = '/' ,$domain = '' ,$secure = true ,$httponly = true)
+    public function __construct($name , $value = null ,$expire = 0 ,$path = '/' ,$domain = '' ,$secure = true ,$httpOnly = true)
     {
         $this->name = $name;
         $this->value = $value;
         $this->expire = time() + $expire;
         $this->path = $path;
         $this->domian =  empty($domain) ? \Tuzhi::$app->request->getDomain() : $domain ;
-        $this->secure = $secure;
-        $this->httponly = $httponly;
+        $this->secure = (boolean) $secure;
+        $this->httpOnly = (boolean) $httpOnly;
     }
 }

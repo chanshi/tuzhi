@@ -32,7 +32,8 @@ return
                                         'savePath'  => 'log/',
                                         'orgFormat' => '{year}/{month}'
                                     ],
-                                'allow' => 7
+                                'allow' => 7,
+                                'pattern'=> '{time}{message}'
 
                             ],
                         'request'=>

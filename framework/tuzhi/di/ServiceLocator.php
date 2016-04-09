@@ -8,11 +8,16 @@
 
 namespace tuzhi\di;
 
-
+/**
+ * 服务等位
+ *
+ * Class ServiceLocator
+ * @package tuzhi\di
+ */
 class ServiceLocator
 {
 
-    private static $serves = [];
+    protected $container;
 
     
 }
