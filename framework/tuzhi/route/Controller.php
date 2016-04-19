@@ -9,7 +9,7 @@
 namespace tuzhi\route;
 
 
-class Control
+class Controller
 {
     
 }
