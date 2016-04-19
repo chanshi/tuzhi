@@ -8,9 +8,16 @@
 
 namespace tuzhi\contracts\web;
 
+/**
+ * Interface IResponse
+ * @package tuzhi\contracts\web
+ */
+interface IResponse
+{
 
-interface IResponse {
-
+    /**
+     * @return mixed
+     */
     public function send();
     
 }

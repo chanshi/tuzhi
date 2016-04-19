@@ -9,6 +9,12 @@
 namespace tuzhi\route;
 
 
+/**
+ * 控制器
+ * 
+ * Class Controller
+ * @package tuzhi\route
+ */
 class Controller
 {
     

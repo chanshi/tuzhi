@@ -7,6 +7,8 @@
  */
 
 namespace tuzhi\di;
+use tuzhi\base\exception\InvalidParamException;
+use tuzhi\base\exception\NotFoundMethodException;
 
 /**
  * 容器  依赖注入
@@ -57,20 +59,20 @@ class Container
         return static::$instance;
     }
 
-
     /**
-     * 
      * @param $name
      * @param array $param
+     * @param array $config
      * @return mixed|null
+     * @throws InvalidParamException
      */
-    public function get( $name ,$param = [] )
+    public function get( $name ,$param = [] ,$config= [])
     {
         if( isset($this->container[$name]) ){
             return $this->container[$name];
         }
         if( ! isset( $this->definition[$name] ) ){
-            return $this->build($name,$param);
+            return $this->build($name,$param ,$config);
         }
 
         $definition = $this->definition[$name];
@@ -84,19 +86,21 @@ class Container
             $class = $definition['class'];
             unset($definition['class']);
 
+            $config = array_merge( $definition ,$config );
             $object = null;
 
             if( $name === $class ){
-                $object = $this->get($class ,$definition);
+                $object = $this->get( $name ,$param ,$config);
             }else{
-                $object = $this->build($class,$definition);
+                $object = $this->build( $class ,$param ,$config);
             }
 
             $this->container[$name] = $object;
 
             return $object;
         }
-        //TODO: 异常
+
+        throw new InvalidParamException( 'Invalid Param Not Found Class Or Definition' );
     }
 
     /**
@@ -119,9 +123,10 @@ class Container
     /**
      * @param $class
      * @param $params
+     * @param $config
      * @return mixed
      */
-    public function build($class ,$params )
+    public function build($class ,$params ,$config)
     {
         list( $reflection ,$dependent ) = $this->getDependent($class);
 
@@ -130,8 +135,23 @@ class Container
         }
 
         $dependent = $this->resolveDependent($dependent,$reflection);
+        
+        if( empty( $config) ){
 
-        return $reflection->newInstanceArgs($dependent);
+            return $reflection->newInstanceArgs ($dependent);
+        }
+
+        if( !empty($dependent) && $reflection->implementsInterface('tuzhi\contracts\base\IObject') ){
+            $dependent[count($dependent) - 1] = $config;
+            return $reflection->newInstanceArgs($dependent);
+        }else{
+            $instance = $reflection->newInstanceArgs($dependent);
+            foreach( $config as $key=>$value )
+            {
+                $instance->{$key} = $value;
+            }
+            return $instance;
+        }
     }
 
 
@@ -141,7 +161,7 @@ class Container
      */
     public function getDependent( $class ) {
         // 缓存
-        if( $this->reflection[$class] ){
+        if( isset( $this->reflection[$class] ) ){
             return [ $this->reflection[$class] ,$this->dependent[$class] ];
         }
 
@@ -171,6 +191,7 @@ class Container
      * @param $dependent
      * @param null $reflection
      * @return Instance
+     * @throws NotFoundMethodException
      */
     public function resolveDependent( $dependent ,$reflection = null )
     {
@@ -179,9 +200,11 @@ class Container
                 if( $dependent->name ){
                     $dependent[$index] = $dependent->get();
                 }else if( $reflection != null ){
-                    //TODO: 抛出异常
+
                     $method = $reflection->getConstructor()->getParameters()[$index]->getName();
                     $class = $reflection->getName();
+
+                    throw new NotFoundMethodException('The '.$class.' Not Found Method '.$method.' In Container::resolvDependent ');
                 }
             }
         }
@@ -189,11 +212,10 @@ class Container
     }
 
     /**
-     * 规范 定义体
-     *
      * @param $class
      * @param $definition
      * @return array
+     * @throws InvalidParamException
      */
     protected function normalizeDefinition( $class , $definition )
     {
@@ -212,12 +234,12 @@ class Container
                 if( strpos($class ,'\\') !==false ){
                     $definition['class'] = $class;
                 }else{
-                    //TODO: 抛出异常  没有类定义
+                    throw new InvalidParamException( 'Invalid Param Class not definition ');
                 }
             }
             return $definition;
         }else {
-            //TODO:  抛出异常
+            throw new InvalidParamException( 'Invalid Param '.$class.' And Param '.$definition.'' );
         }
     }
 

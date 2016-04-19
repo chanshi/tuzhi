@@ -5,3 +5,14 @@
  * Date: 16/4/19
  * Time: 23:28
  */
+
+namespace tuzhi\base\exception;
+
+
+class NotFoundFilesException extends Exception
+{
+    public function getName()
+    {
+        return 'Not Found Files';
+    }
+}

@@ -8,8 +8,7 @@
 
 namespace app\control;
 
-
-use tuzhi\route\Control;
+use tuzhi\route\Controller;
 
 /**
  * 演示
@@ -17,12 +16,17 @@ use tuzhi\route\Control;
  * Class Index
  * @package app\control
  */
-class Index extends Control
+class Index extends Controller
 {
     public $middleWare = [];
 
     public function IndexAction()
     {
         return 'This is Control: Hellow Wold;';
+    }
+
+    public function testAction()
+    {
+        return 'This is Test Control';
     }
 }

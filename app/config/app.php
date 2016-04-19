@@ -11,9 +11,8 @@ return
         'app' =>
             [
                 // 基本
-                'charset' => 'utf8',
+                'charset' => 'utf-8',
                 'timezone' => 'PRC' ,
-                'appPath' => __DIR__.'../',
                 'environment' => 'production',
                 // 启动
                 'bootstrap'=>
@@ -21,31 +20,27 @@ return
 
                     ],
                 //服务
-                'serve' =>
+                'server' =>
                     [
                         'log'=>
                             [
                                 'class' => 'tuzhi\log\Log',
                                 'storage' =>
                                     [
-                                        'class'     =>'tuzhi\log\storage\File',
-                                        'savePath'  => 'log/',
+                                        'class'     => 'tuzhi\log\storage\File',
+                                        'savePath'  => '&runtime/log/',
                                         'orgFormat' => '{year}/{month}'
                                     ],
                                 'allow' => 7,
                                 'pattern'=> '{time}{message}'
-
                             ],
                         'request'=>
                             [
                                 'class'=>'tuzhi\web\Request',
-                                'session'=>'@session',
-                                'cookie'=>'@cookie'
                             ],
                         'router'=>
                             [
                                 'class'=>'tuzhi\route\Router',
-                                'request'=>'@request'
                             ],
                         'response'=>
                             [
@@ -53,11 +48,7 @@ return
                             ],
                         'errorHandler'=>
                             [
-                                'class'=>'tuzhi\base\Error',
-                            ],
-                        'exceptionHandler'=>
-                            [
-                                'class'=>'tuzhi\base\Exception'
+                                'class'=>'tuzhi\web\ErrorHandler'
                             ]
                     ],
                 //中间件

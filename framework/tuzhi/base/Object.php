@@ -9,11 +9,13 @@
 namespace tuzhi\base;
 
 
+use tuzhi\contracts\base\IObject;
+
 /**
  * Class Object
  * @package tuzhi\base
  */
-class Object
+class Object implements IObject
 {
 
     /**
@@ -32,5 +34,10 @@ class Object
     public static function getClassName()
     {
         return get_class( __CLASS__ );
+    }
+
+
+    public function init() {
+
     }
 }

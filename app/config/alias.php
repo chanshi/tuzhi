@@ -11,10 +11,10 @@ return
         // 别名
         'alias'=>
             [
-                '&app' => __DIR__.'../',
-                '&public' => __DIR__.'../public/',
-                '&runtime' =>__DIR__.'../runtime/',
-                '&resource' => __DIR__.'../resource/',
-                '&view'=>__DIR__.'../resource/view/'
+                '&app' => APP_PATH,
+                '&public' => APP_PATH.'/public',
+                '&runtime' =>APP_PATH.'/runtime',
+                '&resource' => APP_PATH.'/resource',
+                '&view'=>APP_PATH.'/resource/view'
             ]
     ];

@@ -12,96 +12,171 @@ namespace tuzhi\base;
 use tuzhi\contracts\base\IApplication;
 use tuzhi\helper\Arr;
 
-class Application extends Object  implements IApplication
+/**
+ * Class Application
+ * @package tuzhi\base
+ */
+abstract class Application extends Object  implements IApplication
 {
-
+     /**
+      * @var
+      */
     public $charset;
 
+     /**
+      * @var
+      */
     public $timezone;
 
+     /**
+      * @var
+      */
     public $appPath;
 
+     /**
+      * @var
+      */
     public $environment;
 
-    protected static $instance;
+     /**
+      * @var array
+      */
+    public $bootstrap = [];
 
     /**
-     * @var 服务
+     * @var
      */
-    protected static $serves = [];
+    public $server;
+
+    /**
+     * @var 服务定位
+     */
+    protected static $locator = null;
 
 
+     /**
+      * Application constructor.
+      * @param array $config
+      */
     protected function __construct( $config = [] )
     {
         parent::__configure($config);
 
+        \Tuzhi::$app = $this;
+
         $this->init();
     }
 
-    protected function init()
+    public function init()
     {
-        // regist serve
+        static::$locator = \Tuzhi::make(
+            'tuzhi\di\ServiceLocator',
+            [$this->server]
+        );
 
-        // boot
-    }
-
-    /**
-     * 获取实例
-     * @return mixed
-     */
-    public static function getInstance()
-    {
-        if( ! static::$instance instanceof IApplication ){
-            static::$instance = new static();
-        }
-        return static::$instance;
-    }
-
-
-    /**
-     * @param Serve $serve
-     */
-    public function register( Serve $serve ){
-        static::$serves[$serve->getServeName()] =  $serve ;
-    }
-
-    public function run(){}
-
-
-    /**
-     * @param $serve
-     * @param $arguments
-     * @return $this
-     */
-    public static function __callStatic ($serve ,$arguments)
-    {
-        if( array_key_exists( $serve ,static::$serves ) ){
-            return static::$serves[$serve];
-        }
-        return self;
-    }
-
-    /**
-     * 注册核心
-     */
-    protected function registerCore(){
-        $core =
-            [
-                'config' => 'tuzhi\base\Configure',
-                'log'    => ''
-            ];
-        Arr::each($core,function($key,$value) use ($this){
-            $this->register($value);
+        /**
+         * boot
+         */
+        Arr::each( $this->bootCore(),function($key ,$value) {
+            \Tuzhi::$app->bootstrap($value);
         });
     }
 
-    protected function boots()
+    /**
+     * @return mixed
+     */
+    public function session()
     {
-        $boot =
-            [
-                'tuzhi\base\bootstrap\BaseSetBoot',
-                'tuzhi\base\bootstrap\ProductEnvBoot'
-            ];
-        
+        return static::$locator->get('session');
     }
+
+    /**
+     * @return mixed
+     */
+    public function request()
+    {
+        return static::$locator->get('request');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function errorHandler()
+    {
+        return static::$locator->get('errorHandler');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function router()
+    {
+        return static::$locator->get('router');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function response()
+    {
+        return static::$locator->get('response');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function log()
+    {
+        return static::$locator->get('log');
+    }
+
+
+    public function registerServer( $name , $params )
+    {
+        static::$locator->set( $name ,$params );
+    }
+
+    /**
+     *
+     */
+     abstract public function run();
+
+    /**
+     * @return array
+     */
+    protected function bootCore()
+    {
+        return array_merge(
+            [
+                'tuzhi\base\bootstrap\ApplicationBoot'
+            ],
+            $this->bootstrap
+        );
+    }
+
+    /**
+     * @param $boot
+     */
+    public function bootstrap( $boot )
+    {
+        call_user_func([  \Tuzhi::make( $boot )  ,'boot'] ,$this);
+    }
+    
+
+    /**
+     * @return array
+     */
+    protected function serverCore()
+    {
+        return
+            [
+                'log'=>'',
+                'session'=>'',
+                'request'=>'',
+                'response'=>'',
+                'router'=>'',
+                'errorHandler'=>''
+            ];
+    }
+
 }

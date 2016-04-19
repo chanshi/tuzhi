@@ -9,7 +9,7 @@
 namespace tuzhi\base;
 
 
-abstract class ErrorHandler extends Serve
+abstract class ErrorHandler extends Server
 {
     /**
      * @var
@@ -27,7 +27,7 @@ abstract class ErrorHandler extends Serve
     /**
      * 注册
      */
-    public function register()
+    public function start()
     {
         //关闭错误显示  移交错误处理
         ini_set('display_errors', false);
@@ -37,6 +37,8 @@ abstract class ErrorHandler extends Serve
         set_exception_handler([$this,'handlerException']);
         // 定义 最高级别错误 处理函数
         register_shutdown_function([$this,'handlerFatalError']);
+
+        parent::start();
     }
 
     /**
@@ -62,6 +64,10 @@ abstract class ErrorHandler extends Serve
      */
     public function handlerError ( $code , $message , $file , $line )
     {
+        if( !class_exists('tuzhi\base\ErrorException',false) ){
+            require_once( __DIR__ ."/ErrorException.php");
+        }
+
         // 检查是否允许处理
         if( error_reporting() & $code ){
 
@@ -78,7 +84,7 @@ abstract class ErrorHandler extends Serve
      */
     public function handlerException( $exception )
     {
-        
+
         $this->exception = $exception;
 
         // 禁止 递归捕获
@@ -115,11 +121,12 @@ abstract class ErrorHandler extends Serve
         }
 
         $error = error_get_last();
+        
 
         if( ErrorException::isFatalError($error) ){
 
             $exception = new ErrorException($error['message'],$error['type'] ,$error['type'] ,$error['file'] ,$error['line']);
-
+            
             $this->clearOutput();
             $this->renderException($exception);
 

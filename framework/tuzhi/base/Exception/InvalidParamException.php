@@ -5,3 +5,13 @@
  * Date: 16/4/19
  * Time: 23:32
  */
+
+namespace tuzhi\base\exception;
+
+class InvalidParamException extends Exception
+{
+    public function getName()
+    {
+        return 'Invalid Param';
+    }
+}

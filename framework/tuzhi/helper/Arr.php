@@ -38,7 +38,7 @@ class Arr {
      * @param array $array
      * @return mixed
      */
-    public static function tail( array $array)
+    public static function last( array $array)
     {
         return end($array);
     }

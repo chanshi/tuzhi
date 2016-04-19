@@ -9,23 +9,106 @@
 
 namespace tuzhi\route;
 
-class Router
-{
-    public static $route;
+use tuzhi\base\exception\NotFoundMethodException;
+use tuzhi\base\Server;
+use tuzhi\contracts\route\IRouter;
+use tuzhi\contracts\web\IRequest;
+use tuzhi\contracts\web\IResponse;
 
-    public static $via = ['GET','POST'];
+class Router extends Server implements IRouter
+{
+    /**
+     * @var null
+     */
+    public static $routeCollection = null;
 
     /**
-     *
-     * @param $via
-     * @param $args
+     * @var
      */
-    public static function __callStatic( $via , $args ){
+    protected $currentRoute;
 
-    }
+    /**
+     * @var
+     */
+    protected $dispatch;
 
-    public static function addRule( $rule = [] )
+    /**
+     * @param array $config
+     */
+    public function __configure(array $config = [])
     {
-
+        parent::__configure($config);
     }
+
+    public function init()
+    {
+        if( static::$routeCollection == null ){
+            static::$routeCollection = new RouteCollection();
+        }
+    }
+
+    /**
+     * 启动服务
+     */
+    public function start()
+    {
+        //TODO: 优化 加载缓存路由
+        $this->init();
+        //加载路由
+
+        parent::start();
+    }
+
+    /**
+     * @param IRequest $request
+     * @param IResponse $response
+     * @return mixed
+     * @throws \tuzhi\base\exception\InvalidParamException
+     */
+    public function handler( IRequest $request ,IResponse $response){
+
+        $this->currentRoute = static::$routeCollection->findRoute( $request );
+
+        if(  $this->currentRoute->getAction() instanceof \Closure ){
+            $this->dispatch = \Tuzhi::make(
+                'tuzhi\route\ClosureDispatch',
+                [$this->currentRoute]
+            );
+        }else {
+            $this->dispatch = \Tuzhi::make(
+                'tuzhi\route\ControllerDispatch',
+                [$this->currentRoute]
+            );
+        }
+        $this->dispatch->dispatch();
+        
+        $response->setContent( $this->dispatch->getContent()  );
+    }
+
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     * @throws NotFoundMethodException
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        if( static::$routeCollection == null ){
+            static::$routeCollection = new RouteCollection();
+        }
+
+        //Add Route
+        if( in_array( strtoupper($name), static::$routeCollection->getAllowMethod() ) ){
+
+            array_unshift($arguments ,$name);
+
+            return call_user_func_array([static::$routeCollection,'addRoute'] ,$arguments);
+
+        }else{
+
+            throw new NotFoundMethodException('Not Found Static Method '.$name.' in Router ');
+        }
+    }
+
 }

@@ -5,3 +5,21 @@
  * Date: 16/4/19
  * Time: 14:59
  */
+
+namespace tuzhi\base\exception;
+
+/**
+ * Class Exception
+ * @package tuzhi\base\exception
+ */
+class Exception extends \Exception
+{
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'Exception';
+    }
+}

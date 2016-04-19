@@ -21,7 +21,7 @@ class ErrorException extends \ErrorException {
      * @param int $lineNo
      * @param \Exception $previous
      */
-    public function __construct($message, $code = 0, $severity = 0, $filename, $lineNo, \Exception $previous)
+    public function __construct($message, $code = 0, $severity = 0, $filename, $lineNo, \Exception $previous =null)
     {
         parent::__construct($message, $code, $severity, $filename, $lineNo, $previous);
     }
