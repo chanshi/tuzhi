@@ -15,6 +15,7 @@ return
                 '&public' => APP_PATH.'/public',
                 '&runtime' =>APP_PATH.'/runtime',
                 '&resource' => APP_PATH.'/resource',
-                '&view'=>APP_PATH.'/resource/view'
+                '&view'=>APP_PATH.'/resource/view',
+                '&web'=> APP_PATH.'/public'
             ]
     ];
