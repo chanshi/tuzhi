@@ -47,6 +47,11 @@ class Tuzhi {
     public static function init()
     {
         /**
+         * 添加对插件的支持
+         */
+        Tuzhi::$alias['&tz'] =dirname(__DIR__).'/tuzhi-';
+
+        /**
          *  定义 autoload
          */
         spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
@@ -122,8 +127,14 @@ class Tuzhi {
     public static function autoload( $className ){
         if( isset( static::$loadedClassFiles[$className] ) ) return true;
         if(  ( $pos = strpos($className,'\\') ) > 0){
-            $classFile = rtrim( Tuzhi::getAlias('&'.substr($className,0,$pos)),'/' ).'/'
-                . substr( str_replace('\\','/',$className),$pos+1).'.php';
+            if( strpos( $className ,'tz' ) === 0 ){
+                $classFile = rtrim( Tuzhi::getAlias('&'.substr($className,0,$pos)),'/' )
+                    . substr( str_replace('\\','/',$className),$pos+1).'.php';
+            }else{
+                $classFile = rtrim( Tuzhi::getAlias('&'.substr($className,0,$pos)),'/' ).'/'
+                    . substr( str_replace('\\','/',$className),$pos+1).'.php';
+            }
+
 
             if(file_exists( $classFile )){
                 include $classFile;
@@ -137,14 +148,24 @@ class Tuzhi {
     }
 
     /**
+     * &tz/
+     *
      * @param $file
      * @return mixed
      */
     public static function alias( $file )
     {
-        if(  substr($file,0,1) == '&'  && ($pos = strpos( $file,'/')) > 0 ){
-            $alias = substr($file,0,$pos);
-            $file = str_replace( $alias , Tuzhi::getAlias($alias) ,$file );
+        if( substr($file,0,4) == '&tz/' ){
+            return str_replace( '&tz/' ,Tuzhi::getAlias('&tz') ,$file );
+        }
+
+        if(  substr($file,0,1) == '&'   ){
+            if( ($pos = strpos( $file,'/')) > 0 ){
+                $alias = substr($file,0,$pos);
+                $file = str_replace( $alias , Tuzhi::getAlias($alias) ,$file );
+            }else{
+                $file = Tuzhi::getAlias($file);
+            }
         }
         return $file;
     }

@@ -5,3 +5,11 @@
  * Date: 16/4/22
  * Time: 11:03
  */
+
+namespace tuzhi\contracts\view;
+
+
+interface IEngine
+{
+    public function render( $file ,$param = [] );
+}

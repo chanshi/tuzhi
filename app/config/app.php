@@ -49,6 +49,17 @@ return
                         'errorHandler'=>
                             [
                                 'class'=>'tuzhi\web\ErrorHandler'
+                            ],
+                        'view'=>
+                            [
+                                'class'=>'tuzhi\view\View',
+                                'theme'=>
+                                    [
+                                        'class'   => 'tuzhi\view\Theme',
+                                        'webPath' => '&web',
+                                        'webUrl'  => '/',
+                                        'basePath'=> '&resource'
+                                    ]
                             ]
                     ],
                 //中间件

@@ -26,6 +26,12 @@ class Object implements IObject
         if(!empty( $config )){
             \Tuzhi::config($this,$config);
         }
+        $this->init();
+    }
+
+    public function __construct(array $config = []  )
+    {
+        return $this->__configure($config);
     }
 
     /**
@@ -37,7 +43,5 @@ class Object implements IObject
     }
 
 
-    public function init() {
-
-    }
+    public function init() {}
 }

@@ -9,6 +9,7 @@
 namespace tuzhi\base;
 
 
+use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\contracts\base\IApplication;
 use tuzhi\helper\Arr;
 
@@ -58,11 +59,11 @@ abstract class Application extends Object  implements IApplication
       * Application constructor.
       * @param array $config
       */
-    protected function __construct( $config = [] )
+    public function __construct( $config = [] )
     {
-        parent::__configure($config);
-
         \Tuzhi::$app = $this;
+
+        parent::__configure($config);
 
         $this->init();
     }
@@ -77,7 +78,7 @@ abstract class Application extends Object  implements IApplication
         /**
          * boot
          */
-        Arr::each( $this->bootCore(),function($key ,$value) {
+        Arr::each( $this->bootCore(),function($key ,$value)  {
             \Tuzhi::$app->bootstrap($value);
         });
     }
@@ -130,6 +131,11 @@ abstract class Application extends Object  implements IApplication
         return static::$locator->get('log');
     }
 
+    public function view()
+    {
+        return static::$locator->get('view');
+    }
+
 
     public function registerServer( $name , $params )
     {
@@ -177,6 +183,18 @@ abstract class Application extends Object  implements IApplication
                 'router'=>'',
                 'errorHandler'=>''
             ];
+    }
+
+
+    public static function __callStatic($method, $arguments)
+    {
+        $app = \Tuzhi::$app;
+
+        if( method_exists( $app ,$method )  ){
+            return call_user_func_array( [$app ,$method] ,$arguments );
+        }else{
+            throw new NotFoundMethodException( 'Not Found Method Application::'.$method.' ' );
+        }
     }
 
 }
