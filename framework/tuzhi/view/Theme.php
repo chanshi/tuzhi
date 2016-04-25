@@ -41,8 +41,7 @@ class Theme extends Object
     public function __construct(array $config = [])
     {
         parent::__construct($config);
-
-        $this->init();
+        
     }
 
     /**
@@ -75,7 +74,7 @@ class Theme extends Object
      */
     public function getLayoutPath()
     {
-        return $this->getBasePath().'/layout';
+        return $this->getBasePath().'/layout/';
     }
 
     /**
@@ -94,7 +93,7 @@ class Theme extends Object
      */
     public function getAssetPath()
     {
-        return $this->getBasePath().'/asset';
+        return $this->getBasePath().'/asset/';
     }
 
     /**

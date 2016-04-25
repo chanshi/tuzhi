@@ -11,6 +11,13 @@ namespace tuzhi\view;
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\helper\File;
 
+
+//TODO:: 需要重构规则
+
+/**
+ * Class AssetManage
+ * @package tuzhi\view
+ */
 class AssetManage
 {
     /**
@@ -133,7 +140,7 @@ class AssetManage
         $asset->webUrl = $asset->webUrl ? $asset->webUrl : $this->theme->getWebUrl();
 
         $asset->webUrl = rtrim($asset->webUrl,'/').'/';
-        
+
         $this->pageBuilder->registerJsFile( $asset->webUrl . $jsFile);
     }
 

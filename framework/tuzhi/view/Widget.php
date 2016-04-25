@@ -57,7 +57,6 @@ abstract class Widget extends Object
         $widget = array_pop( Widget::$stack );
         if( get_class($widget) == get_called_class() ){
             return $widget->run();
-            //return $widget;
         }else{
             throw new InvalidParamException('Not found Widget '.get_called_class().' ');
         }

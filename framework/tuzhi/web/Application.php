@@ -42,8 +42,6 @@ class Application extends \tuzhi\base\Application {
 
             $router  = $this->router();
 
-            //print_r($_SERVER);exit;
-
             $router->handler( $request ,$response ) ;
 
             $response->send();

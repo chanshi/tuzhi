@@ -49,7 +49,7 @@ class Tuzhi {
         /**
          * 添加对插件的支持
          */
-        Tuzhi::$alias['&tz'] =dirname(__DIR__).'/tuzhi-';
+        Tuzhi::$alias['&tz'] = dirname(__DIR__).'/tuzhi-';
 
         /**
          *  定义 autoload
