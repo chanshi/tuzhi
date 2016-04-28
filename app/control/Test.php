@@ -10,9 +10,8 @@ namespace app\control;
 
 
 use tuzhi\route\Controller;
-
-
-use tuzhi\web\Application;
+use tuzhi\log\Log;
+use tuzhi\cache\Cache;
 
 /**
  * Class Test
@@ -27,6 +26,15 @@ class Test extends Controller
      */
     public function  ViewAction()
     {
+
+        Log::Notice('test');
+
+
+        //Cache::File()->set('test',1);
+
+
+
+        //return  Cache::File()->increment('test');
 
         return \Tuzhi::$app->view()->renderPage('index/index');
     }

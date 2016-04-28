@@ -63,9 +63,7 @@ abstract class Application extends Object  implements IApplication
     {
         \Tuzhi::$app = $this;
 
-        parent::__configure($config);
-
-        $this->init();
+        parent::__construct($config);
     }
 
     public function init()

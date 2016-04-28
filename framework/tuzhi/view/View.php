@@ -32,12 +32,7 @@ class View  extends Server implements IView
      * @var 风格
      */
     public $theme;
-
-
-    public function __construct( $config = [] )
-    {
-        parent::__configure($config);
-    }
+    
 
     public function init()
     {

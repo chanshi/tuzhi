@@ -6,4 +6,11 @@
  * Time: 21:53
  */
 
-namespace tuzhi;
+namespace tuzhi\model;
+
+
+
+class Model
+{
+    
+}

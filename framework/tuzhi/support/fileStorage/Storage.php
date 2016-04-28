@@ -5,3 +5,11 @@
  * Date: 16/4/27
  * Time: 14:36
  */
+
+namespace tuzhi\support\fileStorage;
+
+
+class Storage
+{
+    
+}

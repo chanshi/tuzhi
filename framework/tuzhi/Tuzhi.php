@@ -29,6 +29,11 @@ class Tuzhi {
     protected static $container;
 
     /**
+     * @var
+     */
+    protected static $configure;
+
+    /**
      * @var array
      */
     protected static $loadedClassFiles = [];
@@ -41,15 +46,22 @@ class Tuzhi {
             '&tuzhi'=> __DIR__
         ];
 
+    protected static $autoload =
+        [
+            'tuzhi'=> __DIR__
+        ];
+
     /**
-     * 初始化
+     * @param array $config
+     * @throws InvalidParamException
      */
-    public static function init()
+    public static function init( $config = [] )
     {
         /**
          * 添加对插件的支持
          */
         Tuzhi::$alias['&tz'] = dirname(__DIR__).'/tuzhi-';
+        Tuzhi::$autoload['tz'] = Tuzhi::$alias['&tz'];
 
         /**
          *  定义 autoload
@@ -62,6 +74,27 @@ class Tuzhi {
         if( ! static::$container instanceof  Container){
             static::$container = Container::getInstance();
         }
+
+        /**
+         * 启用 Config
+         */
+        static::$configure = Tuzhi::make( $config );
+
+        /**
+         * 配置 别名
+         */
+
+        static::$alias  = array_merge( static::$alias , Tuzhi::config( 'alias' ));
+
+        /**
+         *  配置 自动加载
+         */
+        static::$autoload  = array_merge( static::$autoload , Tuzhi::config( 'autoload' ));
+
+        /**
+         * 启用 APP
+         */
+        Tuzhi::make( Tuzhi::config('app') );
     }
 
 
@@ -71,24 +104,104 @@ class Tuzhi {
      * @param $aliasName
      * @param null $aliasValue
      */
-    public static function setAlias( $aliasName ,$aliasValue = null  ){
-        if( $aliasValue === null && file_exists($aliasName)){
-            $alias  = require_once($aliasName);
-            static::$alias = array_merge( static::$alias ,$alias['alias'] );
-        }else if( is_string($aliasName) && ! empty( $aliasValue ) ){
-            $field = '&'.ltrim($aliasName,'&');
-            static::$alias[$field] = $aliasValue;
+    public static function setAlias( $aliasName ,$aliasValue = null )
+    {
+        if( is_string($aliasName) && is_dir( $aliasValue ) ){
+            $aliasName = '&'.ltrim($aliasName,'&');
+            $aliasValue = rtrim($aliasValue,'/').'/';
+            Tuzhi::$alias[$aliasName] = $aliasValue;
         }
     }
 
     /**
-     * 获取
+     * 简单了
+     *
      * @param $aliasName
      * @return mixed|null
      */
-    public static function getAlias( $aliasName ){
-        $alias = '&'.ltrim($aliasName,'&');
-        return isset( static::$alias[$alias] ) ? static::$alias[$alias] : null;
+    public static function getAlias( $aliasName )
+    {
+        if( strpos($aliasName,'&') === 0 ){
+
+            if( strpos($aliasName,'&tz/') === 0 ){
+                return str_replace( '&tz/' ,static::$alias['&tz'] ,$aliasName );
+            }else if( ($pos = strpos( $aliasName ,'/' ) ) > 0 ){
+                $alias = substr($aliasName ,0 ,$pos);
+                return str_replace( rtrim( $alias,'/') , static::$alias[$alias] ,$aliasName );
+            }else{
+                return isset( static::$alias[$aliasName] )
+                    ? static::$alias[$aliasName]
+                    : null;
+            }
+        }else{
+            return $aliasName;
+        }
+    }
+
+    /**
+     * 别名把
+     * @param $file
+     * @return mixed
+     */
+    public static function alias( $file )
+    {
+        return static::getAlias($file);
+    }
+
+    /**
+     * @param $namespace
+     * @return mixed
+     * @throws Exception
+     */
+    public static function getNamespace( $namespace )
+    {
+        if( isset( Tuzhi::$autoload[$namespace] ) ){
+            return Tuzhi::$autoload[$namespace];
+        }else{
+            throw new \Exception('Not Found Namespace '.$namespace.'!');
+        }
+    }
+
+    /**
+     * @param $className
+     * @return bool
+     * @throws Exception
+     * @throws NotFoundFilesException
+     * @throws \tuzhi\base\exception\NotSupportException
+     */
+    public static function autoload( $className )
+    {
+        if( isset( static::$loadedClassFiles[$className] ) ) return true;
+
+        if(  ( $pos = strpos($className,'\\') ) > 0){
+
+            $class = str_replace('\\','/',$className);
+            $namespace = substr($class,0,$pos);
+            $path = Tuzhi::getNamespace($namespace);
+
+            if( $namespace == 'tz' ){
+                $classFile = rtrim($path,'/').substr($class, $pos+1 ).'.php';
+            }else{
+                $classFile = rtrim($path,'/').'/'.substr($class, $pos+1 ).'.php';
+            }
+
+
+            if(file_exists( $classFile )){
+                try{
+
+                    include $classFile;
+
+                }catch(Exception $e){
+
+                    throw new Exception( 'PHP ERROR in class File '.$classFile);
+                }
+                static::$loadedClassFiles[$className] = $classFile;
+            }else{
+                //TODO: 异常
+                throw new NotFoundFilesException('Not Found File "'.$classFile.'" ');
+            }
+        }
+        return true;
     }
 
     /**
@@ -98,7 +211,8 @@ class Tuzhi {
      * @return mixed
      * @throws InvalidParamException
      */
-    public static function make( $name ,array $parameters = [] ,$config = []){
+    public static function make( $name ,array $parameters = [] ,$config = [])
+    {
 
         if( is_string($name) ){
 
@@ -119,76 +233,34 @@ class Tuzhi {
         }
     }
 
-    /**
-     * @param $className
-     * @return bool
-     * @throws NotFoundFilesException
-     */
-    public static function autoload( $className ){
-        if( isset( static::$loadedClassFiles[$className] ) ) return true;
-        if(  ( $pos = strpos($className,'\\') ) > 0){
-            if( strpos( $className ,'tz' ) === 0 ){
-                $classFile = rtrim( Tuzhi::getAlias('&'.substr($className,0,$pos)),'/' )
-                    . substr( str_replace('\\','/',$className),$pos+1).'.php';
-            }else{
-                $classFile = rtrim( Tuzhi::getAlias('&'.substr($className,0,$pos)),'/' ).'/'
-                    . substr( str_replace('\\','/',$className),$pos+1).'.php';
-            }
-
-
-            if(file_exists( $classFile )){
-                include $classFile;
-                static::$loadedClassFiles[$className] = $classFile;
-            }else{
-                //TODO: 异常
-                throw new NotFoundFilesException('Not Found File "'.$classFile.'" ');
-            }
-        }
-        return true;
-    }
 
     /**
-     * &tz/
-     *
-     * @param $file
-     * @return mixed
+     * @param $key
+     * @param $value
      */
-    public static function alias( $file )
+    public static function config( $key , $value = NULL )
     {
-        if( substr($file,0,4) == '&tz/' ){
-            return str_replace( '&tz/' ,Tuzhi::getAlias('&tz') ,$file );
+        if( $value === NULL ){
+            return static::$configure->get( $key );
+        }else{
+            return static::$configure->set( $key ,$value );
         }
-
-        if(  substr($file,0,1) == '&'   ){
-            if( ($pos = strpos( $file,'/')) > 0 ){
-                $alias = substr($file,0,$pos);
-                $file = str_replace( $alias , Tuzhi::getAlias($alias) ,$file );
-            }else{
-                $file = Tuzhi::getAlias($file);
-            }
-        }
-        return $file;
     }
 
     /**
-     * 对象配置
-     *
-     * @param $object
-     * @param $properties
      * @return mixed
      */
-    public static function config( $object , $properties ){
-        foreach( $properties as $name=>$value ){
-            $object->$name = $value;
-        }
-        return $object;
+    public static function App()
+    {
+        return static::$app;
     }
 
     /**
      * 框架名
      * @return string
      */
-    public static function frameName(){
+    public static function frameName()
+    {
         return '土制框架';
     }
 
@@ -196,18 +268,18 @@ class Tuzhi {
      * 框架作者
      * @return string
      */
-    public static function frameAuthor(){
+    public static function frameAuthor()
+    {
         return "吾色禅师<wuse@chanshi.me>";
     }
 
     /**
-     * @return string
+     * @return string 测试版
      */
     public static function frameVersion()
     {
-        return '1.0';
+        return '1.0 - alpha';
     }
 }
 
 
-Tuzhi::init();

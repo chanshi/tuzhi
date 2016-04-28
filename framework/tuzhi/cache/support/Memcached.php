@@ -6,25 +6,48 @@
  * Time: 11:43
  */
 
-namespace tuzhi\cache\storage;
+namespace tuzhi\cache\support;
 
 
 use tuzhi\contracts\cache\ICache;
 use tuzhi\cache\CacheTrait;
+use tuzhi\base\Object;
 
-class Memcached implements ICache
+class Memcached extends Object implements ICache
 {
 
     use CacheTrait;
 
     /**
-     * @var 
+     * @var 操作实例
      */
     protected $memcached;
 
+    /**
+     * @var 服务器 配置参数
+     */
+    public $server;
+
+    /**
+     * @var string  连机器
+     */
+    public $connection = 'tuzhi\nosql\memcached\Connection';
+
+    /**
+     * 初始化
+     *
+     * @throws \tuzhi\base\exception\InvalidParamException
+     */
     public function init()
     {
-
+        $connection = \Tuzhi::make(
+            [
+                'class'=>$this->connection,
+                'server'=>$this->server
+            ]
+        );
+        
+        $this->memcached = $connection->getCommand();
     }
 
     /**
@@ -37,7 +60,7 @@ class Memcached implements ICache
     {
         return $this->memcached->set(
             $this->getKey($key),
-            $this->setContent($value),
+            $value,
             $expiry == 0 ? 0 : time() + $expiry
         );
     }
@@ -48,9 +71,10 @@ class Memcached implements ICache
      */
     public function get($key)
     {
-        return $this->memcached->get(
-            $this->getKey($key)
-        );
+        $result = $this->memcached->get(  $this->getKey($key) );
+        return $result
+            ? $result
+            : null;
     }
 
     /**
@@ -80,9 +104,10 @@ class Memcached implements ICache
      */
     public function increment($key, $step = 1,$expiry = 0)
     {
-        return $this->memcached->increment(
+        return (int) $this->memcached->increment(
             $this->getKey($key),
             $step,
+            null,
             $expiry == 0 ? 0 : time() + $expiry
         );
     }
@@ -95,9 +120,10 @@ class Memcached implements ICache
      */
     public function decrement($key, $step = 1,$expiry = 0)
     {
-        return $this->memcached->decrement(
+        return (int) $this->memcached->decrement(
             $this->getKey($key),
             $step,
+            null,
             $expiry == 0 ? 0 : time() + $expiry
         );
     }

@@ -35,14 +35,6 @@ class Theme extends Object
     public $basePath = '&resource/';
 
 
-    /**
-     * @param array $config
-     */
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        
-    }
 
     /**
      * 初始化
@@ -66,7 +58,7 @@ class Theme extends Object
      */
     public function getViewPath()
     {
-        return $this->getBasePath().'/view/';
+        return $this->getBasePath().'view/';
     }
 
     /**
@@ -74,7 +66,7 @@ class Theme extends Object
      */
     public function getLayoutPath()
     {
-        return $this->getBasePath().'/layout/';
+        return $this->getBasePath().'layout/';
     }
 
     /**
@@ -93,7 +85,7 @@ class Theme extends Object
      */
     public function getAssetPath()
     {
-        return $this->getBasePath().'/asset/';
+        return $this->getBasePath().'asset/';
     }
 
     /**

@@ -6,7 +6,7 @@
  * Time: 14:22
  */
 
-namespace tuzhi\cache\storage;
+namespace tuzhi\cache\support;
 
 
 use tuzhi\base\Object;
@@ -30,11 +30,6 @@ class File extends Object implements ICache
     /**
      * @var string
      */
-    public $pathFormat = '{1}/{2}';
-
-    /**
-     * @var string
-     */
     public $fileSuffix = '.cache';
 
     /**
@@ -48,7 +43,7 @@ class File extends Object implements ICache
     public function init()
     {
         $this->FileSystem = new FileSystem();
-        $this->cacheDir =  ltrim( \Tuzhi::alias($this->cacheDir),'/' ).'/';
+        $this->cacheDir =  rtrim( \Tuzhi::getAlias($this->cacheDir),'/' ).'/';
     }
 
     /**

@@ -12,25 +12,10 @@
 require __DIR__.'/../../framework/tuzhi/Tuzhi.php';
 
 /**
- * 加载别名
+ * 初始化框架
  */
-Tuzhi::setAlias( __DIR__.'/../config/alias.php');
+Tuzhi::init( ( require  APP_PATH.'/config/config.php') );
 
-
-/**
- * 加载配置?
- */
-
-$config =  (require __DIR__.'/../config/app.php');
-
-
-/**
- * 创建应用
- */
-Tuzhi::make(
-    'tuzhi\web\Application',
-    [$config['app']]
-);
 
 /**
  * 加载路由
@@ -40,4 +25,6 @@ require __DIR__.'/route.php';
 /**
  * 运行
  */
-Tuzhi::$app->run();
+
+Tuzhi::App()->run();
+

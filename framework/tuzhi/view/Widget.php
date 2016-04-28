@@ -27,10 +27,7 @@ abstract class Widget extends Object
 
     protected static $view;
 
-    public function __construct(array $config)
-    {
-        parent::__construct($config);
-    }
+   
 
     /**
      * @param array $config

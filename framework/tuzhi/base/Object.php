@@ -19,19 +19,29 @@ class Object implements IObject
 {
 
     /**
+     * Object constructor.
      * @param array $config
      */
-    public function __configure(array $config = [])
-    {
-        if(!empty( $config )){
-            \Tuzhi::config($this,$config);
-        }
-        $this->init();
-    }
-
     public function __construct(array $config = []  )
     {
-        return $this->__configure($config);
+        $this->initConfig($config);
+        $this->init();
+    }
+    
+    /**
+     * @param array $config
+     */
+    final private function initConfig( $config = [] )
+    {
+        foreach($config as $name => $value )
+        {
+            //TODO:: 新加功能
+            if( is_string($value) && (substr($value,0,1) == '@') ){
+                $value = \Tuzhi::config( $value );
+            }
+
+            $this->{$name} = $value;
+        }
     }
 
     /**
@@ -42,6 +52,8 @@ class Object implements IObject
         return get_class( __CLASS__ );
     }
 
-
+    /**
+     * @return mixed
+     */
     public function init() {}
 }

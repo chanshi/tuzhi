@@ -10,6 +10,7 @@ namespace app\boot;
 
 
 use tuzhi\route\Router;
+use tuzhi\web\Application;
 
 /**
  * 路由器 配置
@@ -29,6 +30,15 @@ use tuzhi\route\Router;
 Router::get('/test/<\d+:ab>',function( $ab ){
     return '我在测试'.$ab;
 });
+
+/**
+ * 设置 module 路由?
+ */
+//Router::all('/module/<\w+:name>',function( $name ){
+//    return Application::getModule( $name )
+//        ->route();
+//});
+
 
 /**
  * 定义路由器的几种方式

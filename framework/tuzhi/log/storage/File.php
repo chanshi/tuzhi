@@ -9,26 +9,87 @@
 namespace tuzhi\log\storage;
 
 
+use tuzhi\base\Object;
 use tuzhi\contracts\log\IStorage;
+use tuzhi\support\fileStorage\FileSystem;
 
-class File implements IStorage
+class File extends Object implements IStorage
 {
+    /**
+     * @var string
+     */
+    public $path = '&runtime/logs/{year}/{month}/{day}/';
 
-    protected $savePath;
+    /**
+     * @var string
+     */
+    public $file = '{type}.log';
 
-    protected $orgFormat = '{year}/{month}/{day}' ;
+    /**
+     * @var
+     */
+    protected $fullFile ;
 
-    public function __construct( $config = [] )
+    /**
+     * @var
+     */
+    protected $fileSystem;
+
+    /**
+     * @var
+     */
+    protected $format;
+
+    /**
+     * @throws \tuzhi\base\exception\InvalidParamException
+     */
+    public function init()
     {
-
+        $this->fileSystem = new FileSystem();
+        $this->path = rtrim( \Tuzhi::getAlias($this->path),'/' ).'/';
+        $this->format =
+            [
+                '#{year}#'=>date('Y'),
+                '#{month}#'=>date('m'),
+                '#{day}#'=>date('d'),
+            ];
+        $this->path = preg_replace(array_keys($this->format),array_values($this->format),$this->path);
+        if( !is_dir($this->path)){
+            \tuzhi\helper\File::createDir($this->path);
+        }
     }
 
+    /**
+     * @param $type
+     * @return string
+     */
+    public function getFileName( $type )
+    {
+        $this->format['#{type}#'] = $type;
+        $file = preg_replace( array_keys($this->format), array_values($this->format), $this->file);
+        return $this->path.$file;
+    }
+
+    /**
+     * @param $message
+     * @param $type
+     * @return mixed
+     */
     public function record( $message ,$type ){
-
+        $this->fileSystem->append(
+            $this->getFileName($type) ,
+            is_array($message)
+                ? join("\n",$message)."\n"
+                : $message."\n"
+        );
     }
 
+    /**
+     * @param $type
+     * @return mixed
+     */
     public function clean( $type )
     {
-        // TODO: Implement clean() method.
+        $this->fileSystem->delete( $this->getFileName($type) );
     }
 }

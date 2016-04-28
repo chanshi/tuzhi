@@ -10,6 +10,7 @@ return
     [
         'app' =>
             [
+                'class'=>'tuzhi\web\Application',
                 // 基本
                 'charset' => 'utf-8',
                 'timezone' => 'PRC' ,
@@ -27,12 +28,12 @@ return
                                 'class' => 'tuzhi\log\Log',
                                 'storage' =>
                                     [
-                                        'class'     => 'tuzhi\log\storage\File',
-                                        'savePath'  => '&runtime/log/',
-                                        'orgFormat' => '{year}/{month}'
+                                        'class' => 'tuzhi\log\storage\File',
+                                        'path' => '&runtime/logs/{year}/{month}/{day}/',
+                                        'file' =>  '{type}.log'
                                     ],
                                 'allow' => 7,
-                                'pattern'=> '{time}{message}'
+                                'pattern'=> '{time} {message}'
                             ],
                         'request'=>
                             [
@@ -60,6 +61,25 @@ return
                                         'webUrl'  => '/',
                                         'basePath'=> '&resource'
                                     ]
+                            ],
+                        'db'=>
+                            [
+                                'class' => 'tuzhi\db\Connection',
+                                'master'=> '@server.mysql.master',
+                                'slave' =>
+                                    [
+                                        'class'=>'tuzhi\support\loadBalance\LoadBalance',
+                                        'server'=>
+                                            [
+                                                ['@server.mysql.slave_1','weight'=>60],
+                                                ['@server.mysql.slave_0','weight'=>40]
+                                            ],
+                                        'dispatch'=>'weight'
+                                    ],
+                                'attribute'=>
+                                    [
+                                        PDO::ATTR_TIMEOUT => 10
+                                    ]
                             ]
                     ],
                 //中间件
@@ -68,4 +88,5 @@ return
 
                     ]
             ]
+        
     ];

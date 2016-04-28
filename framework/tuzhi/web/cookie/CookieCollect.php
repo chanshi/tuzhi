@@ -49,8 +49,9 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
     protected function init()
     {
         // TODO: 初始化 加载 COOKIE
-        Arr::each($_COOKIE,function($key,$value) use($this){
-            $this->offsetSet($key,$value);
+        $Obj = $this;
+        Arr::each($_COOKIE,function($key,$value) use( & $Obj ){
+            $Obj->offsetSet($key,$value);
         });
     }
 

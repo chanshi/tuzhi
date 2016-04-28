@@ -43,13 +43,7 @@ class Asset extends Object
     public $js = [];
     public $jsFile = [];
 
-    /**
-     * @param array $config
-     */
-    public function __configure(array $config = [])
-    {
-        parent::__configure($config);
-    }
+    
 
     public function init()
     {
