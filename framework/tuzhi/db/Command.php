@@ -8,6 +8,7 @@
 
 namespace tuzhi\db;
 
+use tuzhi\base\ErrorException;
 use tuzhi\base\Object;
 
 class Command extends Object
@@ -145,7 +146,7 @@ class Command extends Object
             }
             //TODO:: 检查SQL 是否是查询
 
-            $pdo = $isRead
+            $pdo = ! $isRead
                 ? $this->db->getMaster()
                 : $this->db->getSlave();
 
@@ -156,9 +157,10 @@ class Command extends Object
 
         }catch(\Exception $e){
             //TODO::
-            $message = $e->getMessage() . "\nFailed to prepare SQL: $sql";
-            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
-            throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            //$message = $e->getMessage() . "\nFailed to prepare SQL: $sql";
+            //$errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            //throw new ErrorException($message,$e->getCode(),$e->getCode(),$e);
+            throw $e;
         }
 
     }

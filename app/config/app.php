@@ -68,7 +68,6 @@ return
                                 'master'=> '@server.mysql.master',
                                 'slave' =>
                                     [
-                                        'class'=>'tuzhi\support\loadBalance\LoadBalance',
                                         'server'=>
                                             [
                                                 ['@server.mysql.slave_1','weight'=>60],

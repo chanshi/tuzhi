@@ -20,7 +20,7 @@ abstract class Algorithmic extends Object
     /**
      * @var
      */
-    protected $pool;
+    public $pool;
 
     /**
      * @return mixed

@@ -73,7 +73,7 @@ class Configure extends Object{
     public  function get( $key )
     {
         $key = ltrim($key,'@');
-        $config = & static::$config ;
+        $config =  static::$config ;
         if( strpos($key,'.') !==false ){
             foreach(explode('.',$key) as $item ){
                 if( ! isset($config[$item]) ){
@@ -101,7 +101,7 @@ class Configure extends Object{
     public function set($key,$value = null)
     {
         if( strpos($key,'.') != false ){
-            $config = & static::$config;
+            $config =  static::$config;
             foreach( explode('.',$key) as $item ){
                 if( ! isset($config[$item]) ){
                     $config[$item] =[];

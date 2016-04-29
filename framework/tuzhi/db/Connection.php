@@ -10,11 +10,14 @@ namespace tuzhi\db;
 
 
 use Exception;
+use tuzhi\base\ErrorException;
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\Object;
+use tuzhi\base\Server;
+use tuzhi\helper\Arr;
 use tuzhi\support\loadBalance\LoadBalance;
 
-class Connection extends Object
+class Connection extends Server
 {
 
     /**
@@ -30,7 +33,7 @@ class Connection extends Object
     /**
      * @var array pdo Attribute
      */
-    protected $attribute = [];
+    public $attribute = [];
 
     /**
      * @var string
@@ -38,13 +41,22 @@ class Connection extends Object
     protected $commandClass = 'tuzhi\db\Command';
 
     /**
+     * @var string
+     */
+    public $dispatchClass = 'tuzhi\support\loadBalance\LoadBalance';
+
+    /**
+     * @var string
+     */
+    public $dispatchMethod = 'round';
+
+    /**
      * @var
      */
     public $dsn;
 
-
     /**
-     * @var  主服务器 只写
+     * @var  主服务器  可写  可读
      */
     public $master;
 
@@ -67,31 +79,53 @@ class Connection extends Object
     }
 
     /**
-     * 有问题
      *
-     * @param $group
-     * @return mixed|null|Dsn
+     * @param $data
+     * @return mixed|Dsn
      * @throws InvalidParamException
      */
-    public function initServer( $group )
+    public function initServer( $data )
     {
         $result = null;
-        if( is_string($group) ){
-            $result = new Dsn( $group );
-        }else if(is_array( $group ) ){
+        // 直接调度
+        if( $this->isDsnString($data) ){
+            return new Dsn(['dsn'=>$data]);
+        }
+        // 检查是否是单独的配置
+        if( is_array($data) &&  Arr::isAssoc($data) && Arr::has($data,['userName','schema']) )
+        {
+            return new Dsn($data);
+        }
+        // 检查是否需要调度处理
+        if( is_array($data) && ( ! Arr::isAssoc($data)  ||  Arr::has($data,'server')  ) ){
 
-            $config = [];
-
-            if( ! isset($group['class'])){
-                $config['class'] = '';
-                $config['server'] = $group;
+            $config['class'] =$this->dispatchClass;
+            if( Arr::has( $data ,'server' ) ){
+                $config['server'] = $data['server'];
+                $config['dispatch'] = isset( $data['dispatch'] ) ? $data['dispatch'] : $this->dispatchMethod;
             }else{
-                $config = $group;
+                $config['server']  = $data;
+                $config['dispatch'] = $this->dispatchMethod;
             }
 
-            $result = \Tuzhi::make($config);
+            return \Tuzhi::make($config);
         }
-        return $result;
+        throw new InvalidParamException('Invalid Param in db/Connection '.json_encode($data) );
+
+    }
+
+    /**
+     * @param $string
+     * @return bool
+     */
+    public function isDsnString( $string )
+    {
+        if( is_string($string) )
+        {
+            //TODO:: 简单的 DSN 匹配
+            return preg_match('#^\w+\:[\w\d\.]+;#',$string) ? true : false;
+        }
+        return false;
     }
 
     /**
@@ -106,7 +140,7 @@ class Connection extends Object
 
     public function getTransaction()
     {
-
+        return false;
     }
 
     /**
@@ -141,12 +175,13 @@ class Connection extends Object
 
             try{
 
-                $pdoInstance = new $this->pdoClass($dsn,$dsn->getUserName() ,$dsn->getPassword() ,$this->attribute);
+                $pdoInstance = new $this->pdoClass($dsn->getDsn(),$dsn->getUserName() ,$dsn->getPassword() ,$this->attribute);
 
                 $pdoInstance = $this->initConnection($pdoInstance);
 
             }catch(\PDOException $e){
-                throw new Exception( $e->getMessage() , $e->errorInfo, (int) $e->getCode(), $e );
+                //TODO:: 异常捕获 有问题
+                throw $e;
             }
             return $pdoInstance;
         }
@@ -204,8 +239,12 @@ class Connection extends Object
      */
     protected function choosePdo( &$obj )
     {
+        /**
+         * 配置问题 OR DSN string?
+         */
         if( is_string($obj) ){
-            
+            $config = \Tuzhi::config( $obj );
+            return $this->choosePdo( $config );
         }
 
         if( is_array($obj) ){
@@ -226,7 +265,8 @@ class Connection extends Object
             $server = $obj->loop();
             $instance = $server->getServer();
             $instance = $this->choosePdo($instance);
-            $server->updateServer( $instance );
+            //重新设置
+            $server->setServer( $instance );
             return $instance;
         }
         throw new InvalidParamException( 'Invalid Param '.$obj.' type not the PdoClass ,Dsn or LoadBalance ' );

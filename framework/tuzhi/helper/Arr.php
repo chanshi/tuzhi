@@ -54,6 +54,28 @@ class Arr {
 
     /**
      * @param array $array
+     * @param $key
+     * @return bool
+     */
+    public static function has( array $array,$key )
+    {
+        if(empty($key)){
+            return false;
+        }
+
+        if( is_array($key) ){
+            $result = true;
+            foreach($key as $item){
+                $result  = $result && static::has($array,$item);
+            }
+            return $result;
+        }else{
+            return isset( $array[$key] ) ? true : false;
+        }
+    }
+
+    /**
+     * @param array $array
      * @return bool
      */
     public static function isAssoc( array $array)

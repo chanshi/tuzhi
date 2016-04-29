@@ -16,24 +16,27 @@ return
                     [
                         'master' =>
                             [
-                                'host'=>'localhost',
-                                'userName'=>'',
-                                'password'=>'',
-                                'schema'=>'',
+                                'driver'=>'mysql',
+                                'host'=>'192.168.56.102',
+                                'userName'=>'root',
+                                'password'=>'root',
+                                'schema'=>'tuzhi_test',
                             ],
                         'slave_0'=>
                             [
-                                'host'=>'localhost',
-                                'userName'=>'',
-                                'password'=>'',
-                                'schema'=>'',
+                                'driver'=>'mysql',
+                                'host'=>'192.168.56.102',
+                                'userName'=>'root',
+                                'password'=>'root',
+                                'schema'=>'tuzhi_test',
                             ],
                         'slave_1'=>
                             [
-                                'host'=>'localhost',
-                                'userName'=>'',
-                                'password'=>'',
-                                'schema'=>'',
+                                'driver'=>'mysql',
+                                'host'=>'192.168.56.102',
+                                'userName'=>'root',
+                                'password'=>'root',
+                                'schema'=>'tuzhi_test',
                             ],
                     ],
                 //缓存 服务器

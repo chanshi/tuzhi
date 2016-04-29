@@ -48,21 +48,19 @@ class Dsn extends Object
     public $password;
 
     /**
-     * Dsn constructor.
-     * @param array $config
+     * @var
      */
-    public function __construct( $config )
+    public $dsn;
+
+    /**
+     *
+     */
+    public function init()
     {
-        if(is_string($config)){
-
-            //从配置中读取 @
-
-        }
-
-        parent::__construct($config);
-        
+        //存在 加密 解密的问题
+        // 从DSN  翻译
+        //TODO:: dsn  解析
     }
-
 
     /**
      * @return mixed
@@ -85,11 +83,22 @@ class Dsn extends Object
      */
     public function __toString()
     {
-        return $this->driver .
-            ':host='   . $this->host .
-            ';port='   . $this->port .
-            ';dbname=' . $this->schema .
-            ';charset='. $this->charset;
+        return $this->getDsn();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDsn()
+    {
+        if( $this->dsn == null ){
+            $this->dsn = $this->driver .
+                ':host='   . $this->host .
+                ';port='   . $this->port .
+                ';dbname=' . $this->schema .
+                ';charset='. $this->charset;
+        }
+        return $this->dsn;
     }
 
 }

@@ -32,6 +32,9 @@ class LoadBalance extends Object
      */
     public $dispatch = 'round';
 
+    /**
+     * @var
+     */
     public $server;
 
     /**
@@ -46,10 +49,6 @@ class LoadBalance extends Object
     public function init()
     {
         $this->pool = new ServerPool();
-        $this->dispatch = \Tuzhi::make(
-            $this->support[ $this->setDispatch( $this->dispatch ) ],
-            [$this->pool]
-        );
 
         if( is_array($this->server) ){
             foreach( $this->server as $s ){
@@ -58,6 +57,13 @@ class LoadBalance extends Object
         }else{
             $this->addServer($this->server);
         }
+
+        $this->dispatch = \Tuzhi::make(
+            [
+                'class' => $this->support[ $this->setDispatch( $this->dispatch ) ],
+                'pool'  => $this->pool
+            ]
+        );
     }
 
     /**

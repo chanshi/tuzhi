@@ -134,6 +134,11 @@ abstract class Application extends Object  implements IApplication
         return static::$locator->get('view');
     }
 
+    public function db()
+    {
+        return static::$locator->get('db');
+    }
+
 
     public function registerServer( $name , $params )
     {

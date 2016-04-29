@@ -27,15 +27,24 @@ class Test extends Controller
     public function  ViewAction()
     {
 
-        Log::Notice('test');
+        //Log::Notice('test');
 
 
         //Cache::File()->set('test',1);
 
+        $db =\Tuzhi::App()->db();
 
+        $result = $db->createCommand('select * from user')->queryAll();
+
+        return json_encode($result);
 
         //return  Cache::File()->increment('test');
 
-        return \Tuzhi::$app->view()->renderPage('index/index');
+        //return \Tuzhi::$app->view()->renderPage('index/index');
+    }
+
+    public function infoAction()
+    {
+        return phpinfo();
     }
 }
