@@ -37,9 +37,16 @@ class Configure extends Object{
      */
     public function init()
     {
-        $this->path =  rtrim( \Tuzhi::getAlias($this->path),'/' ).'/';
+        $this->path = is_dir($this->path)
+            ? $this->path
+            : rtrim( \Tuzhi::alias($this->path),'/' ).'/';
+
         foreach( $this->files  as $file ){
-            $this->loadFileConfig( $this->path . $file);
+            if( file_exists( $file ) ){
+                $this->loadFileConfig( $file );
+            }else{
+                $this->loadFileConfig( $this->path . $file );
+            }
         }
     }
 
@@ -52,12 +59,12 @@ class Configure extends Object{
      * @return bool
      * @throws \Exception
      */
-    public function loadFileConfig( $file )
+    protected function loadFileConfig( $file )
     {
         if( file_exists( $file ) ){
             try{
                 $config = include $file;
-            }catch(\Exception $e){
+            }catch( \Exception $e){
                 throw $e;
             }
             static::$config = array_merge(static::$config ,$config);
@@ -70,11 +77,11 @@ class Configure extends Object{
      * @param $key
      * @return null|string
      */
-    public  function get( $key )
+    public function get( $key )
     {
         $key = ltrim($key,'@');
         $config =  static::$config ;
-        if( strpos($key,'.') !==false ){
+        if( strpos($key,'.') !== false ){
             foreach(explode('.',$key) as $item ){
                 if( ! isset($config[$item]) ){
                     return NULL;
@@ -131,22 +138,6 @@ class Configure extends Object{
     public function all()
     {
         return static::$config;
-    }
-
-    /**
-     * 从缓存中读取
-     */
-    public function load()
-    {
-
-    }
-
-    /**
-     * 把配置写入缓存
-     */
-    public function save()
-    {
-
     }
 
 }

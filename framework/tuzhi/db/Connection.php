@@ -14,6 +14,7 @@ use tuzhi\base\ErrorException;
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\Object;
 use tuzhi\base\Server;
+use tuzhi\db\query\QueryBuilder;
 use tuzhi\helper\Arr;
 use tuzhi\support\loadBalance\LoadBalance;
 
@@ -23,7 +24,7 @@ class Connection extends Server
     /**
      * @var pdo Instance
      */
-    protected $pdo;
+    public $pdo;
 
     /**
      * @var string pdoClass
@@ -33,12 +34,20 @@ class Connection extends Server
     /**
      * @var array pdo Attribute
      */
-    public $attribute = [];
+    public $attribute = [ \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION];
 
     /**
      * @var string
      */
     protected $commandClass = 'tuzhi\db\Command';
+
+    /**
+     * @var array
+     */
+    protected static $schemaMap =
+        [
+            'mysql' => 'tuzhi\db\engine\mysql\Schema'
+        ];
 
     /**
      * @var string
@@ -53,7 +62,12 @@ class Connection extends Server
     /**
      * @var
      */
-    public $dsn;
+    private $driverName;
+
+    /**
+     * @var
+     */
+    private $schema;
 
     /**
      * @var  主服务器  可写  可读
@@ -65,8 +79,10 @@ class Connection extends Server
      */
     public $slave;
 
+    protected  $transaction;
+
     /**
-     *
+     * 初始化
      */
     public function init()
     {
@@ -138,9 +154,61 @@ class Connection extends Server
             : false;
     }
 
+    /**
+     * @return bool
+     */
+    public function transactionActivity()
+    {
+        $status = false;
+        if( $this->transaction instanceof Transaction && $this->transaction->getLevel() ){
+            $status = true;
+        }
+        return $status;
+    }
+    /**
+     * @return bool
+     */
     public function getTransaction()
     {
-        return false;
+        if( $this->transaction == null ){
+            $this->beginTransaction();
+        }
+        return $this->transaction;
+    }
+
+    /**
+     * @return Transaction
+     */
+    public function beginTransaction()
+    {
+        $transaction = new Transaction(['db'=>$this]);
+        $transaction->begin();
+        return $this->transaction  = $transaction;
+    }
+
+    /**
+     * @param callable $callback
+     * @return mixed
+     * @throws Exception
+     */
+    public function transaction( callable $callback )
+    {
+        $transaction = $this->getTransaction();
+        $level = $transaction->getLevel();
+
+        try{
+            $result = call_user_func($callback ,$this);
+
+            if( $transaction->getLevel() == $level){
+                $transaction->commit();
+            }
+        }catch(Exception $e){
+            if( $transaction->getLevel() == $level){
+                $transaction->rollback();
+            }
+            throw $e;
+        }
+        return $result;
     }
 
     /**
@@ -175,7 +243,7 @@ class Connection extends Server
 
             try{
 
-                $pdoInstance = new $this->pdoClass($dsn->getDsn(),$dsn->getUserName() ,$dsn->getPassword() ,$this->attribute);
+                $pdoInstance = new $this->pdoClass($dsn->getDsn(),$dsn->getUserName() ,$dsn->getPassword() );
 
                 $pdoInstance = $this->initConnection($pdoInstance);
 
@@ -194,6 +262,8 @@ class Connection extends Server
      */
     public function initConnection( $pdoClass )
     {
+        $pdoClass->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        //TODO:: SET NAMES
         return $pdoClass;
     }
 
@@ -217,6 +287,11 @@ class Connection extends Server
     public function getMaster()
     {
         return $this->choosePdo( $this->master );
+    }
+
+    public function getMasterPdo()
+    {
+        return $this->getMaster();
     }
 
     /**
@@ -273,6 +348,11 @@ class Connection extends Server
     }
 
 
+    /**
+     * @param null $sql
+     * @param array $param
+     * @return mixed
+     */
     public function createCommand( $sql = null , $param = [] )
     {
         $command = new $this->commandClass([
@@ -283,11 +363,71 @@ class Connection extends Server
         return $command->bindValues( $param );
     }
 
+    /**
+     * @return mixed
+     * @throws InvalidParamException
+     */
     public function getSchema()
     {
+        if($this->schema == null ){
+            $this->schema = \Tuzhi::make(
+                [
+                    'class' => static::$schemaMap[ $this->getDriverName() ],
+                    'db' => $this
+                ]);
+        }
+        return $this->schema;
+    }
 
+    public function getTableSchema( $table )
+    {
+        return $this->getSchema()->getTableSchema( $table );
     }
 
 
+    /**
+     * @return QueryBuilder  简单处理
+     */
+    public function getQueryBuild()
+    {
+        return new QueryBuilder(['db'=>$this]);
+    }
+
+    public function quoteValue( $value )
+    {
+        return $this->getSchema()->quoteValue( $value );
+    }
+
+    public function quoteTable( $table )
+    {
+        return $this->getSchema()->quoteTableName( $table );
+    }
+
+    public function quoteColumn( $column )
+    {
+        return $this->getSchema()->quoteColumn( $column );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDriverName()
+    {
+        if($this->driverName == null){
+            $this->driverName = strtolower( $this->getMaster()->getAttribute( \PDO::ATTR_DRIVER_NAME ) );
+        }
+        return $this->driverName;
+    }
+
+    /**
+     *
+     * @param $sql
+     * @return mixed
+     */
+    public function isQuerySql( $sql )
+    {
+        $pattern = '/^\s*(SELECT|SHOW|DESCRIBE)\b/i';
+        return preg_match($pattern, $sql) > 0;
+    }
 
 }

@@ -8,7 +8,7 @@
 
 namespace tuzhi\base;
 
-
+use Tuzhi;
 use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\contracts\base\IApplication;
 use tuzhi\helper\Arr;
@@ -47,120 +47,36 @@ abstract class Application extends Object  implements IApplication
     /**
      * @var
      */
-    public $server;
+    public $service;
 
     /**
-     * @var 服务定位
+     * @var
      */
-    protected static $locator = null;
+    protected  $locator = null;
 
 
-     /**
-      * Application constructor.
-      * @param array $config
-      */
-    public function __construct( $config = [] )
-    {
-        \Tuzhi::$app = $this;
-
-        parent::__construct($config);
-    }
-
+    /**
+     * Init
+     */
     public function init()
     {
-        static::$locator = \Tuzhi::make(
+
+        Tuzhi::$app = $this;
+
+        /**
+         * service
+         */
+        $this->locator = Tuzhi::make(
             'tuzhi\di\ServiceLocator',
-            [$this->server]
+            [$this->serviceCore()]
         );
 
         /**
          * boot
          */
-        Arr::each( $this->bootCore(),function($key ,$value)  {
-            \Tuzhi::$app->bootstrap($value);
+        Arr::each( $this->bootCore(),function($key,$value)  {
+            Tuzhi::$app->bootstrap($value);
         });
-    }
-
-    /**
-     * @return mixed
-     */
-    public function session()
-    {
-        return static::$locator->get('session');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function request()
-    {
-        return static::$locator->get('request');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function errorHandler()
-    {
-        return static::$locator->get('errorHandler');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function router()
-    {
-        return static::$locator->get('router');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function response()
-    {
-        return static::$locator->get('response');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function log()
-    {
-        return static::$locator->get('log');
-    }
-
-    public function view()
-    {
-        return static::$locator->get('view');
-    }
-
-    public function db()
-    {
-        return static::$locator->get('db');
-    }
-
-
-    public function registerServer( $name , $params )
-    {
-        static::$locator->set( $name ,$params );
-    }
-
-    /**
-     *
-     */
-     abstract public function run();
-
-    /**
-     * @return array
-     */
-    protected function bootCore()
-    {
-        return array_merge(
-            [
-                'tuzhi\base\bootstrap\ApplicationBoot'
-            ],
-            $this->bootstrap
-        );
     }
 
     /**
@@ -168,36 +84,74 @@ abstract class Application extends Object  implements IApplication
      */
     public function bootstrap( $boot )
     {
-        call_user_func([  \Tuzhi::make( $boot )  ,'boot'] ,$this);
+        call_user_func( [ \Tuzhi::make( $boot )  ,'boot'] ,$this);
     }
-    
+
+    /**
+     * @param $service
+     * @return mixed
+     */
+    public function has( $service )
+    {
+        return $this->locator->has($service);
+    }
+
+    /**
+     * @param $service
+     * @return mixed
+     */
+    public function get( $service )
+    {
+        return $this->locator->get($service);
+    }
 
     /**
      * @return array
      */
-    protected function serverCore()
+    protected function bootCore()
     {
-        return
+        return Arr::marge(
             [
-                'log'=>'',
-                'session'=>'',
-                'request'=>'',
-                'response'=>'',
-                'router'=>'',
-                'errorHandler'=>''
-            ];
+                'tuzhi\base\bootstrap\ApplicationBoot',
+                'tuzhi\base\bootstrap\FacadeBoot'
+            ], $this->bootstrap
+        );
     }
 
+    /**
+     * @return array
+     */
+    protected function serviceCore()
+    {
+        return Arr::marge(
+            [
+                'request'=>'tuzhi\web\Request',
+                'response'=>'tuzhi\web\Response',
+                'router'=>'tuzhi\route\Router',
+                'errorHandler'=>'tuzhi\web\ErrorHandler',
+                'log'=>'tuzhi\log\Log',
+            ],$this->service
+        );
+    }
 
+    /**
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     * @throws NotFoundMethodException
+     */
     public static function __callStatic($method, $arguments)
     {
-        $app = \Tuzhi::$app;
-
-        if( method_exists( $app ,$method )  ){
-            return call_user_func_array( [$app ,$method] ,$arguments );
+        if( ($server =  Tuzhi::$app->get($method) ) ){
+            return $server;
         }else{
-            throw new NotFoundMethodException( 'Not Found Method Application::'.$method.' ' );
+            throw new NotFoundMethodException( 'Not Found Services '.$method.' ' );
         }
     }
+
+    /**
+     * @abstract
+     */
+    abstract public function run();
 
 }

@@ -8,22 +8,13 @@
 
 namespace tuzhi\log;
 
-use tuzhi\base\exception\NotFoundMethodException;
-use tuzhi\base\Server;
+use tuzhi\base\Object;
 
 /**
  * Class Log
- *
- * Log::Notice()
- *
- * Log::error()
- *
- * Log::Debug()
- *
- *
  * @package tuzhi\log
  */
-class Log extends Server
+class Log extends Object
 {
     /**
      * 类型
@@ -58,11 +49,6 @@ class Log extends Server
     public $allow = 31;
 
     /**
-     * @var
-     */
-    public static $instance;
-
-    /**
      * @var array
      */
     protected static $logs = [];
@@ -70,7 +56,12 @@ class Log extends Server
     /**
      * @var null
      */
-    public $storage = null;
+    public $storage =
+        [
+            'class' => 'tuzhi\log\storage\File',
+            'path' =>  '&runtime/logs/{year}/{month}/{day}/',
+            'file' =>  '{type}.log'
+        ];
 
 
     /**
@@ -78,7 +69,6 @@ class Log extends Server
      */
     public function init()
     {
-        static::$instance = $this;
         $this->storage = \Tuzhi::make($this->storage);
     }
 
@@ -89,9 +79,11 @@ class Log extends Server
      */
     public function record( $message  , $type )
     {
-        if( $type & $this->allow )
-        {
+        if( $type & $this->allow ) {
             $content = $this->normalizeMessage( $message );
+
+            $this->storage->record( $content , static::$Type[$type] );
+
             static::$logs[ $type ] = $content;
         }
     }
@@ -102,27 +94,7 @@ class Log extends Server
      */
     protected function normalizeMessage( $message )
     {
-        return "[".date('H:i:s')."] [{$message}]";
-    }
-
-    /**
-     * @param $name
-     * @param $arguments
-     * @throws NotFoundMethodException
-     */
-    public static function __callStatic($name, $arguments)
-    {
-        if( static::$instance == null ){
-            \Tuzhi::App()->log();
-        }
-        $method = strtolower($name);
-        $type = array_flip(static::$Type);
-        if( isset($type[$method]) ){
-            //print_r($arguments);exit;
-            $arguments[1] = $type[$method];
-            return call_user_func_array([static::$instance ,'record'] ,$arguments);
-        }
-        throw new NotFoundMethodException( 'Not Found Method In Log ,Method is '.$name );
+        return "[".date('H:i:s')."] {$message}";
     }
 
     /**
@@ -141,7 +113,7 @@ class Log extends Server
      */
     public function __destruct()
     {
-        $this->save();
-        $this->stop();
+        //$this->save();
+        //$this->stop();
     }
 }

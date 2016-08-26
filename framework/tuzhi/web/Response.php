@@ -9,10 +9,10 @@
 namespace tuzhi\web;
 
 
-use tuzhi\base\Server;
+use tuzhi\base\Object;
 use tuzhi\contracts\web\IResponse;
 
-class Response extends Server implements IResponse {
+class Response extends Object implements IResponse {
 
     protected $header;
 
@@ -23,7 +23,6 @@ class Response extends Server implements IResponse {
     {
 
     }
-
 
     public function setContent( $content )
     {

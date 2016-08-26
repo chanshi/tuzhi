@@ -74,7 +74,7 @@ class Patten
     {
         $path = trim($path,'/');
         //$path = Arr::head( explode('.',$path) );
-        return empty($path) ? null :  explode('/',$path);
+        return empty($path) ? [] :  explode('/',$path);
     }
 
     /**
@@ -86,39 +86,46 @@ class Patten
     public function match( $path ){
         
         $path = $this->normalizeUrlPath($path);
-
-        //空值匹配
-        if( $path == null && empty( $this->segment[0] ) ){
-            return  true;
-        }
-
-        $isMatch = true;
-        foreach( $path as $index=>$value ){
-            // 空值的情况
-            if( !isset( $this->segment[$index] ) || empty( $this->segment[$index] )  ){
-                return false;
+        //var_dump($path);exit;
+        if( $path == [] ){
+            //Match  /
+            if( empty($this->segment[0]) ){
+                return true;
             }
-            // 匹配字符串
-            if( is_string( $this->segment[$index] )  ){
-                if( strtolower( $value ) ==  strtolower( $this->segment[$index] ) ){
-                    continue;
-                }else{
+            //TODO:: 这里
+            //Match default
+            if( $this->raw == '/<\w+:control>/<\w+:action>'){
+                return true;
+            }
+        }else{
+            $isMatch = true;
+            foreach(  $path as $index=>$value ){
+                // 空值的情况
+                if( !isset( $this->segment[$index] ) || empty( $this->segment[$index] )  ){
                     return false;
                 }
-            }
-            // 匹配字段
-            if( is_array( $this->segment[$index] ) ) {
-                preg_match( $this->segment[$index][0] ,$value ,$match );
-                if( isset($match[1])){
-                    $this->matched[$this->segment[$index][1]] = $match[1];
-                    continue;
-                }else {
-                    return false;
+                // 匹配字符串
+                if( is_string( $this->segment[$index] )  ){
+                    if( strtolower( $value ) ==  strtolower( $this->segment[$index] ) ){
+                        continue;
+                    }else{
+                        return false;
+                    }
+                }
+                // 匹配字段
+                if( is_array( $this->segment[$index] ) ) {
+                    preg_match( $this->segment[$index][0] ,$value ,$match );
+                    if( isset($match[1])){
+                        $this->matched[$this->segment[$index][1]] = $match[1];
+                        continue;
+                    }else {
+                        return false;
+                    }
                 }
             }
-        }
 
-        return $isMatch;
+            return $isMatch;
+        }
     }
 
     /**

@@ -2,11 +2,6 @@
 /**
  * Created by PhpStorm.
  * User: 吾色禅师<wuse@chanshi.me>
- * Date: 16/5/4
- * Time: 21:17
+ * Date: 16/8/26
+ * Time: 10:28
  */
-
-
-class DB
-{
-}

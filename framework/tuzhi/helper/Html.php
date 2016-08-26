@@ -22,14 +22,23 @@ class Html
         $attribute = [];
 
         foreach( $option as $name=>$value ){
-            $attribute[] = $name.'="'.$value.'"';
+            if(is_numeric($name)){
+                $attribute[] = $value;
+            }else{
+                $attribute[] = $name.'="'.$value.'"';
+            }
         }
 
-        $str = '<'.$tagName.' '.( $attribute ? implode(' ',$attribute) : '' ).'>';
+        $str = '<'.$tagName.( $attribute ? ' '.implode(' ',$attribute) : '' ).'>';
         if( $content !==null ){
             $str .=$content.'</'.$tagName.'>';
         }
         return $str;
+    }
+
+    public static function endTag( $tagName )
+    {
+        return '</'.$tagName.'>';
     }
 
     /**
@@ -78,5 +87,52 @@ class Html
         return htmlspecialchars( $content );
     }
 
+    /**
+     * @param $data
+     * @param null $current
+     * @param array $option
+     * @return string
+     */
+    public static function checkbox($data,$current=null,$option = [])
+    {
+        $checkbox = [];
+        foreach ($data as $key=>$value)
+        {
+            $op = array_merge($option,['type'=>'checkbox','value'=>$key]);
+            if(is_array($current)){
+                if(in_array($key,$current)){
+                    $op['checked']='true';
+                }
+            }else {
+                if($current === $key){
+                    $op['checked']='true';
+                }
+            }
+            $checkbox[] = Html::tag('label',Html::tag('input',null,$op).$value);
+        }
+
+        return join("",$checkbox);
+    }
+
+    /**
+     * 未注意 多选的情况
+     *
+     * @param $data
+     * @param null $current
+     * @param array $option
+     * @return string
+     */
+    public static function select($data,$current=null,$option=[])
+    {
+        $options = [];
+        foreach($data as $key => $value){
+            $op =['value'=>$key];
+            if( $current === $key ){
+                $op[] = 'selected';
+            }
+            $options[] = Html::tag('option',$value,$op);
+        }
+        return Html::tag('select',join("\n",$options),$option);
+    }
 
 }

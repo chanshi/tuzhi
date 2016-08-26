@@ -8,13 +8,14 @@
 
 namespace tuzhi\route;
 
+use tuzhi\base\Object;
 use tuzhi\contracts\route\IDispatch;
 
 /**
  * Class ClosureDispatch
  * @package tuzhi\route
  */
-class ClosureDispatch implements IDispatch
+class ClosureDispatch  implements IDispatch
 {
 
     /**

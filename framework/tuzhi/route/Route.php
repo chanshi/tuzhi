@@ -151,7 +151,9 @@ class Route
         if( in_array('ALL',$this->method) ){
             return true;
         }else{
-            return in_array( strtoupper( $method ) , $this->method ) ? true : false;
+            return in_array( strtoupper( $method ) , $this->method )
+                ? true
+                : false;
         }
     }
 

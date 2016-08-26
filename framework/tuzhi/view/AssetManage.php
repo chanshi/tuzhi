@@ -25,15 +25,19 @@ class AssetManage
      */
     protected $asset;
 
-
     /**
      * @var
      */
     protected $pageBuilder;
 
+    /**
+     * @var
+     */
     protected $theme;
 
-
+    /**
+     * @var int
+     */
     protected $fileMode = 0777;
 
 

@@ -34,6 +34,11 @@ class Theme extends Object
      */
     public $basePath = '&resource/';
 
+    /**
+     * @var string
+     */
+    public $defaultLayout = 'main';
+
 
 
     /**
@@ -75,7 +80,7 @@ class Theme extends Object
      */
     public function getLayoutFile( $layout = null )
     {
-        $layoutFile = $layout === null ? 'main.php' : $layout;
+        $layoutFile = $layout === null ? $this->defaultLayout : $layout;
 
         return $this->getLayoutPath().'/'. rtrim( ltrim($layoutFile ,'/') ,'.php' ).'.php';
     }

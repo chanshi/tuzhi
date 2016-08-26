@@ -5,3 +5,16 @@
  * Date: 16/5/7
  * Time: 12:23
  */
+
+namespace tuzhi\support\monitor;
+
+/**
+ * 采集器
+ *
+ * Class Collection
+ * @package tuzhi\support\monitor
+ */
+class Collection
+{
+
+}

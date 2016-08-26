@@ -67,6 +67,9 @@ class PageBuilder
      */
     public $theme;
 
+    /**
+     * @var array
+     */
     public $param;
 
     /**

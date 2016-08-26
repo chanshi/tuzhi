@@ -14,6 +14,7 @@ use tuzhi\base\Object;
 /**
  * Class Transaction
  * @package tuzhi\db
+ * @see Yii2
  */
 class Transaction extends Object
 {
@@ -28,22 +29,78 @@ class Transaction extends Object
 
     public $db;
 
-    private $_level = 0;
+    private $level = 0;
 
-
-    public function begin()
+    /**
+     * @param string $isolation
+     * @return bool
+     */
+    public function begin( $isolation = Transaction::REPEATABLE_READ )
     {
+        if( !$this->db->isActivity()  ){
+            $this->db->open();
+        }
 
+        if( $this->level == 0 ){
+            $this->db->getSchema()
+                ->setTransactionLevel( $isolation );
+
+            $this->db->pdo->beginTransaction();
+            $this->level = 1;
+            return true;
+        }
+
+        $this->db->getSchema()
+            ->createSavePoint( 'POINT '.$this->level );
+        $this->level++;
+        return true;
     }
 
+    /**
+     * @return bool
+     */
     public function rollback()
     {
+        if( ! $this->db->isActivity() ){
+            return false;
+        }
 
+        $this->level--;
+        if($this->level == 0){
+            $this->db->pdo->rollback();
+            return true;
+        }
+
+        $this->db->getSchema()
+            ->rollBackSavePoint('POINT '.$this->level);
+        return true;
     }
 
+    /**
+     * @return bool
+     */
     public function commit()
     {
-        
+        if( ! $this->db->isActivity() ){
+            return false;
+        }
+
+        $this->level--;
+        if($this->level == 0){
+            $this->db->pdo->commit();
+            return true;
+        }
+
+        $this->db->getSchema()
+            ->releaseSavePoint('POINT '.$this->level);
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel()
+    {
+        return $this->level;
     }
 
 }

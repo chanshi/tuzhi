@@ -25,6 +25,7 @@ class ApplicationBoot implements IBootstrap
          *  设置时区
          */
         $this->setTimeZone( $application );
+
         /**
          *  设置字符
          */
@@ -48,6 +49,7 @@ class ApplicationBoot implements IBootstrap
 
     private function setErrorHandler( $application ) {
         error_reporting(E_ALL);
-        $application->errorHandler();
+        //修改调用方法
+        $application->get('errorHandler');
     }
 }

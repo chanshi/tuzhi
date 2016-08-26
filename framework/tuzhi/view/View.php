@@ -32,8 +32,11 @@ class View  extends Server implements IView
      * @var 风格
      */
     public $theme;
-    
 
+
+    /**
+     *
+     */
     public function init()
     {
         $this->engine = Tuzhi::make(
@@ -55,6 +58,12 @@ class View  extends Server implements IView
         return $this->renderFile($viewFile, $param );
     }
 
+    /**
+     * @param $file
+     * @param array $param
+     * @return mixed
+     * @throws NotFoundFilesException
+     */
     public function renderFile( $file ,$param = [] )
     {
         if( file_exists( $file ) ){
@@ -83,20 +92,4 @@ class View  extends Server implements IView
         return $this->render( $viewFile ,$param );
     }
 
-    /**
-     * @param $method
-     * @param $arguments
-     * @return mixed
-     * @throws NotFoundMethodException
-     */
-    public static function __callStatic($method, $arguments)
-    {
-        $view = Application::view();
-
-        if( method_exists( $view ,$method ) ){
-            return call_user_func_array( [$view ,$method] ,$arguments );
-        }else{
-            throw new NotFoundMethodException( 'Not Found Method View::'.$method.' ' );
-        }
-    }
 }

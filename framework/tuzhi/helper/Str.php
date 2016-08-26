@@ -25,4 +25,14 @@ class Str
             ? true
             : false ;
     }
+
+    /**
+     * @param int $num
+     * @return string
+     */
+    public static function random( $num = 6 )
+    {
+        $all = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789';
+        return substr(str_shuffle($all),0,$num);
+    }
 }

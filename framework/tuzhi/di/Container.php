@@ -11,7 +11,7 @@ use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\exception\NotFoundMethodException;
 
 /**
- * 容器  依赖注入
+ * 容器
  *
  * Class Container
  * @package tuzhi\di
@@ -82,7 +82,7 @@ class Container
             return $definition;
         }
 
-        if( is_array($definition)){
+        if(  ! empty($definition) && is_array($definition)){
             $class = $definition['class'];
             unset($definition['class']);
 

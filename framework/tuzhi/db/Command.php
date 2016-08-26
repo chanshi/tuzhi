@@ -28,13 +28,24 @@ class Command extends Object
      */
     public $raw;
 
-
+    /**
+     * @var int
+     */
     public $fetchMode = \PDO::FETCH_ASSOC ;
 
+    /**
+     * @var array
+     */
     protected $param = [];
 
+    /**
+     * @var array
+     */
     protected $pendingParam = [];
 
+    /**
+     * @var
+     */
     protected $statement;
 
 
@@ -130,8 +141,11 @@ class Command extends Object
         return $this;
     }
 
-
-
+    /**
+     * @param bool $isRead
+     * @return mixed
+     * @throws \Exception
+     */
     public function prepare( $isRead = false )
     {
         if( $this->statement ){
@@ -141,22 +155,26 @@ class Command extends Object
         $sql = $this->getSql();
         try{
             //TODO:: 注意 事务处理 必须使用 Master PDO;
-            if( $this->db->getTransaction() ){
-                $isRead = false;
-            }
-            //TODO:: 检查SQL 是否是查询
+            if( $this->db->transactionActivity() ){
+                $pdo = $this->db->pdo;
+            }else{
+                //TODO:: 检查SQL 是否是查询
+                if( $this->db->isQuerySql( $sql ) ){
+                    $isRead = true;
+                }
 
-            $pdo = ! $isRead
-                ? $this->db->getMaster()
-                : $this->db->getSlave();
+                $pdo = ! $isRead
+                    ? $this->db->getMaster()
+                    : $this->db->getSlave();
+            }
 
             $this->statement = $pdo->prepare( $sql );
 
             //TODO:: 绑定参数
             $this->bindPendingParam();
 
-        }catch(\Exception $e){
-            //TODO::
+        }catch(\PDOException $e){
+            //TODO::异常混乱
             //$message = $e->getMessage() . "\nFailed to prepare SQL: $sql";
             //$errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
             //throw new ErrorException($message,$e->getCode(),$e->getCode(),$e);
@@ -187,9 +205,11 @@ class Command extends Object
             return $num;
 
         }catch( \Exception $e ){
-            $message = $e->getMessage() . "\nFailed to execute SQL: $sql";
-            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
-            throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            //异常问题
+            //$message = $e->getMessage() . "\nFailed to execute SQL: $sql";
+            //$errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            throw $e;
         }
 
     }
@@ -223,14 +243,16 @@ class Command extends Object
             }else{
                 $result  = call_user_func_array([$this->statement ,$method] ,[$fetchMode]);
             }
+            //关闭
             $this->statement->closeCursor();
 
             return $result;
 
-        } catch ( \Exception $e ){
-            $message = $e->getMessage() . "\nFailed to query SQL: $sql";
-            $errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
-            throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+        } catch ( \PDOException $e ){
+            //$message = $e->getMessage() . "\nFailed to query SQL: $sql";
+            //$errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
+            //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
+            throw $e;
         }
     }
 

@@ -7,6 +7,8 @@
  */
 
 namespace tuzhi\route;
+
+use Tuzhi;
 use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\contracts\route\IDispatch;
 
@@ -31,17 +33,17 @@ class ControllerDispatch implements IDispatch
     /**
      * @var string
      */
-    protected $defaultControlName = 'Index';
+    public $defaultControlName = 'Index';
 
     /**
      * @var string
      */
-    protected $defaultActionName = 'Index';
+    public $defaultActionName = 'Index';
 
     /**
      * @var string
      */
-    protected $controlNamespace = 'app\control';
+    public $controlNamespace = 'app\control';
 
     /**
      * ControllerDispatch constructor.
@@ -74,16 +76,21 @@ class ControllerDispatch implements IDispatch
     /**
      * @param $control
      * @return mixed
+     * @throws NotFoundMethodException
      */
     public function makeControl( $control )
     {
         if( strpos($control ,'<') !== false) {
             $control = $this->defaultControlName;
         }
-        //首字母大写把
-        $control =ucfirst( strtolower( $control )  );
-        
-        return \Tuzhi::make( $this->controlNamespace.'\\'.$control );
+
+        $control = $this->controlNamespace.'\\'. ucfirst( strtolower( $control )  );
+
+        if( class_exists( $control ) ){
+            return Tuzhi::make( $control );
+        }else{
+            throw new NotFoundMethodException('Not Found Control '.$control);
+        }
     }
 
     /**

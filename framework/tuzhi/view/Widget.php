@@ -25,9 +25,10 @@ abstract class Widget extends Object
      */
     protected static $stack = [];
 
+    /**
+     * @var
+     */
     protected static $view;
-
-   
 
     /**
      * @param array $config

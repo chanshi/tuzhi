@@ -7,6 +7,7 @@
  */
 
 namespace tuzhi\di;
+
 use tuzhi\base\ErrorException;
 use tuzhi\base\Server;
 
@@ -61,6 +62,7 @@ class ServiceLocator
      */
     public function get( $serverName )
     {
+        //TODO:: 需要去掉 Server
         $server = null;
         if( $this->has($serverName) ){
             $server = static::$completed[$serverName];
@@ -96,7 +98,7 @@ class ServiceLocator
             foreach( $serverName as $key =>$value ){
                 $this->set( $key ,$value );
             }
-        }else if( $definition !== null ){
+        }else if( ! empty( $definition )  ){
             $this->container->set( $serverName ,$definition );
             static::$server[$serverName] = $definition;
         }
@@ -107,7 +109,7 @@ class ServiceLocator
      * @param $serverName
      * @return bool
      */
-    public function unset( $serverName )
+    public function rm( $serverName )
     {
         if( isset( static::$completed[$serverName] ) ){
             unset( static::$completed[$serverName] );

@@ -22,7 +22,7 @@ class Object implements IObject
      * Object constructor.
      * @param array $config
      */
-    public function __construct(array $config = []  )
+    public function __construct( array $config = []  )
     {
         $this->initConfig($config);
         $this->init();

@@ -38,7 +38,7 @@ class LoadBalance extends Object
     public $server;
 
     /**
-     * @var
+     * @var ServerPool
      */
     protected $pool;
 
@@ -89,6 +89,7 @@ class LoadBalance extends Object
      */
     public function addServer( $server ,$option =[] )
     {
+        //TODO:: 此处规则的处理 不应该交给 底层处理
         if( is_array($server) ){
             $instance = array_shift($server);
             $config = array_merge($server,$option);
@@ -116,6 +117,8 @@ class LoadBalance extends Object
      */
     public function loop()
     {
+        //TODO:: 当 池 发生变化的时候 调度也要相应的发生变化
+
         return $this->dispatch->getServer();
     }
 

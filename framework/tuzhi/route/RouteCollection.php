@@ -42,6 +42,7 @@ class RouteCollection implements \IteratorAggregate , \ArrayAccess ,\Countable
     public function __construct()
     {
         $this->routes = [];
+
     }
 
     /**
@@ -50,9 +51,9 @@ class RouteCollection implements \IteratorAggregate , \ArrayAccess ,\Countable
      * @param $action
      * @return Route
      */
-    public function addRoute($method,$patten,$action )
+    public function addRoute( $method , $patten , $action )
     {
-        $route = new Route( $method ,$patten ,$action );
+        $route = new Route( $method ,$patten , $action );
         $this->routes[ $route->getName() ] = $route;
         return $route;
     }
@@ -65,16 +66,31 @@ class RouteCollection implements \IteratorAggregate , \ArrayAccess ,\Countable
      */
     public function findRoute( $request )
     {
-        foreach( $this as $name=>$route )
+        foreach( $this->routes as $name=>$route )
         {
             //match method && match patten
             if( $route->matchMethod( $request->getMethod() ) && 
                 $route->matchPatten( $request->getPath() )
             ){
+                //print_r($route);exit;
                 return $route;
             }
         }
-        throw new NotMatchRouteException('Not Match Route The Method "'.$request->getMethod().'" The Patten "'.$request->getPath().'" ');
+        $Router = $this->getDefaultRoute();
+        $Router->matchPatten( $request->getPath() );
+        return $Router;
+
+        // 此处 使用默认的路由定义
+        //return $this->getDefaultRoute();
+        //throw new NotMatchRouteException('Not Match Route The Method "'.$request->getMethod().'" The Patten "'.$request->getPath().'" ');
+    }
+
+    /**
+     * @return Route
+     */
+    private function getDefaultRoute()
+    {
+        return new Route('ALL','/<\w+:control>/<\w+:action>','<control>@<action>');
     }
 
     /**

@@ -5,3 +5,8 @@
  * Date: 16/5/4
  * Time: 21:17
  */
+
+class Cache
+{
+
+}

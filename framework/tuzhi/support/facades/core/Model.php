@@ -5,3 +5,8 @@
  * Date: 16/5/4
  * Time: 21:18
  */
+
+class Model extends \tuzhi\model\Model
+{
+
+}

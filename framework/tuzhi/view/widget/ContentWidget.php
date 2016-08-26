@@ -8,7 +8,6 @@
 
 namespace tuzhi\view\widget;
 
-
 use tuzhi\view\Widget;
 
 class ContentWidget extends Widget
@@ -50,7 +49,9 @@ class ContentWidget extends Widget
         $param['content'] = $content;
 
         //渲染输出
-        return \Tuzhi::$app->view()->renderFile( $this->layout , $param );
+        //return App::View()->renderFile(  );
+        //return App::View()->renderFile( $this->layout,$param );
+        return \Tuzhi::$app->get('view')->renderFile( $this->layout , $param );
 
     }
 }

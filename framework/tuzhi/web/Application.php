@@ -8,47 +8,60 @@
 
 namespace tuzhi\web;
 
-
-
+use tuzhi\helper\Arr;
 
 class Application extends \tuzhi\base\Application {
 
-
     /**
-     * 启用父类
-     * Application constructor.
-     * @param array $config
+     * @return mixed
      */
-    public function __construct( $config = [] ){
-
-        parent::__construct( $config );
-
-    }
-
     public function getAppPath()
     {
         return $this->appPath;
     }
 
     /**
-     * 基本处理流
+     * Run
      */
     public function run(){
         try{
 
-            $request = $this->request();
+            $content = static::router()->handler( static::request() );
 
-            $response = $this->response();
+            static::response()->setContent( $content );
 
-            $router  = $this->router();
-
-            $router->handler( $request ,$response ) ;
-
-            $response->send();
+            static::response()->send();
 
         }catch(\Exception $e){
-            //这里要处理
+            //TODO::
             throw $e;
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function bootCore()
+    {
+        return Arr::marge(
+            parent::bootCore(),
+            [
+
+            ]
+        );
+    }
+
+    /**
+     * @return array
+     */
+    protected function serviceCore()
+    {
+        return Arr::marge(
+            [
+                //'session'=>'',
+                'view'=>'tuzhi\view\View',
+            ],
+            parent::serviceCore()
+        );
     }
 }

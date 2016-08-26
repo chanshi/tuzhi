@@ -5,3 +5,24 @@
  * Date: 16/8/23
  * Time: 14:46
  */
+
+namespace tuzhi\base\bootstrap;
+
+use Tuzhi;
+use tuzhi\contracts\base\IBootstrap;
+
+class FacadeBoot implements IBootstrap
+{
+
+    protected $facade = 'tuzhi\support\facades\Manage';
+
+    /**
+     * @param $app
+     */
+    public function boot( $app )
+    {
+        $facade = Tuzhi::make($this->facade);
+
+        $facade->load();
+    }
+}

@@ -84,4 +84,47 @@ class Arr {
 
         return array_keys($key) != $key;
     }
+
+    /**
+     * @var
+     */
+    const FILTER_INCLUDE = '1';
+
+    /**
+     * @var
+     */
+    const FILTER_DIFF = '2';
+
+    /**
+     * @param $array
+     * @param $keys
+     * @param string $type
+     * @return array
+     */
+    public static function filter( $array , $keys , $type = Arr::FILTER_INCLUDE )
+    {
+        $result = [];
+        foreach( $array as $key => $value ){
+
+            if($type == Arr::FILTER_INCLUDE && in_array($key,$keys)){
+                $result[$key] = $value;
+            }else if( $type == Arr::FILTER_DIFF && !in_array($key,$keys) ){
+                $result[$key] = $value;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param $source
+     * @param $array
+     * @return mixed
+     */
+    public static function marge( $source ,$array )
+    {
+        foreach( $array as $key=>$value ){
+            $source[$key] = $value;
+        }
+        return $source;
+    }
 }

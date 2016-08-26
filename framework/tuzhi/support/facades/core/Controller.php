@@ -5,3 +5,9 @@
  * Date: 16/5/4
  * Time: 21:18
  */
+
+
+class Controller extends \tuzhi\route\Controller
+{
+
+}

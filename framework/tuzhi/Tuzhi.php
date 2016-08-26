@@ -13,6 +13,9 @@ use tuzhi\di\Container;
 use tuzhi\base\exception\NotFoundFilesException;
 use tuzhi\base\exception\InvalidParamException;
 
+
+//todo::  &tz  这个逻辑需要独立出去
+
 /**
  * Class Tuzhi
  */
@@ -46,7 +49,7 @@ class Tuzhi {
             '&tuzhi'=> __DIR__
         ];
 
-    protected static $autoload =
+    protected static $namespace =
         [
             'tuzhi'=> __DIR__
         ];
@@ -61,7 +64,7 @@ class Tuzhi {
          * 添加对插件的支持
          */
         Tuzhi::$alias['&tz'] = dirname(__DIR__).'/tuzhi-';
-        Tuzhi::$autoload['tz'] = Tuzhi::$alias['&tz'];
+        Tuzhi::$namespace['tz'] = Tuzhi::$alias['&tz'];
 
         /**
          *  定义 autoload
@@ -89,7 +92,7 @@ class Tuzhi {
         /**
          *  配置 自动加载
          */
-        static::$autoload  = array_merge( static::$autoload , Tuzhi::config( 'autoload' ));
+        static::$namespace  = array_merge( static::$namespace , Tuzhi::config( 'namespace' ));
 
         /**
          * 启用 APP
@@ -139,13 +142,19 @@ class Tuzhi {
     }
 
     /**
-     * 别名把
-     * @param $file
-     * @return mixed
+     * 简单处理
+     * @param $aliasName
+     * @param null $aliasPath
+     * @return mixed|null
      */
-    public static function alias( $file )
+    public static function alias( $aliasName ,$aliasPath = null )
     {
-        return static::getAlias($file);
+        if( $aliasPath == null ){
+            return static::getAlias($aliasName);
+        }else{
+            return static::setAlias($aliasName,$aliasPath);
+        }
+
     }
 
     /**
@@ -155,8 +164,8 @@ class Tuzhi {
      */
     public static function getNamespace( $namespace )
     {
-        if( isset( Tuzhi::$autoload[$namespace] ) ){
-            return Tuzhi::$autoload[$namespace];
+        if( isset( Tuzhi::$namespace[$namespace] ) ){
+            return Tuzhi::$namespace[$namespace];
         }else{
             throw new \Exception('Not Found Namespace '.$namespace.'!');
         }

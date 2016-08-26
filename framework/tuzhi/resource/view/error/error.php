@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><?php echo Tuzhi::frameName()?></a>
+            <a class="navbar-brand" href="#">土制框架</a>
         </div>
         <!--div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -43,16 +43,62 @@
 <!-- Begin page content -->
 <div class="container">
     <div class="page-header">
-        <h1><?php echo  'Exception'  ?></h1>
+        <h1>
+            <?php if( method_exists($exception,'getName') ){?>
+                <?= $exception->getName();?>
+            <?php }else{?>
+                Exception
+            <?php }?>
+        </h1>
     </div>
-    <p class="lead"> <code> <?php echo $exception->getMessage()?> </code> </p>
-    <p><?php echo $exception->getFile()?> ( <?php echo $exception->getLine() ?>  )</p>
+    <p class="lead"><code> <?php echo $exception->getMessage()?> </code> </p>
+    <p> <kbd> <?= $exception->getLine() ?></kbd> <?php echo $exception->getFile()?> </p>
+    <br>
+    <br>
+    <?php if($exception->getTrace()){?>
+        <div>
+            <h2>TraceMessage</h2>
+            <table class="table table-striped table-hover">
+                <?php $index = 1; foreach( $exception->getTrace() as $item){ ?>
+                    <?php if( in_array( $item['function'],
+                        [
+                            'autoload',
+                            'spl_autoload_call',
+                            'class_exists',
+                            'call_user_func_array',
+                            'call_user_func',
+                            '__callStatic',
+                            '__call'
+                        ]
+                    ) ){ continue; }?>
+                    <tr>
+                        <td><h4> #<?= $index++?></h4></td>
+                        <td>
+                            <p class="lead">
+                                <?= isset($item['class']) ?$item['class']: null ?>
+                                <?= isset($item['type']) ?$item['type']: null ?>
+                                <?= isset($item['function']) ? $item['function'].'( )' : null ?>
+                            </p>
+
+                            <?php if( isset($item['file']) ){?>
+                                <p>
+                                    <kbd><?= isset($item['line']) ? $item['line'] : null ?></kbd>
+                                    <?= isset($item['file']) ? $item['file'] : null ?>
+                                </p>
+                            <?php }?>
+                        </td>
+                    </tr>
+                <?php }?>
+            </table>
+        </div>
+    <?php }?>
+    <?php //print_r($exception)?>
 
 </div>
 
 <!-- Footer  -->
 <footer class="footer">
     <div class="container">
-        <p class="text-muted"><?php echo date('Y',time()).' '.Tuzhi::frameName().' '.Tuzhi::frameVersion()?></p>
+        <p class="text-muted"><?php echo date('Y',time()).' '.Tuzhi::frameName().' '.Tuzhi::frameVersion()?> - 禅师</p>
     </div>
 </footer>
