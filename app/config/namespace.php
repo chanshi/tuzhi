@@ -13,8 +13,8 @@
  */
 return
     [
-        'autoload'=>
+        'namespace'=>
             [
-                'app'=>APP_PATH
+                'app' => APP_PATH
             ]
     ];

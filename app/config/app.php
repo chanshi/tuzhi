@@ -11,46 +11,28 @@ return
         'app' =>
             [
                 'class'=>'tuzhi\web\Application',
-                // 基本
+
+                /**
+                 * 网站编码
+                 */
                 'charset' => 'utf-8',
+
+                /**
+                 * 时区
+                 */
                 'timezone' => 'PRC' ,
+
+                /**
+                 * 运行环境
+                 */
                 'environment' => 'production',
-                // 启动
-                'bootstrap'=>
+
+                /**
+                 * APP服务
+                 */
+                'service' =>
                     [
 
-                    ],
-                //服务
-                'server' =>
-                    [
-                        'log'=>
-                            [
-                                'class' => 'tuzhi\log\Log',
-                                'storage' =>
-                                    [
-                                        'class' => 'tuzhi\log\storage\File',
-                                        'path' => '&runtime/logs/{year}/{month}/{day}/',
-                                        'file' =>  '{type}.log'
-                                    ],
-                                'allow' => 7,
-                                'pattern'=> '{time} {message}'
-                            ],
-                        'request'=>
-                            [
-                                'class'=>'tuzhi\web\Request',
-                            ],
-                        'router'=>
-                            [
-                                'class'=>'tuzhi\route\Router',
-                            ],
-                        'response'=>
-                            [
-                                'class'=>'tuzhi\web\Response',
-                            ],
-                        'errorHandler'=>
-                            [
-                                'class'=>'tuzhi\web\ErrorHandler'
-                            ],
                         'view'=>
                             [
                                 'class'=>'tuzhi\view\View',
@@ -80,11 +62,6 @@ return
                                         PDO::ATTR_TIMEOUT => 10
                                     ]
                             ]
-                    ],
-                //中间件
-                'middleware'=>
-                    [
-
                     ]
             ]
         

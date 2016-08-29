@@ -11,6 +11,7 @@ namespace tuzhi\view;
 
 use tuzhi\helper\Html;
 use tuzhi\view\widget\ContentWidget;
+use tuzhi\view\widget\ReadyJsWidget;
 
 class PageBuilder
 {
@@ -195,7 +196,8 @@ class PageBuilder
 
         if( isset( $this->js[ PageBuilder::POS_READY ] ) ){
             $jsArr = array_values( $this->js[ PageBuilder::POS_READY ] );
-            $bodyEndHtml[] = Html::script(null , implode("\n",$jsArr));
+            $bodyEndHtml[] = implode("\n",$jsArr);
+            //$bodyEndHtml[] = Html::script(null , implode("\n",$jsArr));
         }
 
         return implode("\n",$bodyEndHtml);
@@ -243,6 +245,22 @@ class PageBuilder
     public function contentEnd()
     {
        echo ContentWidget::end();
+    }
+
+    /**
+     *
+     */
+    public function jsBegin()
+    {
+        ReadyJsWidget::begin(['view'=>$this]);
+    }
+
+    /**
+     *
+     */
+    public function jsEnd()
+    {
+        ReadyJsWidget::end();
     }
 
     /**

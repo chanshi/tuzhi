@@ -27,6 +27,8 @@ class Str
     }
 
     /**
+     * 随机数
+     *
      * @param int $num
      * @return string
      */
@@ -34,5 +36,16 @@ class Str
     {
         $all = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ123456789';
         return substr(str_shuffle($all),0,$num);
+    }
+
+    /**
+     * 首字母大写
+     *
+     * @param $string
+     * @return string
+     */
+    public static function ucFirst( $string )
+    {
+        return ucfirst(strtolower($string));
     }
 }

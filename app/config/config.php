@@ -8,20 +8,25 @@
 
 return
     [
+        /**
+         * 定义配置类
+         */
         'class' => 'tuzhi\base\Configure',
-        'path'=> APP_PATH.'/config/',
+
+        /**
+         *  配置路径
+         */
+        'path' => __DIR__.'/',
+
+        /**
+         * 配置文件
+         */
         'files'=>
             [
                 'alias.php',
-                'autoload.php',
+                'namespace.php',
                 'app.php',
                 'server.php',
                 'cache.php',
-                'memcached.php',
-                'cookie.php',
-                'session.php',
-                // 这个跟环境有关系 暂不处理
-                //'developing/server.php',
-                //'testing/server.php'
             ]
 ];

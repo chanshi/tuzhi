@@ -8,7 +8,7 @@
 
 namespace app\control;
 
-use tuzhi\route\Controller;
+use Controller;
 
 /**
  * 演示
@@ -18,7 +18,6 @@ use tuzhi\route\Controller;
  */
 class Index extends Controller
 {
-    public $middleWare = [];
 
     public function IndexAction()
     {

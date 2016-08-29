@@ -114,12 +114,11 @@ abstract class ErrorHandler extends Server
         }
 
         $error = error_get_last();
-        
 
         if( ErrorException::isFatalError($error) ){
 
             $exception = new ErrorException($error['message'],$error['type'] ,$error['type'] ,$error['file'] ,$error['line']);
-            
+
             $this->clearOutput();
             $this->renderException($exception);
 
@@ -127,6 +126,7 @@ abstract class ErrorHandler extends Server
         }
 
     }
+
 
 
     /**

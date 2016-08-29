@@ -46,7 +46,7 @@
         <h1>
             <?php if( method_exists($exception,'getName') ){?>
                 <?= $exception->getName();?>
-            <?php }else{?>
+            <?php }else{ ?>
                 Exception
             <?php }?>
         </h1>

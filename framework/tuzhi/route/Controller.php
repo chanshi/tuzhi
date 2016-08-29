@@ -7,6 +7,7 @@
  */
 
 namespace tuzhi\route;
+use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\base\Object;
 
 
@@ -26,16 +27,24 @@ class Controller extends Object
     /**
      * @param $action
      * @param $arguments
+     * @return mixed
+     * @throws NotFoundMethodException
      */
     public function __call( $action,$arguments)
     {
-        $action = strtolower($action);
+        //$action = strtolower($action);
         if(array_key_exists($action,$this->actionClass)){
             $action = \Tuzhi::make(
                 $this->actionClass[$action]
             );
             return $action->action();
         }
+        throw new NotFoundMethodException('Not Found Action');
         //TODO:: NOT FOUND
+    }
+
+    public function hasAct( $action )
+    {
+        return method_exists($this,$action) || array_key_exists($action,$this->actionClass);
     }
 }

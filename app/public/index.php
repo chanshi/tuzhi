@@ -6,8 +6,25 @@
  * Time: 11:29
  */
 
-
+/**
+ * 项目APP 目录
+ */
 define('APP_PATH', dirname(__DIR__) );
 
 
-require __DIR__ .'/../boot/bootstrap.php';
+/**
+ * 加载框架
+ */
+require __DIR__.'/../../framework/tuzhi/Tuzhi.php';
+
+/**
+ * 初始化框架
+ */
+Tuzhi::init(
+    ( require  APP_PATH.'/config/config.php')
+);
+
+/**
+ * 运行
+ */
+Tuzhi::App()->run();

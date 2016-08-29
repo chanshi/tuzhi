@@ -37,7 +37,8 @@ class Manage extends Object
             'Asset',
             'DB',
             'Cache',
-            'Log'
+            'Log',
+            'Block'
         ];
 
     /**

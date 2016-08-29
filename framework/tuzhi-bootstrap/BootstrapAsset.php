@@ -15,6 +15,11 @@ class BootstrapAsset extends Asset
     /**
      * @var string
      */
+    protected $version ='v3.3.6';
+
+    /**
+     * @var string
+     */
     public $sourcePath = '&tz/bootstrap/';
 
     /**

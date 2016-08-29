@@ -23,11 +23,13 @@ AppAsset::register( $view );
     <?= $view->headTag()?>
 </head>
 <body>
+<div class="container">
 <?= $view->bodyBeginTag()?>
 
 <?= $content?>
 
 <?= $view->bodyEndTag()?>
+</div>
 </body>
 </html>
 <?php $view->pageEnd()?>

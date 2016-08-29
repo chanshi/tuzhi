@@ -142,6 +142,27 @@ abstract class Application extends Object  implements IApplication
      */
     public static function __callStatic($method, $arguments)
     {
+        return Tuzhi::$app->magicCall($method);
+    }
+
+    /**
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+       return $this->magicCall($method);
+    }
+
+    /**
+     * @param $method
+     * @return mixed
+     * @throws NotFoundMethodException
+     */
+    public function magicCall( $method )
+    {
+        $method = strtolower( $method );
         if( ($server =  Tuzhi::$app->get($method) ) ){
             return $server;
         }else{

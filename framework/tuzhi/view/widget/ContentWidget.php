@@ -49,8 +49,6 @@ class ContentWidget extends Widget
         $param['content'] = $content;
 
         //渲染输出
-        //return App::View()->renderFile(  );
-        //return App::View()->renderFile( $this->layout,$param );
         return \Tuzhi::$app->get('view')->renderFile( $this->layout , $param );
 
     }

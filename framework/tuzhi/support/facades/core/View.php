@@ -6,6 +6,8 @@
  * Time: 21:18
  */
 
+use tuzhi\base\exception\NotFoundMethodException;
+
 class View extends \tuzhi\support\facades\Facades
 {
     protected static $serviceName = 'view';
@@ -15,6 +17,7 @@ class View extends \tuzhi\support\facades\Facades
      * @param $view
      * @param array $__params__
      * @return mixed
+     * @throws \tuzhi\base\exception\NotFoundMethodException
      */
     public static function layout( $view ,$__params__ = [] )
     {
@@ -22,7 +25,14 @@ class View extends \tuzhi\support\facades\Facades
         if( static::$service ){
             return static::$service->renderPage( $view ,$__params__ );
         }
-        //throw new \tuzhi\base\exception\NotFoundMethodException('a');
+        throw new NotFoundMethodException('Not Found Server View');
+    }
 
+    public static function fetch($view ,$__params__ = []){
+        static::init();
+        if( static::$service ){
+            return static::$service->render( $view ,$__params__ );
+        }
+        throw new NotFoundMethodException('Not Found Server View');
     }
 }

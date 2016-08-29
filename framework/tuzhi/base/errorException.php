@@ -32,7 +32,29 @@ class ErrorException extends \ErrorException {
      */
     public static function isFatalError($error)
     {
-        return isset($error['type']) && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING, self::E_HHVM_FATAL_ERROR]);
+
+        return
+            isset( $error['type'] )
+        && in_array(
+            $error['type'],
+            [
+                E_ERROR,
+                E_PARSE,
+                E_CORE_ERROR,
+                E_CORE_WARNING,
+                E_COMPILE_ERROR,
+                E_COMPILE_WARNING,
+                E_DEPRECATED,
+                E_NOTICE,
+                E_RECOVERABLE_ERROR,
+                E_STRICT,
+                E_WARNING,
+                E_USER_DEPRECATED,
+                E_USER_ERROR,
+                E_USER_NOTICE,
+                E_USER_WARNING,
+               // self::E_HHVM_FATAL_ERROR
+            ]);
     }
     /**
      * 优化显示
@@ -40,7 +62,7 @@ class ErrorException extends \ErrorException {
     public function getName()
     {
 
-        static $names = [
+         $names = [
             E_COMPILE_ERROR => 'PHP Compile Error',
             E_COMPILE_WARNING => 'PHP Compile Warning',
             E_CORE_ERROR => 'PHP Core Error',
@@ -59,6 +81,8 @@ class ErrorException extends \ErrorException {
             //self::E_HHVM_FATAL_ERROR => 'HHVM Fatal Error',
         ];
 
-        return isset($names[$this->getCode()]) ? $names[$this->getCode()] : 'Error';
+        return isset($names[$this->getCode()])
+            ? $names[$this->getCode()]
+            : 'Error';
     }
 }

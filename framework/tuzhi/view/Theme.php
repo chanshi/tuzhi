@@ -80,7 +80,9 @@ class Theme extends Object
      */
     public function getLayoutFile( $layout = null )
     {
-        $layoutFile = $layout === null ? $this->defaultLayout : $layout;
+        $layoutFile = $layout === null
+            ? $this->defaultLayout
+            : $layout;
 
         return $this->getLayoutPath().'/'. rtrim( ltrim($layoutFile ,'/') ,'.php' ).'.php';
     }

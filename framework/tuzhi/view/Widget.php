@@ -25,10 +25,6 @@ abstract class Widget extends Object
      */
     protected static $stack = [];
 
-    /**
-     * @var
-     */
-    protected static $view;
 
     /**
      * @param array $config
@@ -41,6 +37,7 @@ abstract class Widget extends Object
             get_called_class(),
             [$config]
         );
+
         Widget::$stack[] = $widget;
 
         return $widget;

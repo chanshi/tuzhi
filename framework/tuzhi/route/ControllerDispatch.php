@@ -65,7 +65,7 @@ class ControllerDispatch implements IDispatch
 
         $action  = $this->prepareAction($action);
 
-        if( method_exists( $Control , $action ) ){
+        if( $Control->hasAct( $action ) ){
             //TODO: 匹配参数的问题
             $this->content = call_user_func_array([$Control ,$action],[]);
         }else{
@@ -87,7 +87,7 @@ class ControllerDispatch implements IDispatch
         $control = $this->controlNamespace.'\\'. ucfirst( strtolower( $control )  );
 
         if( class_exists( $control ) ){
-            return Tuzhi::make( $control );
+            return  Tuzhi::make( $control );
         }else{
             throw new NotFoundMethodException('Not Found Control '.$control);
         }
