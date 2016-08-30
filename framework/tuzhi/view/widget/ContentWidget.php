@@ -24,11 +24,6 @@ class ContentWidget extends Widget
     public $layout;
 
 
-    public function __construct(array $config = [])
-    {
-        parent::__construct( $config );
-    }
-
     /**
      *
      */

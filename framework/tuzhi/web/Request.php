@@ -11,6 +11,8 @@ namespace tuzhi\web;
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\Server;
 use tuzhi\contracts\web\IRequest;
+use tuzhi\web\cookie\CookieCollect;
+use tuzhi\web\cookie\Cookie;
 
 /**
  * Class Request
@@ -396,7 +398,30 @@ class Request extends Server implements IRequest
      */
     public function cookie()
     {
+        if( $this->cookie == null ) {
+            $this->cookie = new CookieCollect(
+                [
+                    '_cookie' => $this->loadCookie(),
+                    'readOnly'=>true
+                ]);
+        }
         return $this->cookie;
+    }
+
+    /**
+     * @return array
+     */
+    protected function loadCookie()
+    {
+        $cookie = [];
+        foreach( $_COOKIE as $key=>$value ) {
+            $cookie[$key] = new Cookie(
+                [
+                    'name'=>$key,
+                    'value'=>$value
+                ]);
+        }
+        return $cookie;
     }
 
     /**

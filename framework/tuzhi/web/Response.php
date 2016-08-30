@@ -12,6 +12,7 @@ use Tuzhi;
 use tuzhi\base\Object;
 use tuzhi\contracts\web\IResponse;
 use Closure;
+use tuzhi\web\cookie\CookieCollect;
 
 class Response extends Object implements IResponse
 {
@@ -25,6 +26,11 @@ class Response extends Object implements IResponse
      * @var
      */
     protected $version;
+
+    /**
+     * @var
+     */
+    protected $cookie;
 
     /**
      * @var array
@@ -181,6 +187,25 @@ class Response extends Object implements IResponse
         }
     }
 
+    public function sendCookie()
+    {
+        if( $this->cookie == null ){
+            return;
+        }
+
+        foreach( $this->cookie as $name=>$cookie ) {
+            setcookie(
+                $cookie->name,
+                $cookie->value,
+                $cookie->expire,
+                $cookie->path,
+                $cookie->domain,
+                $cookie->secure,
+                $cookie->httpOnly
+            );
+        }
+    }
+
 
     /**
      * @param $url
@@ -225,4 +250,16 @@ class Response extends Object implements IResponse
             'form' => array('application/x-www-form-urlencoded'),
         );
     }
+
+    /**
+     * @return CookieCollect
+     */
+    public function cookie()
+    {
+        if($this->cookie == null){
+            $this->cookie = new CookieCollect();
+        }
+        return $this->cookie;
+    }
+
 }

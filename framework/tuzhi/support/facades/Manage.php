@@ -39,7 +39,10 @@ class Manage extends Object
             'DB',
             'Cache',
             'Log',
-            'Block'
+            'Block',
+            'Config',
+            'Cookie',
+            'Session'
         ];
 
     /**

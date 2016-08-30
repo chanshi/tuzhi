@@ -8,10 +8,15 @@
 
 namespace tuzhi\web\cookie;
 
-
+use tuzhi\base\exception\InvalidParamException;
+use tuzhi\base\Object;
 use tuzhi\helper\Arr;
 
-class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
+/**
+ * Class CookieCollect
+ * @package tuzhi\web\cookie
+ */
+class CookieCollect extends Object implements \ArrayAccess ,\IteratorAggregate,\Countable
 {
     /**
      * @var
@@ -19,40 +24,80 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
     protected  $cookies;
 
     /**
-     * @var null
+     * @var bool
      */
-    protected static $instance = null;
+    public $readOnly = false;
 
     /**
      * CookieCollect constructor.
+     * @param array $config
      */
-    private function __construct()
+    public function __construct(array $config =[])
     {
-        $this->init();
-    }
+        parent::__construct($config);
 
-    /**
-     * 单例模式
-     * @return null
-     */
-    public static function getInstance(){
-        if( ! static::$instance ){
-            static::$instance = new static();
+        if( isset($config['_cookie']) ){
+            $this->cookies = $config['_cookie'];
         }
-        return static::$instance;
     }
 
     /**
-     *
+     * @param $name
      * @return null
      */
-    protected function init()
+    public function get( $name )
     {
-        // TODO: 初始化 加载 COOKIE
-        $Obj = $this;
-        Arr::each($_COOKIE,function($key,$value) use( & $Obj ){
-            $Obj->offsetSet($key,$value);
-        });
+        return isset( $this->cookies[$name] )
+            ? $this->cookies[$name]->value
+            : null;
+    }
+
+    /**
+     * @param $name
+     * @param $cookie
+     * @throws InvalidParamException
+     */
+    public function set($name ,$cookie)
+    {
+        if( $this->readOnly ){
+            throw new InvalidParamException('The Cookie Collection is Read Only');
+        }
+        $this->cookies[$name] = $cookie;
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function has( $name )
+    {
+        return isset( $this->cookies[$name] ) && $this->cookies[$name]->value !== ''
+            && $this->cookies[$name]->expire === null || $this->cookies[$name]->expire >= time();
+    }
+
+    /**
+     * @param $cookie
+     * @throws InvalidParamException
+     */
+    public function rm( $cookie )
+    {
+        if( $this->readOnly ){
+            throw new InvalidParamException('The Cookie Collection is Read Only');
+        }
+
+        if( $cookie instanceof Cookie) {
+            $cookie->expire = 1;
+            $cookie->value = '';
+        }else{
+            //TODO:: 域名的问题
+            $cookie = new Cookie(
+                [
+                    'name' => $cookie,
+                    'expire' => 1,
+                ]);
+        }
+        //
+        $this->cookies[$cookie->name] = $cookie;
     }
 
     /**
@@ -61,7 +106,7 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
      */
     public function offsetGet($offset)
     {
-        return isset( $this->cookies[$offset] ) ? $this->cookies[$offset]->value : null;
+        return $this->get($offset);
     }
 
     /**
@@ -70,11 +115,7 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
      */
     public function offsetSet($offset, $value)
     {
-        if(isset($this->cookies[$offset])){
-            $this->cookies[$offset]->value = $value;
-        }else{
-            $this->cookies[$offset] = new Cookie($offset,$value);
-        }
+        return $this->set( $offset ,$value );
     }
 
     /**
@@ -82,10 +123,7 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
      */
     public function offsetUnset($offset)
     {
-        if(isset($this->cookies[$offset])){
-            $this->cookies[$offset]->value  = null;
-            $this->cookies[$offset]->expire = -1;
-        }
+        return $this->rm($offset);
     }
 
     /**
@@ -106,27 +144,28 @@ class CookieCollect implements \ArrayAccess ,\IteratorAggregate,\Countable
     }
 
     /**
-     * 保存
-     */
-    public function save(){
-        foreach(static::getIterator() as $cookie){
-            setcookie(
-                $cookie->name,
-                $cookie->value,
-                $cookie->expire,
-                $cookie->path,
-                $cookie->domian,
-                $cookie->secure,
-                $cookie->httponly
-            );
-        }
-    }
-
-    /**
      * @return \ArrayIterator
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this);
+        return new \ArrayIterator($this->cookies);
+    }
+
+    /**
+     * @param $name
+     * @param $cookie
+     */
+    public function __set( $name, $cookie )
+    {
+        return $this->set($name,$cookie);
+    }
+
+    /**
+     * @param $name
+     * @return null
+     */
+    public function __get( $name )
+    {
+        return $this->get( $name );
     }
 }

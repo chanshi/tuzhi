@@ -39,5 +39,6 @@ class Html extends Object implements IResponse
     {
         $this->response->sendStatsCode();  //send 200
         header("Content-type: text/html; charset=utf-8");
+        $this->response->sendCookie();
     }
 }

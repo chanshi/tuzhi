@@ -9,7 +9,13 @@
 namespace tuzhi\web\cookie;
 
 
-class Cookie {
+use tuzhi\base\Object;
+
+/**
+ * Class Cookie
+ * @package tuzhi\web\cookie
+ */
+class Cookie extends Object{
 
     /**
      * @var
@@ -19,52 +25,52 @@ class Cookie {
     /**
      * @var null
      */
-    public $value;
+    public $value = '';
 
     /**
      * @var
      */
-    public $expire;
+    public $expire = 0;
 
     /**
      * @var string
      */
-    public $path;
+    public $path = '/';
 
     /**
      * @var
      */
-    public $domain;
+    public $domain = '';
 
     /**
      * @var bool
      */
-    public $secure;
+    public $secure = false;
 
     /**
      * @var bool
      */
-    public $httpOnly;
-
+    public $httpOnly = true;
 
     /**
-     * Cookie constructor.
-     * @param $name
-     * @param null $value
-     * @param int $expire
-     * @param string $path
-     * @param string $domain
-     * @param bool $secure
-     * @param bool $httpOnly
+     *
      */
-    public function __construct($name , $value = null ,$expire = 0 ,$path = '/' ,$domain = '' ,$secure = true ,$httpOnly = true)
+    public function init()
     {
-        $this->name = $name;
-        $this->value = $value;
-        $this->expire = time() + $expire;
-        $this->path = $path;
-        $this->domian =  empty($domain) ? \Tuzhi::$app->request->getDomain() : $domain ;
-        $this->secure = (boolean) $secure;
-        $this->httpOnly = (boolean) $httpOnly;
+        /**
+         * default ?
+         */
+        $this->expire = $this->expire
+            ?  (int) $this->expire + time()
+            : 0;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return  (string) $this->value;
+    }
+
 }

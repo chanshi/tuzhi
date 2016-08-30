@@ -27,6 +27,7 @@ class Closure extends Object implements IResponse
     protected function sendHeader()
     {
         $this->response->sendStatsCode();
+        $this->response->sendCookie();
     }
 
     /**

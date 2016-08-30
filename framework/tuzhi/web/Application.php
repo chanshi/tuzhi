@@ -58,7 +58,7 @@ class Application extends \tuzhi\base\Application {
     {
         return Arr::marge(
             [
-                //'session'=>'',
+                'session'=>'tuzhi\session\Session',
                 'view'=>'tuzhi\view\View',
             ],
             parent::serviceCore()
