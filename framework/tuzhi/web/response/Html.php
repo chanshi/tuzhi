@@ -13,8 +13,31 @@ use tuzhi\contracts\web\IResponse;
 
 class Html extends Object implements IResponse
 {
+    /**
+     * @var
+     */
+    public $response;
+
+    /**
+     * @var
+     */
+    public $content;
+
+    /**
+     *
+     */
     public function send()
     {
-        // TODO: Implement send() method.
+        $this->sendHeader();
+        return $this->content;
+    }
+
+    /**
+     *
+     */
+    protected function sendHeader()
+    {
+        $this->response->sendStatsCode();  //send 200
+        header("Content-type: text/html; charset=utf-8");
     }
 }

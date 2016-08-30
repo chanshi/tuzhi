@@ -31,6 +31,7 @@ class Manage extends Object
             'App',
             'Router',
             'Request',
+            'Response',
             'Controller',
             'Model',
             'View',

@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: 吾色禅师<wuse@chanshi.me>
- * Date: 16/8/26
- * Time: 10:56
+ * Date: 16/8/29
+ * Time: 14:26
  */
 
 namespace tuzhi\web\response;
@@ -11,11 +11,9 @@ namespace tuzhi\web\response;
 use tuzhi\base\Object;
 use tuzhi\contracts\web\IResponse;
 
-class Json extends Object implements IResponse
+class Closure extends Object implements IResponse
 {
-    /**
-     * @var
-     */
+
     public $response;
 
     /**
@@ -28,8 +26,7 @@ class Json extends Object implements IResponse
      */
     protected function sendHeader()
     {
-        $this->response->sendStatsCode();  //send 200
-        header("Content-type: application/json; charset=utf-8");
+        $this->response->sendStatsCode();
     }
 
     /**
@@ -38,6 +35,6 @@ class Json extends Object implements IResponse
     public function send()
     {
         $this->sendHeader();
-        return json_encode( $this->content );
+        return call_user_func($this->content);
     }
 }

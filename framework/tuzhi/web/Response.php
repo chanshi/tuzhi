@@ -8,17 +8,33 @@
 
 namespace tuzhi\web;
 
-
+use Tuzhi;
 use tuzhi\base\Object;
 use tuzhi\contracts\web\IResponse;
+use Closure;
 
-class Response extends Object implements IResponse {
+class Response extends Object implements IResponse
+{
 
+    /**
+     * @var
+     */
     protected $header;
 
-    protected $content;
-
+    /**
+     * @var
+     */
     protected $version;
+
+    /**
+     * @var array
+     */
+    protected static $responseClass  =
+        [
+            'html'=>'tuzhi\web\response\Html',
+            'json'=>'tuzhi\web\response\Json',
+            'closure'=>'tuzhi\web\response\Closure'
+        ];
 
     /**
      * @var array
@@ -91,34 +107,65 @@ class Response extends Object implements IResponse {
         511 => 'Network Authentication Required',
     ];
 
+    /**
+     * @var
+     */
+    public $content;
+
+    /**
+     * @var
+     */
+    public $format;
+
+    /**
+     * init
+     */
     public function init()
     {
         if ($this->version === null) {
-            if (isset($_SERVER['SERVER_PROTOCOL']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.0') {
-                $this->version = '1.0';
-            } else {
-                $this->version = '1.1';
-            }
+            $this->version = (isset($_SERVER['SERVER_PROTOCOL']) && $_SERVER['SERVER_PROTOCOL'] === 'HTTP/1.0')
+                ? '1.0'
+                : '1.1';
         }
     }
 
-    public function sendHead()
-    {
-        $this->sendStatsCode();
-        header("Content-type: text/html; charset=utf-8");
-    }
-
+    /**
+     * @param $content
+     */
     public function setContent( $content )
     {
-        $this->content = $content;
+        if(is_string($content)){
+            $this->content = Tuzhi::make(
+                [
+                    'class' => static::$responseClass['html'],
+                    'response' => $this,
+                    'content' => $content
+                ]
+            );
+        }else if(is_array( $content )){
+            $this->content = \Tuzhi::make(
+                [
+                    'class' => static::$responseClass['json'],
+                    'response' => $this,
+                    'content' => $content
+                ]
+            );
+        }else if( $content instanceof Closure) {
+            $this->content = \Tuzhi::make(
+                [
+                    'class'=> static::$responseClass['closure'],
+                    'response' => $this,
+                    'content' => $content
+                ]
+            );
+        }else if ( $content instanceof  IResponse){
+            $this->content = $content;
+        }
     }
 
-    public function sendContent()
+    public function getResponseClass( $className )
     {
-        if( $this->content ){
-            echo $this->content;
-        }
-        return;
+        return static::$responseClass[$className];
     }
 
     /**
@@ -126,8 +173,12 @@ class Response extends Object implements IResponse {
      */
     public function send()
     {
-        $this->sendHead();
-        $this->sendContent();
+        if( $this->content instanceof IResponse) {
+            echo $this->content->send();
+        }else{
+            //TODO::
+            echo 'Null';
+        }
     }
 
 
@@ -139,7 +190,8 @@ class Response extends Object implements IResponse {
     {
         $this->sendStatsCode($statusCode);
         header("Location: {$url}");
-        exit();
+        //TODO::
+        exit(0);
     }
 
 

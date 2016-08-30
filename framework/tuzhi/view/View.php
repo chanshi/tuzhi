@@ -54,7 +54,8 @@ class View  extends Server implements IView
     public function render($view, $param = [])
     {
         //TODO:: 可以根据文件后缀 选择解析引擎
-        $viewFile = rtrim( $this->theme->getViewPath().$view ,'.php').'.php';
+        //$viewFile = rtrim( $this->theme->getViewPath().$view ,'.php').'.php';
+        $viewFile = $this->theme->getViewPath().$view.'.php';
         return $this->renderFile($viewFile, $param );
     }
 
