@@ -21,7 +21,7 @@ class Validator extends Object
     /**
      * @var
      */
-    public $mode;
+    public $model;
 
     /**
      * @var
@@ -38,14 +38,12 @@ class Validator extends Object
      */
     protected static $ruleMaps =
         [
-            /**
-             * 包含  只在 Insert 标记下执行
-             */
-            'require' => 'tuzhi\model\validators\rule\RequireValid' ,
-            /**
-             * 闭包函数
-             */
-            'closure' => '',
+            'require' => 'tuzhi\model\validators\rule\RequireValid',
+            'closure' => 'tuzhi\model\validators\rule\ClosureValid',
+            'regular' => 'tuzhi\model\validators\rule\RegularValid',
+            'compare' => 'tuzhi\model\validators\rule\CompareValid',
+            'length'  => 'tuzhi\model\validators\rule\LengthValid',
+            'proper'  => 'tuzhi\model\validators\rule\ProperValid',
         ];
 
     /**
@@ -58,7 +56,15 @@ class Validator extends Object
      */
     protected $runAttribute=[];
 
+    /**
+     * @var array
+     */
     protected $fullRuleObject = [];
+
+    /**
+     * @var bool
+     */
+    protected $verifyStatus = true;
 
 
     /**
@@ -77,9 +83,10 @@ class Validator extends Object
     {
         $this->error = [];
         $this->runAttribute = [];
+        $this->verifyStatus = true;
+        $this->model->setVerifyErrors([]);
         if( $attributes ){
-            foreach( $attributes as $attribute )
-            {
+            foreach( $attributes as $attribute ) {
                 if( in_array($attribute,$this->attributes) ){
                     $this->runAttribute[] = $this->attributes[$attribute];
                 }
@@ -92,20 +99,30 @@ class Validator extends Object
 
     /**
      * @param array $attributes
+     * @param bool $all
      * @return bool
      */
-    public function verify( $attributes = [] )
+    public function verify( $attributes = [] ,$all = false)
     {
         $this->beforeVerify( $attributes );
 
         foreach( $this->runAttribute as $object ) {
-            if( ! $object->verify() ){
-                return false;
+            if(  ! $object->verify() && $all  ){
+                break;
             }
         }
-        return true;
+        $this->afterVerify();
+        return $this->verifyStatus;
     }
 
+    /**
+     * @return bool
+     */
+    public function afterVerify()
+    {
+        $this->model->setVerifyErrors($this->error);
+        return true;
+    }
 
 
 
@@ -122,6 +139,7 @@ class Validator extends Object
         return true;
     }
 
+
     /**
      * @param $rules
      * @param $attribute
@@ -131,22 +149,39 @@ class Validator extends Object
     {
         $Object = [];
         foreach( $rules as $rule ) {
-            $type =  strtolower(  array_unshift($rule) );
+            //print_r($rule);exit;
+            $type =  strtolower(  array_shift($rule) );
             $config = array_merge($rule,
                 [
                     'validator'=>$this,
                     'attribute'=>$attribute
                 ]);
-            if( in_array($type,static::$ruleMaps) ){
-                $ruleObject = \Tuzhi::make(
-                    static::$ruleMaps[$type],
-                    $config
-                );
+            if( in_array($type, array_keys( static::$ruleMaps ) ) ){
+                $config['class'] = static::$ruleMaps[$type];
+                $ruleObject = \Tuzhi::make( $config );
                 $Object[]= $ruleObject;
                 $this->fullRuleObject[] = $ruleObject;
             }
         }
         return $Object;
+    }
+
+    /**
+     * @param $attribute
+     * @param $errorMessage
+     * @return bool
+     */
+    public function setError( $attribute , $errorMessage )
+    {
+        if( $this->verifyStatus ){
+            $this->verifyStatus = false;
+        }
+
+        if( ! isset($this->error[$attribute]) ){
+            $this->error[$attribute] = [];
+        }
+        $this->error[$attribute][] = $errorMessage;
+        return true;
     }
 
 }

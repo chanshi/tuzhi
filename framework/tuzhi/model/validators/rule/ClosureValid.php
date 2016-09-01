@@ -17,10 +17,29 @@ use tuzhi\model\validators\Verify;
 class ClosureValid extends Verify
 {
 
+    /**
+     * @var
+     */
     public $closure;
+
+    /**
+     * @return bool|mixed
+     */
+    protected function checkClosure()
+    {
+
+        if( $value = $this->getAttribute() ){
+            $status = call_user_func($this->closure,$this);
+            if($status == false){
+                $this->addError();
+            }
+            return $status;
+        }
+        return true;
+    }
 
     public function verify()
     {
-
+        return $this->checkClosure();
     }
 }

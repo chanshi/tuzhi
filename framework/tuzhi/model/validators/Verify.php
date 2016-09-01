@@ -18,32 +18,72 @@ abstract class Verify extends Object
     public $validator;
 
     /**
-     * @var 验证的 字段
+     * @var
      */
     public $attribute;
 
     /**
      * @var
      */
-    public $error;
+    public $error = '属性 {label} 验证错误';
 
     /**
      * @var
      */
-    public $success;
+    public $success = 'success';
 
 
     /**
-     * @param $message
-     * @return $this
+     * @param null $attribute
+     * @return mixed
      */
-    public function addError( $message )
+    protected function getAttribute( $attribute = null )
     {
-        return $this->validator->addError( $this->attribute ,$message );
+        $attribute = $attribute
+            ? $attribute
+            : $this->attribute;
+        return $this->validator->model->getAttribute( $attribute );
+    }
+
+    /**
+     * @param null $attribute
+     * @return mixed
+     */
+    protected function getLabel( $attribute = null)
+    {
+        $attribute = $attribute
+            ? $attribute
+            : $this->attribute;
+        return $this->validator->model->getLabel($attribute);
+    }
+
+    /**
+     *
+     * @param $message
+     * @return mixed
+     */
+    protected function reservedMessage($message)
+    {
+        $format =
+            [
+                '#{label}#'=>$this->getLabel()
+            ];
+        return preg_replace(array_keys($format),array_values($format),$message);
+    }
+
+    /**
+     * @param null $message
+     * @return bool
+     */
+    public function addError( $message = null )
+    {
+        $message = $message ? $message : $this->error;
+        $this->validator->setError($this->attribute,$this->reservedMessage($message));
+        return true;
     }
 
     /**
      * @return mixed
      */
-    abstract public function verify( );
+    abstract public function verify();
 }

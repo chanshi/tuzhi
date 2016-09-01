@@ -68,14 +68,26 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     private $errors =
         [
             'system' => '',
-            'valid' =>[]
+            'verify' =>[]
         ];
 
 
+    /**
+     * Init
+     */
     public function init()
     {
-        $this->attLabel = $this->initLabel();
-        $this->rules = $this->initRules();
+        $this->attMaps = $this->attMaps
+            ? $this->attMaps
+            : $this->initMaps();
+
+        $this->attLabel = $this->attLabel
+            ? $this->attLabel
+            :  $this->initLabel();
+
+        $this->rules = $this->rules
+            ? $this->rules
+            : $this->initRules();
     }
 
     /**
@@ -87,6 +99,11 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
      * @return array
      */
     protected function initRules() { return [];}
+
+    /**
+     * @return array
+     */
+    protected function initMaps(){ return [];}
 
     /**
      * @param $attribute
@@ -108,6 +125,14 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
             : $attribute;
     }
 
+    /**
+     * @param $attributes
+     */
+    public function initAttributes( $attributes )
+    {
+        $this->attributes = [];
+        $this->setAttributes($attributes);
+    }
 
     /**
      * @param $attributes
@@ -126,6 +151,11 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
      */
     public function setAttribute( $attribute ,$value)
     {
+
+        if( in_array($attribute, array_keys( $this->attMaps ) ) ){
+            $attribute = $this->attMaps[$attribute];
+        }
+
         if( $this->isAllowAttr($attribute) == false ){
             return false;
         }
@@ -340,28 +370,51 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     }
 
     /**
+     * @param $errors
+     */
+    public function setVerifyErrors( $errors )
+    {
+        $this->errors['verify'] = $errors;
+    }
+
+    /**
+     * @param null $attribute
+     * @return array|mixed
+     */
+    public function getVerifyError( $attribute = null )
+    {
+        if( $attribute ){
+            return isset($this->errors['verify'][$attribute])
+                ? $this->errors['verify'][$attribute]
+                : [];
+        }else{
+            return $this->errors['verify'];
+        }
+    }
+
+    /**
      * @return mixed|null|Validator
      */
     public function getValidator()
     {
-        if( !(  $this->validator instanceof  Validator ) ){
-            $this->validator = \Tuzhi::make(
-                $this->validator,
-                [
-                    'model'=>$this,
-                    'rules'=>$this->rules
-                ]
-            );
+        if( ! ( $this->validator instanceof  Validator ) ){
+            $config = [
+                'class'=>$this->validClass,
+                'model'=>$this,
+                'rules'=>$this->rules
+            ];
+            $this->validator = \Tuzhi::make( $config );
         }
         return $this->validator;
     }
 
     /**
      * @param array $attributes
+     * @return bool
      */
     public function verify( $attributes = [] )
     {
-
+        return $this->getValidator()->verify($attributes);
     }
 
 }

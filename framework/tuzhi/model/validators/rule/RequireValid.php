@@ -16,9 +16,28 @@ use tuzhi\model\validators\Verify;
  */
 class RequireValid extends Verify
 {
+    /**
+     * @var string
+     */
+    public $error = '请输入 {label}';
 
+    /**
+     * @return bool
+     */
+    protected function checkRequire()
+    {
+        if( $this->getAttribute() === null ){
+            $this->addError();
+            return false;
+        }
+        return  true;
+    }
+
+    /**
+     * @return bool
+     */
     public function verify()
     {
-        return isset( $this->validator->model[$this->attribute] );
+        return $this->checkRequire();
     }
 }
