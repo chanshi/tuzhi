@@ -10,14 +10,17 @@ namespace tuzhi\db;
 
 
 use Exception;
-use tuzhi\base\ErrorException;
 use tuzhi\base\exception\InvalidParamException;
-use tuzhi\base\Object;
 use tuzhi\base\Server;
+use tuzhi\cache\Cache;
 use tuzhi\db\query\QueryBuilder;
 use tuzhi\helper\Arr;
 use tuzhi\support\loadBalance\LoadBalance;
 
+/**
+ * Class Connection
+ * @package tuzhi\db
+ */
 class Connection extends Server
 {
 
@@ -79,15 +82,40 @@ class Connection extends Server
      */
     public $slave;
 
+    /**
+     * @var Cache
+     */
+    public $cache = 'cache';
+
+    /**
+     * @var string
+     */
+    public $dbHashName;
+
+    /**
+     * @var
+     */
+    public $databaseName;
+
+    /**
+     * @var Transaction
+     */
     protected  $transaction;
+
+
 
     /**
      * 初始化
      */
     public function init()
     {
+        $this->cache = \Tuzhi::App()->get($this->cache);
+
+        $this->dbHashName =  md5( serialize($this->master) );
+
         if( $this->master ){
             $this->master = $this->initServer($this->master);
+
         }
         if( $this->slave ){
             $this->slave  = $this->initServer($this->slave);
@@ -165,6 +193,16 @@ class Connection extends Server
         }
         return $status;
     }
+
+    /**
+     * @return Transaction
+     */
+    public function beginTransaction()
+    {
+        $transaction = new Transaction(['db'=>$this]);
+        return $this->transaction  = $transaction;
+    }
+
     /**
      * @return bool
      */
@@ -177,16 +215,6 @@ class Connection extends Server
     }
 
     /**
-     * @return Transaction
-     */
-    public function beginTransaction()
-    {
-        $transaction = new Transaction(['db'=>$this]);
-        $transaction->begin();
-        return $this->transaction  = $transaction;
-    }
-
-    /**
      * @param callable $callback
      * @return mixed
      * @throws Exception
@@ -194,6 +222,7 @@ class Connection extends Server
     public function transaction( callable $callback )
     {
         $transaction = $this->getTransaction();
+        $transaction->begin();
         $level = $transaction->getLevel();
 
         try{
@@ -260,7 +289,7 @@ class Connection extends Server
      * @param $pdoClass
      * @return mixed
      */
-    public function initConnection( $pdoClass )
+    protected function initConnection( $pdoClass )
     {
         $pdoClass->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         //TODO:: SET NAMES
@@ -379,6 +408,10 @@ class Connection extends Server
         return $this->schema;
     }
 
+    /**
+     * @param $table
+     * @return mixed
+     */
     public function getTableSchema( $table )
     {
         return $this->getSchema()->getTableSchema( $table );
@@ -393,19 +426,34 @@ class Connection extends Server
         return new QueryBuilder(['db'=>$this]);
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function quoteValue( $value )
     {
-        return $this->getSchema()->quoteValue( $value );
+        return $this->getSchema()
+            ->quoteValue( $value );
     }
 
+    /**
+     * @param $table
+     * @return mixed
+     */
     public function quoteTable( $table )
     {
-        return $this->getSchema()->quoteTableName( $table );
+        return $this->getSchema()
+            ->quoteTableName( $table );
     }
 
+    /**
+     * @param $column
+     * @return mixed
+     */
     public function quoteColumn( $column )
     {
-        return $this->getSchema()->quoteColumn( $column );
+        return $this->getSchema()
+            ->quoteColumn( $column );
     }
 
     /**
@@ -418,6 +466,34 @@ class Connection extends Server
         }
         return $this->driverName;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDatabaseName()
+    {
+        if( $this->databaseName == null ){
+            //TODO:: 注意这里有一个BUG 返回的对象 可能无法获取
+            if( $this->master instanceof  Dsn) {
+                $this->setDatabaseName( $this->master->getSchema() );
+            }
+            //TODO:: 这里还需要做处理
+        }
+        return $this->databaseName;
+    }
+
+    /**
+     * @param $databaseName
+     * @return $this
+     */
+    public function setDatabaseName( $databaseName )
+    {
+        if($this->databaseName == null){
+            $this->databaseName = $databaseName;
+        }
+        return $this;
+    }
+
 
     /**
      *

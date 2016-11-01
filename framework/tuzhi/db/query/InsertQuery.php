@@ -60,10 +60,8 @@ class InsertQuery  extends Query
         }
         $sql = $this->getSqlString();
 
-        return $this->db->transaction( function( $db ) use ($sql) {
-            $db->createCommand( $sql )->execute();
-            return $db->getSchema()->getLastInsertId();
-        });
-
+        //TODO:: 是否加事务
+        $this->db->createCommand( $sql )->execute();
+        return $this->db->getSchema()->getLastInsertId();
     }
 }

@@ -13,5 +13,13 @@ use tuzhi\db\active\ActiveRecord;
 
 class Test extends ActiveRecord
 {
-    
+    public function IndexAction()
+    {
+        return function(){
+
+            echo 't';
+
+
+        };
+    }
 }

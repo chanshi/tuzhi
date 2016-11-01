@@ -26,7 +26,7 @@ class RequireValid extends Verify
      */
     protected function checkRequire()
     {
-        if( $this->getAttribute() === null ){
+        if( $this->getAttribute() == null || $this->getAttribute() == '' ){
             $this->addError();
             return false;
         }

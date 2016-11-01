@@ -6,7 +6,69 @@
  * Time: 21:17
  */
 
-class Cache
+use tuzhi\contracts\cache\ICache;
+use tuzhi\base\exception\NotFoundMethodException;
+
+/**
+ * Class Cache
+ */
+class Cache extends \tuzhi\support\facades\Facades
 {
+    /**
+     * @var string
+     */
+    protected static $serviceName = 'cache';
+
+    /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
+
+    /**
+     * @var array 支持的方法
+     */
+    protected static $InterfaceMethod =
+        [
+            'set',
+            'get',
+            'delete',
+            'flush',
+            'decrement',
+            'increment'
+        ];
+
+    /**
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     * @throws Exception
+     */
+    public static function __callStatic($method, $arguments)
+    {
+        static::init();
+
+        $Cache = static::$service;
+        if( $Cache ){
+            $method = strtolower($method);
+            if( isset($Cache->support[$method]) ){
+                return $Cache->getInstance($method);
+            }
+
+            $defaultCache = $Cache->getInstance();
+
+            if( $defaultCache instanceof ICache && in_array($method ,Cache::$InterfaceMethod)){
+                return call_user_func_array( [ $defaultCache , $method ] ,$arguments );
+            }
+
+            throw new NotFoundMethodException('Not Found Method '.$method.' In Cache ');
+        }
+
+        throw new NotFoundMethodException('Not Found Cache In App');
+    }
 
 }

@@ -49,5 +49,4 @@ class Instance
         return Container::getInstance()->get( $this->name );
     }
 
-
 }

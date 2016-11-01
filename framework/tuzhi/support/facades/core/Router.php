@@ -22,6 +22,16 @@ class Router extends \tuzhi\support\facades\Facades
     /**
      * @var
      */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
+
+    /**
+     * @var
+     */
     private static $method;
 
     /**

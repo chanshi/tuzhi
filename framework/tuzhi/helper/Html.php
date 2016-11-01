@@ -22,7 +22,7 @@ class Html
         $attribute = [];
 
         foreach( $option as $name=>$value ){
-            if(is_numeric($name)){
+            if( is_numeric($name) ){
                 $attribute[] = $value;
             }else{
                 $attribute[] = $name.'="'.$value.'"';

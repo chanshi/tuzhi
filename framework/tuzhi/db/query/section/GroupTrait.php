@@ -8,7 +8,10 @@
 
 namespace tuzhi\db\query\section;
 
-
+/**
+ * Class GroupTrait
+ * @package tuzhi\db\query\section
+ */
 trait GroupTrait
 {
     /**

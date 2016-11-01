@@ -15,6 +15,16 @@ class Response extends \tuzhi\support\facades\Facades
     protected static $serviceName ='response';
 
     /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
+
+    /**
      * @param $data
      * @param array $header
      * @return mixed

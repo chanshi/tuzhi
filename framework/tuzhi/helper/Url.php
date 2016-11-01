@@ -32,4 +32,18 @@ class Url
 
         return $queryString;
     }
+
+    /**
+     * @return mixed
+     */
+    public static function patten()
+    {
+        return  '/'.Application::Request()->getPath();
+    }
+
+
+    public static function self( $params = [] , $append )
+    {
+
+    }
 }

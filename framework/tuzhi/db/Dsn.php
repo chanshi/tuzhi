@@ -79,6 +79,14 @@ class Dsn extends Object
     }
 
     /**
+     * @return mixed
+     */
+    public function getSchema()
+    {
+        return $this->schema;
+    }
+
+    /**
      * @return string
      */
     public function __toString()

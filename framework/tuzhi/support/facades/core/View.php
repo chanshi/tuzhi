@@ -12,7 +12,15 @@ class View extends \tuzhi\support\facades\Facades
 {
     protected static $serviceName = 'view';
 
+    /**
+     * @var
+     */
+    protected static $service;
 
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
     /**
      * @param $view
      * @param array $__params__

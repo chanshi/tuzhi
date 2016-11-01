@@ -17,27 +17,6 @@ use tuzhi\contracts\cache\ICache;
 /**
  * Class Cache
  * @package tuzhi\cache
- *
- *
- *
- * Cache::set()
- *
- * Cache::get()
- *
- * Cache::delete()
- *
- * Cache::flush()
- *
- * Cache::decrement()
- *
- * Cache::increment()
- *
- * Cache::Memcached()->set();
- *
- * Cache::Redis()->set();
- *
- * Cache::File()->set();
- *
  */
 
 class Cache extends Object
@@ -63,45 +42,11 @@ class Cache extends Object
         ];
 
     /**
-     * @var array 支持的方法
-     */
-    protected static $InterfaceMethod =
-        [
-            'set',
-            'get',
-            'delete',
-            'flush',
-            'decrement',
-            'increment'
-        ];
-
-    /**
      * @var array
      */
     protected $instance =[];
 
-    /**
-     * @var
-     */
-    public static $cache;
 
-
-    /**
-     * 启动
-     */
-    public function init()
-    {
-        Cache::$cache = $this;
-    }
-
-    public static function initCache()
-    {
-        $config = \Tuzhi::config('cache');
-        if( $config ){
-            return  \Tuzhi::make( $config );
-        }
-        throw new NotSupportException('Not Found Cache Configure ');
-    }
 
     /**
      * @param $support
@@ -135,32 +80,16 @@ class Cache extends Object
         return $this->instance[$method];
     }
 
-
     /**
      * @param $method
-     * @param $arguments
+     * @param $args
      * @return mixed
-     * @throws NotFoundMethodException
      */
-    public static function __callStatic($method, $arguments)
+    public function __call( $method ,$args )
     {
-        if( Cache::$cache == null )
-        {
-            Cache::initCache();
-        }
-        //首先使用
-        $method = strtolower($method);
-        if( Cache::$cache->support[$method] ){
-            return Cache::$cache->getInstance($method);
-        }
-        //然后在
-        $defaultCache = Cache::$cache->getInstance();
-
-        if( $defaultCache instanceof ICache && in_array($method ,Cache::$InterfaceMethod)){
-            return call_user_func_array( [ $defaultCache , $method ] ,$arguments );
-        }
-
-
-        throw new NotFoundMethodException('Not Found Method '.$method.' In Cache ');
+        return call_user_func_array([$this->getInstance(),$method],$args);
     }
+
+
+
 }

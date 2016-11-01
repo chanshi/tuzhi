@@ -10,7 +10,7 @@ namespace tuzhi\db\engine\mysql;
 
 
 use tuzhi\db\exception\NotFoundTableException;
-
+use tuzhi\db\query\Expression;
 
 class Schema extends \tuzhi\db\schema\Schema
 {
@@ -52,11 +52,26 @@ class Schema extends \tuzhi\db\schema\Schema
 
     /**
      * @param $table
+     * @return string
+     */
+    private function tableSchemaCacheKey( $table )
+    {
+        return md5( serialize([
+            'db'=>$this->db->dbHashName,
+            'tableName'=>$table
+        ]));
+    }
+
+    /**
+     * @param $table
      * @return mixed
      * @throws NotFoundTableException
      */
     public function getTableSchema( $table )
     {
+        $CacheKey = $this->tableSchemaCacheKey($table);
+        $Cache = $this->db->cache;
+        if(($tableSchema = $Cache->get($CacheKey)) == null){
        // if( !( $tableSchema = $this->cache->get($table) ) ){
             $result = $this->showCreateTable($table);
             if($result == null){
@@ -91,6 +106,12 @@ class Schema extends \tuzhi\db\schema\Schema
                         $columns->size = $match[2];
                     }
                 }
+
+                if( $columns->type === 'timestamp' && $col['Default'] == 'CURRENT_TIMESTAMP' )
+                {
+                    $columns->defaultValue = new Expression('CURRENT_TIMESTAMP');
+                }
+
                 //更新字段
                 $tableSchema->columns[ $columns->column ] = $columns;
                 //跟新主键
@@ -98,10 +119,12 @@ class Schema extends \tuzhi\db\schema\Schema
                     array_push($tableSchema->primaryKey,$columns->column);
                 }
             }
-        //配置外键等信息
+            //TODO:: 外键信息
 
-          //  $this->cache->set($tableSchema);
-        //}
-        return $tableSchema;
+            //配置外键等信息
+            $Cache->set($CacheKey,serialize($tableSchema));
+            return $tableSchema;
+        }
+        return unserialize( $tableSchema );
     }
 }

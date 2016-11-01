@@ -10,4 +10,14 @@
 class Session extends \tuzhi\support\facades\Facades
 {
     protected static $serviceName = 'session';
+
+    /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
 }

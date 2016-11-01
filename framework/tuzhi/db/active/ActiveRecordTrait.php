@@ -8,14 +8,20 @@
 
 namespace tuzhi\db\active;
 
-
 use tuzhi\db\query\DeleteQuery;
 use tuzhi\db\query\InsertQuery;
 use tuzhi\db\query\Query;
 use tuzhi\db\query\UpdateQuery;
+use tuzhi\db\query\Expression;
 
 trait ActiveRecordTrait
 {
+
+    public static function getDb()
+    {
+        return \Tuzhi::App()->get('db');
+    }
+
     /**
      * @return mixed
      */
@@ -25,12 +31,32 @@ trait ActiveRecordTrait
     }
 
     /**
-     * @return $this
+     * @return string
      */
-    public static function find()
+    public static function fullTableName()
     {
-        $query = new Query();
-        return $query->table( static::tableName() );
+        return static::getDb()->getDatabaseName().'.'.static::tableName();
+    }
+
+    /**
+     * @param null $Columns
+     * @return mixed
+     */
+    public static function find( $Columns = null )
+    {
+        $Query = (new Query( ['db'=> static::getDb() ] ))->table( static::tableName() );
+        $Columns
+            ? $Query->select($Columns)
+            : null;
+        return $Query;
+    }
+
+    /**
+     * @return Query
+     */
+    public static function query()
+    {
+        return (new Query( ['db'=>static::getDb() ] ) );
     }
 
     /**
@@ -38,20 +64,19 @@ trait ActiveRecordTrait
      * @param $data
      * @return mixed
      */
-    public static function insert( $data )
+    public static function insert( $data = null)
     {
-        return (new InsertQuery(static::tableName(),$data))
+        return (new InsertQuery(static::tableName(), $data, ['db'=>static::getDb()] ))
             ->insert();
     }
 
     /**
-     * 返回
-     * @param $data
+     * @param null $data
      * @return UpdateQuery
      */
     public static function update( $data = null )
     {
-        return (new UpdateQuery(static::tableName(),$data));
+        return (new UpdateQuery(static::tableName(), $data, ['db'=>static::getDb()] ));
     }
 
     /**
@@ -59,16 +84,32 @@ trait ActiveRecordTrait
      */
     public static function delete()
     {
-        return (new DeleteQuery(static::tableName()));
+        return (new DeleteQuery(static::tableName(), ['db'=>static::getDb()] ));
     }
 
     /**
-     * @param $primary
+     * @param null $primary
      * @return static
      */
-    public static function getRecord( $primary )
+    public static function getNewRecord( $primary = null )
     {
-        return new static( $primary );
+        $Object = new static();
+        if( $primary ){
+            $Object->load($primary);
+        }
+        return $Object;
     }
+
+    /**
+     * @param $condition
+     * @return bool
+     */
+    public static function exists( $condition )
+    {
+        $result = static::find(new Expression('COUNT(*) as has'))->where($condition)->one();
+        return isset($result['has']) && $result['has'] >  0 ;
+    }
+
+
 
 }

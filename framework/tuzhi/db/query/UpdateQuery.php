@@ -35,7 +35,6 @@ class UpdateQuery extends Query
         if($params){
             $this->params = $params;
         }
-
     }
 
     /**
@@ -57,10 +56,7 @@ class UpdateQuery extends Query
         }
 
         $sql = $this->getSqlString();
-
-        return $this->db->transaction(function($db) use($sql) {
-            return $db->createCommand($sql)->execute();
-        });
-
+        //TODO:: 是否加事务
+        return $this->db->createCommand($sql)->execute();
     }
 }

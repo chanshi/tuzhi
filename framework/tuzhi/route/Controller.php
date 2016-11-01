@@ -19,6 +19,7 @@ use tuzhi\base\Object;
  */
 class Controller extends Object
 {
+    protected $front = [];
     /**
      * @var array
      */

@@ -16,17 +16,23 @@ use tuzhi\db\query\section\OrderTrait;
 use tuzhi\db\query\section\SelectTrait;
 use tuzhi\db\query\section\TableTrait;
 use tuzhi\db\query\section\WhereTrait;
+use tuzhi\db\query\Expression;
 
 class Query extends Object
 {
 
+    /**
+     * @var
+     */
     public $db;
 
-    const AS ='AS';
+    const _AS_ ='AS';
+    const _AND_ ='AND';
+    const _OR_  ='OR';
 
     const JOIN ='JOIN';
-    const LEFTJOIN ='LEFT JOIN';
-    const RIGHTJOIN='RIGHT JOIN';
+    const LEFT_JOIN ='LEFT JOIN';
+    const RIGHT_JOIN='RIGHT JOIN';
 
     const F_COUNT = 'COUNT';
     const F_SUM = 'SUM';
@@ -34,9 +40,6 @@ class Query extends Object
 
     const ASC = 'ASC';
     const DESC ='DESC';
-
-    const AND ='AND';
-    const OR  ='OR';
 
     const EQ  = '=';
     const NEQ = '<>';
@@ -128,6 +131,85 @@ class Query extends Object
     {
         return $this->db->createCommand( $this->getSqlString() )->queryAll();
     }
+
+    /**
+     * @param string $column
+     * @return mixed
+     */
+    public function count( $column = '*' )
+    {
+        return $this->queryScalar("count($column)");
+    }
+
+    /**
+     *
+     * @param $column
+     * @return mixed
+     */
+    public function sum( $column )
+    {
+        $column = $this->db->quoteColumn($column);
+        return $this->queryScalar("SUM({$column})");
+    }
+
+    /**
+     *
+     * @param $selectExpression
+     * @return mixed
+     */
+    public function scalarExpression(  $selectExpression )
+    {
+        $select = $this->select;
+        $limit = $this->limit;
+
+        $this->limit = null;
+        if( empty($this->group) && empty($this->having) ){
+            if( is_array($selectExpression) ){
+                $this->select = $selectExpression;
+            }else{
+                $this->select = [$selectExpression];
+            }
+            $sql = $this->db->getQueryBuild()->build($this);
+        }else{
+            $Query = (new Query(['db'=>$this->db]))
+                ->select($selectExpression)
+                ->table($this ,'a');
+            $sql = $this->db->getQueryBuild()->build($Query);
+        }
+
+        $this->select = $select;
+        $this->limit = $limit;
+
+        return $this->db->createCommand($sql)->queryOne();
+    }
+
+    /**
+     * @param $selectExpression
+     * @return mixed
+     */
+    protected function queryScalar( $selectExpression )
+    {
+        $select = $this->select;
+        $limit = $this->limit;
+
+        $this->limit = null;
+
+        if( empty( $this->group) && empty($this->having) ){
+            $this->select = [$selectExpression];
+            $sql = $this->db->getQueryBuild()->build($this);
+        }else{
+            $Query = (new Query(['db'=>$this->db]) )
+                ->select(new Expression( $selectExpression ))
+                ->table($this,'a');
+            $sql = $this->db->getQueryBuild()->build($Query);
+        }
+
+        $this->select = $select;
+        $this->limit = $limit;
+        return $this->db->createCommand($sql)->queryScalar();
+
+    }
+
 
     /**
      * @return mixed

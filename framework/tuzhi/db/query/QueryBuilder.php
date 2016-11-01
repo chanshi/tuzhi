@@ -25,6 +25,7 @@ class QueryBuilder extends Object
 
     /**
      * @param Query $Query
+     * @return string
      */
     public function build( Query $Query )
     {
@@ -179,7 +180,7 @@ class QueryBuilder extends Object
     public function prepareCondition( $condition = null)
     {
         $result = '';
-        if($condition == null){
+        if($condition === null){
             return null;
         }
         if( is_string($condition) ){
@@ -203,13 +204,13 @@ class QueryBuilder extends Object
         if( isset($condition[1]) ){
             switch( $condition[1] ){
                 //别名
-                case Query::AS :
-                    $result = $condition[0].$this->BLANK.Query::AS.$this->BLANK.$condition[2];
+                case Query::_AS_ :
+                    $result = $condition[0].$this->BLANK.Query::_AS_.$this->BLANK.$condition[2];
                     break;
                 //连接
                 case Query::JOIN  :
-                case Query::LEFTJOIN :
-                case Query::RIGHTJOIN :
+                case Query::LEFT_JOIN :
+                case Query::RIGHT_JOIN :
                     $result = $condition[1].$this->BLANK.$condition[0].' ON '.$condition[2];
                 break;
                 //函数
@@ -229,7 +230,11 @@ class QueryBuilder extends Object
                 case Query::IS_NOT_NULL :
                     $result = $condition[0] .$this->BLANK. $condition[1];
                     break;
-                //TODO:: BETWEEN  LIKE  EXIEXT IN regexp
+                //TODO::  LIKE  EXIEXT IN regexp
+                case Query::BETWEEN:
+                case Query::NOT_BETWEEN :
+                    $result = $condition[0] .$this->BLANK. $condition[1] ." '". $condition[2] ."' AND '".$condition[3]."'";
+                    break;
                 default :
                     if( isset($condition[2]) ){
                         $result =  $condition[0].$this->BLANK.$condition[1].$this->BLANK.$condition[2];
@@ -311,11 +316,11 @@ class QueryBuilder extends Object
     {
         $tableSchema = $this->db->getTableSchema($table);
         $set =[];
-        $columns = $tableSchema->getAllColumns();
+        $columns = $tableSchema->columns();
 
         foreach($params as $key=>$value)
         {
-            if( ! in_array($key,$columns) || in_array($key,$tableSchema->getPrimaryKey()) ){
+            if( ! in_array($key,$columns) || in_array($key,$tableSchema->primary()) ){
                 continue;
             }
             //消灭主键

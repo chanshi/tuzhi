@@ -15,32 +15,26 @@ use tuzhi\contracts\route\IDispatch;
  * Class ClosureDispatch
  * @package tuzhi\route
  */
-class ClosureDispatch  implements IDispatch
+class ClosureDispatch  extends Dispatcher  implements IDispatch
 {
 
     /**
-     * @var
-     */
-    public $route;
-
-    /**
-     * @var
-     */
-    public $content;
-
-    /**
-     * ClosureDispatch constructor.
-     * @param $route
-     */
-    public function __construct( $route )
-    {
-        $this->route = $route;
-    }
-
-    /**
-     *
+     * @return mixed
      */
     public function dispatch()
+    {
+        $this->frontCheck();
+
+        if( !$this->hasContent() ){
+            $this->getCallContent();
+        }
+    }
+
+
+    /**
+     * @return mixed
+     */
+    protected function getCallContent()
     {
         $this->content = call_user_func_array(
             $this->route->getAction(),
@@ -48,11 +42,4 @@ class ClosureDispatch  implements IDispatch
         );
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
 }

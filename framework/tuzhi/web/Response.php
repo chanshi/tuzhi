@@ -14,6 +14,10 @@ use tuzhi\contracts\web\IResponse;
 use Closure;
 use tuzhi\web\cookie\CookieCollect;
 
+/**
+ * Class Response
+ * @package tuzhi\web
+ */
 class Response extends Object implements IResponse
 {
 
@@ -39,7 +43,8 @@ class Response extends Object implements IResponse
         [
             'html'=>'tuzhi\web\response\Html',
             'json'=>'tuzhi\web\response\Json',
-            'closure'=>'tuzhi\web\response\Closure'
+            'closure'=>'tuzhi\web\response\Closure',
+            'redirect'=> 'tuzhi\web\response\Redirect'
         ];
 
     /**
@@ -182,15 +187,18 @@ class Response extends Object implements IResponse
         if( $this->content instanceof IResponse) {
             echo $this->content->send();
         }else{
-            //TODO::
+            //TODO:: 这里需要完善
             echo 'Null';
         }
     }
 
+    /**
+     * @return bool
+     */
     public function sendCookie()
     {
         if( $this->cookie == null ){
-            return;
+            return false;
         }
 
         foreach( $this->cookie as $name=>$cookie ) {
@@ -204,6 +212,7 @@ class Response extends Object implements IResponse
                 $cookie->httpOnly
             );
         }
+        return true;
     }
 
 
@@ -214,6 +223,7 @@ class Response extends Object implements IResponse
     public function redirect($url,$statusCode = 302)
     {
         $this->sendStatsCode($statusCode);
+        $this->sendCookie();
         header("Location: {$url}");
         //TODO::
         exit(0);

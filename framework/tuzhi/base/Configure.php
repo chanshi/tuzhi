@@ -19,7 +19,7 @@ class Configure extends Object{
     /**
      * @var string
      */
-    protected static $config = [];
+    protected  $config = [];
 
     /**
      * @var string
@@ -67,7 +67,7 @@ class Configure extends Object{
             }catch( \Exception $e){
                 throw $e;
             }
-            static::$config = array_merge(static::$config ,$config);
+            $this->config = array_merge($this->config ,$config);
             return true;
         }
         return false;
@@ -80,7 +80,7 @@ class Configure extends Object{
     public function get( $key )
     {
         $key = ltrim($key,'@');
-        $config =  static::$config ;
+        $config =  $this->config ;
         if( strpos($key,'.') !== false ){
             foreach(explode('.',$key) as $item ){
                 if( ! isset($config[$item]) ){
@@ -108,7 +108,7 @@ class Configure extends Object{
     public function set($key,$value = null)
     {
         if( strpos($key,'.') != false ){
-            $config =  static::$config;
+            $config =  $this->config;
             foreach( explode('.',$key) as $item ){
                 if( ! isset($config[$item]) ){
                     $config[$item] =[];
@@ -116,8 +116,9 @@ class Configure extends Object{
                 $config = $config[$item];
             }
             $config = $value;
+            return $config;
         }else{
-            static::$config[$key] = $value;
+            $this->config[$key] = $value;
         }
     }
 
@@ -132,12 +133,5 @@ class Configure extends Object{
             : true;
     }
 
-    /**
-     * @return string
-     */
-    public function all()
-    {
-        return static::$config;
-    }
 
 }

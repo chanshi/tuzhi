@@ -47,6 +47,12 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
      * @var array
      */
     protected $attMaps = [];
+
+    /**
+     * @var array  其他字段
+     */
+    protected $attExt =[];
+
     /**
      * @var null
      */
@@ -77,9 +83,6 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
      */
     public function init()
     {
-        $this->attMaps = $this->attMaps
-            ? $this->attMaps
-            : $this->initMaps();
 
         $this->attLabel = $this->attLabel
             ? $this->attLabel
@@ -88,6 +91,10 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
         $this->rules = $this->rules
             ? $this->rules
             : $this->initRules();
+
+        $this->attFormat = $this->attFormat
+            ? $this->attFormat
+            : $this->initFormat();
     }
 
     /**
@@ -103,7 +110,8 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     /**
      * @return array
      */
-    protected function initMaps(){ return [];}
+    protected function initFormat() {return [];}
+
 
     /**
      * @param $attribute
@@ -217,6 +225,30 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     }
 
     /**
+     * @param $attribute
+     * @param null $value
+     */
+    public function setExtAtt( $attribute ,$value = null)
+    {
+        if( is_array($attribute) && $value === null   ) {
+            $this->attExt = array_merge($this->attExt,$attribute);
+        }else if( is_string($attribute)  ){
+            $this->attExt[$attribute] = $value;
+        }
+    }
+
+    /**
+     * @param $attribute
+     * @return mixed|null
+     */
+    public function getExtAtt( $attribute )
+    {
+        return isset($this->attExt[$attribute])
+            ? $this->attExt[$attribute]
+            : null;
+    }
+
+    /**
      *
      * @param $attribute
      * @param null $format
@@ -228,7 +260,7 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
         if( $format == null ){
             return isset( $this->attFormat[$attribute] )
                 ? ( $this->attFormat[$attribute] instanceOf \Closure
-                    ?   call_user_func($this->attFormat[$attribute],$this,$attribute)
+                    ?   call_user_func($this->attFormat[$attribute],$this->getAttribute($attribute))
                     :   $this->attFormat[$attribute]
                 )
                 : $this->getAttribute($attribute);
@@ -270,13 +302,21 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     }
 
     /**
-     * 魔术方法
      * @param $attribute
      * @return null
      */
     public function __get($attribute)
     {
         return $this->getAttribute($attribute);
+    }
+
+    /**
+     * @param $attribute
+     * @return bool
+     */
+    public function __isset($attribute)
+    {
+        return isset($this->attributes[$attribute]);
     }
 
     /**
@@ -346,9 +386,24 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
      */
     public function hasError()
     {
-        return $this->errors['system'] == ''
+        return $this->errors['system'] == '' && $this->getVerifyFirstError()== ''
             ? false
             : true;
+    }
+
+    /**
+     *
+     */
+    public function getErrors()
+    {
+        if( $this->getErrorMessage() !== '' ){
+            return $this->getErrorMessage();
+        }
+
+        if( $this->getVerifyFirstError() !== '' ){
+            return $this->getVerifyFirstError();
+        }
+        return '';
     }
 
     /**
@@ -365,7 +420,7 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     public function getErrorMessage()
     {
         return $this->errors['system']
-            ? $this->errors
+            ? $this->errors['system']
             : '';
     }
 
@@ -393,6 +448,17 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
     }
 
     /**
+     * @return string
+     */
+    public function getVerifyFirstError()
+    {
+        $error = array_values($this->errors['verify']);
+        return isset( $error[0][0] )
+            ? $error[0][0]
+            : '';
+    }
+
+    /**
      * @return mixed|null|Validator
      */
     public function getValidator()
@@ -410,11 +476,12 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
 
     /**
      * @param array $attributes
+     * @param bool $all
      * @return bool
      */
-    public function verify( $attributes = [] )
+    public function verify( $attributes = [] ,$all = false)
     {
-        return $this->getValidator()->verify($attributes);
+        return $this->getValidator()->verify($attributes,$all);
     }
 
 }

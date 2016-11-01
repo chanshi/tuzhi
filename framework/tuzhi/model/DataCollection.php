@@ -6,16 +6,142 @@
  * Time: 17:59
  */
 
-namespace app\model;
+namespace tuzhi\model;
 
 
-use tuzhi\model\Model;
+use tuzhi\contracts\model\IDataCollection;
+use tuzhi\db\query\Query;
+
 
 /**
  * Class DataCollection
  * @package app\model
  */
-class DataCollection extends Model
+class DataCollection extends Model implements IDataCollection
 {
-    public $Pager = '';
+    /**
+     * @var string
+     */
+    public $Pager = 'tuzhi\model\pager\BasePager';
+
+    /**
+     * @var bool
+     */
+    protected $enablePager = true;
+
+    /**
+     * @var
+     */
+    protected $data = [];
+
+    /**
+     * @var int
+     */
+    protected $page = 1;
+
+    /**
+     * @var int
+     */
+    protected $pageSize =30;
+
+    /**
+     *
+     */
+    //protected $attDeny = ['data','page','pageSize','Pager'];
+
+    /**
+     * @var
+     */
+    protected $Query;
+
+    /**
+     *
+     */
+    public function init()
+    {
+        parent::init();
+
+        $this->Query = \DB::Query();
+        $this->Pager = new $this->Pager();
+
+    }
+
+    /**
+     * @param bool $enable
+     * @return $this
+     */
+    public function setEnablePager( bool $enable  )
+    {
+        $this->enablePager = $enable;
+        return $this;
+    }
+
+    /**
+     * @param int $page
+     * @param int $pageSize
+     */
+    final public function setPage(  $page ,  $pageSize )
+    {
+        $this->page = max(1,$page);
+        $this->pageSize = max(1, min(30,$pageSize) );
+    }
+
+    /**
+     * @return string
+     */
+    public function getPager()
+    {
+        return $this->Pager;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function buildQuery(){}
+
+    /**
+     * @return mixed
+     */
+    public function query()
+    {
+        $this->buildQuery();
+        if( $this->enablePager && $this->Query instanceof Query) {
+            $this->Query->limit(
+                ($this->page - 1) * $this->pageSize,
+                $this->pageSize
+            );
+
+            $this->Pager->setTotal($this->Query->count())
+                ->setPage($this->page)
+                ->setPageSize($this->pageSize)
+                ->build();
+        }
+        $this->data = $this->Query->all();
+        return $this->data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->Query;
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    public  function getIterator()
+    {
+        return new \ArrayIterator($this->data);
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
 }

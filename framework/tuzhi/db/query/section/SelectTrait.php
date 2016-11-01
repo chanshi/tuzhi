@@ -38,47 +38,17 @@ trait SelectTrait
                     $this->select($value,$key);
                 }
             }
-        }else if(is_string($field)){
+        }else {
             $field = $this->db->quoteColumn( $field );
             $this->select[] = $alias
-                ? [$field,Query::AS,$alias]
+                ? [$field,Query::_AS_,$alias]
                 : [$field];
         }
 
         return $this;
     }
 
-    /**
-     * @param string $field
-     * @param null $alias
-     * @return array|string
-     */
-    public function count( $field = '*' ,$alias = null)
-    {
-        $field = $this->db->quoteColumn( $field );
-        $field = [$field,Query::F_COUNT];
-        $this->select[] = $alias
-            ? [$field ,Query::AS ,$alias]
-            : $field ;
 
-        return $this;
-    }
-
-    /**
-     * @param $field
-     * @param null $alias
-     * @return array
-     */
-    public function sum( $field ,$alias = null)
-    {
-        $field = $this->db->quoteColumn( $field );
-        $field = [$field,Query::F_SUM];
-        $this->select[] = $alias
-            ? [$field,Query::AS ,$alias]
-            : $field;
-
-        return $this;
-    }
 
     /**
      * @param $field
@@ -90,7 +60,7 @@ trait SelectTrait
         $field = $this->db->quoteColumn( $field );
         $field = [$field,Query::F_AVG];
         $this->select[] = $alias
-            ? [$field,Query::AS,$alias]
+            ? [$field,Query::_AS_,$alias]
             : $field;
         return $this;
     }

@@ -10,6 +10,7 @@ namespace tuzhi\base;
 
 use Tuzhi;
 use tuzhi\base\exception\NotFoundMethodException;
+use tuzhi\base\exception\NotFoundServersException;
 use tuzhi\contracts\base\IApplication;
 use tuzhi\helper\Arr;
 
@@ -99,10 +100,25 @@ abstract class Application extends Object  implements IApplication
     /**
      * @param $service
      * @return mixed
+     * @throws NotFoundServersException
      */
     public function get( $service )
     {
-        return $this->locator->get($service);
+        $service = $this->locator->get($service);
+        if($service){
+            return $service;
+        }
+        throw new NotFoundServersException('Not Found Service '.$service.'!');
+    }
+
+    /**
+     * @param $serviceName
+     * @param $definition
+     * @return $this
+     */
+    public function register( $serviceName , $definition )
+    {
+        $this->locator->set($serviceName, $definition );
     }
 
     /**

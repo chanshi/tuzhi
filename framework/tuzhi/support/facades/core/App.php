@@ -11,6 +11,15 @@
  */
 class App extends \tuzhi\support\facades\Facades
 {
+    /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
 
     /**
      * @param $name

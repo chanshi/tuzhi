@@ -10,10 +10,17 @@ namespace tuzhi\db\active;
 
 
 use tuzhi\base\exception\InvalidParamException;
+use tuzhi\db\Connection;
 use tuzhi\helper\Arr;
 use tuzhi\model\Model;
-use tuzhi\validators\Validator;
+use tuzhi\db\query\InsertQuery;
+use tuzhi\db\query\UpdateQuery;
+use tuzhi\db\query\DeleteQuery;
 
+/**
+ * Class ActiveRecord
+ * @package tuzhi\db\active
+ */
 class ActiveRecord extends Model
 {
     /**
@@ -47,9 +54,19 @@ class ActiveRecord extends Model
     protected $columns;
 
     /**
+     * @var array
+     */
+    protected $oldAttr = [];
+
+    /**
+     * @var array
+     */
+    protected $defaultAttr = [];
+
+    /**
      * @var array 禁止更新字段
      */
-    protected $denyUpdateColumns = [];
+    protected $denyUpdate = [];
 
     /**
      * @var array 自动更新
@@ -61,21 +78,6 @@ class ActiveRecord extends Model
      */
     private $loadDb = false;
 
-    /**
-     * ActiveRecord constructor.
-     * @param null $primary
-     * @param array $config
-     */
-    public function __construct( $primary = null ,array $config=[])
-    {
-        parent::__construct($config);
-        // load;
-        if($primary !== null)
-        {
-
-            $this->loadByPrimary( $primary );
-        }
-    }
 
     /**
      * init
@@ -83,31 +85,81 @@ class ActiveRecord extends Model
     public function init()
     {
         parent::init();
-        $this->db = \Tuzhi::App()->db();
+        $this->defaultAttr = $this->defaultAttr ? $this->defaultAttr : $this->initDefaultAtt();
+        $this->db =  $this->db instanceOf Connection
+            ? $this->db
+            :   \Tuzhi::App()->get( $this->db ? $this->db : 'db' );
 
         $this->loadTableSchema();
-        $this->primaryKey = $this->tableSchema->getPrimaryKey();
-        $this->columns = $this->tableSchema->getAllColumns();
     }
 
     /**
-     * @param $primary
-     * @throws InvalidParamException
+     * @return array
      */
-    protected function initPrimary( $primary )
+    protected function initDefaultAtt()
     {
-        if( is_array($primary) && count($this->primaryKey) == count($primary) )
-        {
-            $this->primary = array_combine($this->primaryKey,$primary);
+        return [];
+    }
 
-        }else if(count($this->primaryKey)== 1 )
-        {
-            $this->primary = array_combine($this->primaryKey,[$primary]);
-        }else{
+    /**
+     * @param $attribute
+     * @return bool
+     */
+    protected function isPrimaryAtt( $attribute )
+    {
+        return in_array($attribute,$this->primaryKey);
+    }
 
-            throw new InvalidParamException('Invalid Params the Model::initPrimary primary :'.json_encode($primary) );
+    /**
+     * @return bool
+     */
+    protected function hasPrimary()
+    {
+        foreach($this->primaryKey as $key)
+        {
+            if( ! isset( $this->primary[$key] ) || $this->primary[$key] == null ){
+                return false;
+            }
         }
+        return true;
+    }
 
+    /**
+     * @return mixed
+     */
+    protected function getPrimary()
+    {
+        return $this->primary;
+    }
+
+    /**
+     * @param $attribute
+     * @return mixed|null
+     */
+    protected function getDefault( $attribute )
+    {
+        if(isset($this->defaultAttr[$attribute])){
+            if( $this->defaultAttr[$attribute] instanceof \Closure){
+                return call_user_func($this->defaultAttr[$attribute]);
+            }else {
+                return $this->defaultAttr[$attribute];
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param $attribute
+     * @param $value
+     * @return bool
+     */
+    protected function setPrimary( $attribute,$value )
+    {
+        if($this->isPrimaryAtt($attribute) && !isset($this->primary[$attribute])) {
+            $this->primary[$attribute] = $value;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -116,41 +168,43 @@ class ActiveRecord extends Model
     protected function loadTableSchema()
     {
         if( $this->tableSchema == null ){
-
             $this->tableSchema = $this->db->getTableSchema( static::tableName() );
+            $this->primaryKey = $this->tableSchema->primary();
+            $this->attAllow = $this->tableSchema->columns();
         }
         return $this->tableSchema;
     }
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @return bool
+     */
     public function setAttribute($attribute, $value)
     {
-        if( ! in_array($attribute,$this->columns) )
-        {
-            return false;
-        }
-        //初始值
-        if( !isset( $this->attributes[$attribute] ) )
-        {
-            $this->attributes[$attribute] = $value;
-            if( in_array($attribute ,$this->primaryKey) ){
-                $this->primary[$attribute] = $value;
-            }
-            return true;
-        }
-        if( $this->loadDb )
-        {
-            if( in_array($attribute ,$this->denyUpdateColumns) ){
+
+        if( $this->loadDb ) {
+            //TODO::禁止设置 主键
+
+
+            if( in_array($attribute ,$this->denyUpdate) ){
                 return false;
             }
-            if( in_array($attribute ,$this->primaryKey) ){
+
+            if( isset($this->attributes[$attribute]) && ($this->attributes[$attribute] != $value) ){
+                $this->oldAttr[$attribute] = $this->attributes[$attribute];
+                $this->attributes[$attribute] = $value;
+            }
+        }else{
+            if( parent::setAttribute($attribute,$value) == false){
                 return false;
             }
-            if( ! isset($this->oldAttributes[$attribute]) ){
-                $this->oldAttributes[$attribute] = $this->attributes[$attribute];
+
+            if( $this->setPrimary($attribute,$value) == false) {
+                return false;
             }
         }
 
-        $this->attributes[$attribute] = $value;
         return true;
     }
 
@@ -159,7 +213,9 @@ class ActiveRecord extends Model
      */
     public function isNewRecord()
     {
-        return empty( $this->oldAttributes );
+        return $this->loadDb
+            ? false
+            : true;
     }
 
     /**
@@ -167,7 +223,9 @@ class ActiveRecord extends Model
      */
     public function hasDirtyAttribute()
     {
-        return count($this->oldAttributes) > 0;
+        return $this->oldAttr == []
+            ? false
+            : true;
     }
 
     /**
@@ -175,7 +233,7 @@ class ActiveRecord extends Model
      */
     public function getDirtyAttributes()
     {
-        $keys = array_keys($this->oldAttributes);
+        $keys = array_keys($this->oldAttr);
 
         return Arr::filter($this->attributes,$keys);
     }
@@ -186,8 +244,7 @@ class ActiveRecord extends Model
      */
     public function save( $data = null )
     {
-        if($data !== null)
-        {
+        if( $data ) {
             $this->setAttributes($data);
         }
 
@@ -195,66 +252,195 @@ class ActiveRecord extends Model
         {
             if( $this->hasDirtyAttribute() ){
 
-                return $this->updateAttribute($this->getDirtyAttributes());
+                return $this->modify();
             }
             return true;
         }
         //TODO:: 根据主键 主要根据 主键一般为自增ID
-        if( count( $this->primary ) > 0 ){
-            return $this->updateAttribute($this->attributes);
+        if( $this->hasPrimary() ){
+            return $this->modify();
         }else{
-            return $this->insertAttribute($this->attributes);
+            return $this->add();
         }
     }
 
     /**
-     * @param $data
-     * @return bool|mixed
+     * @return mixed
      */
-    protected function updateAttribute( $data )
+    protected function addInitDefault()
     {
-        if( $this->valid($data,Validator::TYPE_SEGMENT) ){
-
-            return static::update($data)
-                ->where($this->primary)
-                ->update();
-
+        foreach($this->attAllow as $attribute) {
+            if(!isset($this->attributes[$attribute])){
+                $this->setAttribute($attribute,$this->getDefault($attribute));
+            }
         }
+    }
+
+
+    /**
+     * @param null $data
+     * @param bool $isVerify
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function add( $data = null , $isVerify = true)
+    {
+        if( $data ) {
+            $this->setAttributes($data);
+        }
+
+        if( empty( $this->attributes ) ) {
+            $this->setErrorMessage('Attributes is Empty');
+            return false;
+        }
+
+        // 加载初始化值
+        $this->addInitDefault();
+
+        //添加验证
+        if(  $isVerify  && ! $this->verify() ){
+            return false;
+        }
+
+        $transaction = $this->db->getTransaction();
+        $transaction->begin();
+        $level = $transaction->getLevel();
+        try{
+
+            $result = (new InsertQuery( static::tableName() , null ,['db'=>$this->db] ) )->insert( $this->attributes );
+
+            if( $transaction->getLevel() == $level){
+                $transaction->commit();
+            }
+
+            if( $result > 0 ){
+                ////TODO 自增ID
+                $this->setAttribute($this->primaryKey[0],$result);
+            }
+        }catch(\Exception $e) {
+            if( $transaction->getLevel() == $level){
+                $transaction->rollback();
+            }
+            throw $e;
+        }
+
+        return $result;
+
+    }
+
+    /**
+     * @param null $data
+     * @param bool $isVerify
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function modify( $data = null ,$isVerify = true)
+    {
+        if( $data ){
+            $this->setAttributes($data);
+        }
+        if( $this->hasPrimary() ) {
+
+            $data = $this->hasDirtyAttribute()
+                ? $this->getDirtyAttributes()
+                : $this->attributes;
+
+            //添加验证
+            if( $isVerify && ! $this->verify(array_keys($data)) ){
+                return false;
+            }
+
+            $transaction = $this->db->getTransaction();
+            $transaction->begin();
+            $level = $transaction->getLevel();
+            try{
+
+                $result = (new UpdateQuery(static::tableName(),null,['db'=>$this->db]))
+                    ->where( $this->getPrimary() )
+                    ->update($data);
+
+                if( $transaction->getLevel() == $level){
+                    $transaction->commit();
+                }
+                return $result;
+            }catch(\Exception $e){
+
+                if( $transaction->getLevel() == $level){
+                    $transaction->rollback();
+                }
+                throw $e;
+            }
+        }
+        $this->setErrorMessage('Primary is empty Modify Error');
+        return false;
+    }
+
+
+    /**
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function remove()
+    {
+        if( $this->hasPrimary() ){
+
+            $transaction = $this->db->getTransaction();
+            $transaction->begin();
+            $level = $transaction->getLevel();
+            try{
+                $result = (new DeleteQuery(static::tableName(),['db'=>$this->db]))
+                    ->where( $this->getPrimary() )
+                    ->delete();
+
+                if( $transaction->getLevel() == $level){
+                    $transaction->commit();
+                }
+                return $result;
+            }catch(\Exception $e){
+                if( $transaction->getLevel() == $level){
+                    $transaction->rollback();
+                }
+                throw $e;
+            }
+        }
+        $this->setErrorMessage('Primary is empty Remove Error');
         return false;
     }
 
     /**
-     * @param $data
-     * @return bool|mixed
+     * @param $primary
+     * @return $this
      */
-    protected function insertAttribute( $data )
+    public function load( $primary )
     {
-        if( $this->valid($data ,Validator::TYPE_SEGMENT) ){
-
-            return static::insert($data);
-
+        if( is_array($primary) ) {
+            $this->setAttributes($primary);
+        }else{
+            $this->setAttribute($this->primaryKey[0],$primary);
         }
-        return false;
+
+        if( $this->hasPrimary() ){
+            $attributes = static::find()->where($this->getPrimary())->one();
+            if( $attributes ){
+                $this->setAttributes($attributes);
+                $this->loadDb = true;
+                return $this;
+            }else{
+                $this->setErrorMessage('Not Found Attribute By Primary Key');
+            }
+        }else{
+            $this->setErrorMessage('Load Error Primary is empty');
+        }
+
+        return $this;
     }
 
-
     /**
-     * @param null $key
      * @return bool
      */
-    public function loadByPrimary( $key = null )
+    public function hasLoad()
     {
-        if( $key != null){
-            $this->initPrimary($key);
-        }
-
-        $attribute = static::find()->where($this->primary)->one();
-
-        if( $attribute ){
-            $this->setAttributes($attribute);
-            $this->loadDb = true;
-            return true;
-        }
-        return false;
+        return $this->loadDb ;
     }
+
 }

@@ -14,10 +14,20 @@ use tuzhi\model\validators\Verify;
 class LengthValid extends Verify
 {
 
+    /**
+     * @var
+     */
     public $min;
 
+    /**
+     * @var
+     */
     public $max;
 
+
+    /**
+     * @return bool
+     */
     protected function check()
     {
         if( ($value = $this->getAttribute() ) ){
@@ -45,7 +55,7 @@ class LengthValid extends Verify
                     if( mb_strlen( $value ) > $this->max ){
                         $this->addError();
                     }
-                }else if( is_integer($value)){
+                }else if( is_integer($value) ){
                     if( $value > $this->max){
                         $this->addError();
                     }
@@ -55,7 +65,9 @@ class LengthValid extends Verify
         return true;
     }
 
-
+    /**
+     * @return bool
+     */
     public function verify()
     {
         return $this->check();

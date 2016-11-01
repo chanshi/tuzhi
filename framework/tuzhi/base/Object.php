@@ -47,9 +47,9 @@ class Object implements IObject
     /**
      * @return mixed
      */
-    public static function getClassName()
+    public static function className()
     {
-        return get_class( __CLASS__ );
+        return get_called_class();
     }
 
     /**

@@ -8,9 +8,12 @@
 
 namespace tuzhi\db;
 
-use tuzhi\base\ErrorException;
 use tuzhi\base\Object;
 
+/**
+ * Class Command
+ * @package tuzhi\db
+ */
 class Command extends Object
 {
     /**
@@ -49,15 +52,6 @@ class Command extends Object
     protected $statement;
 
 
-
-    /**
-     * Command constructor.
-     * @param array $config
-     */
-    public function __construct(array $config)
-    {
-        parent::__construct($config);
-    }
 
     /**
      * @return mixed
@@ -234,7 +228,7 @@ class Command extends Object
 
             $this->statement->execute();
 
-            if( $fetchMode == null ){
+            if( $fetchMode === null ){
                 $fetchMode = $this->fetchMode;
             }
 
@@ -246,14 +240,16 @@ class Command extends Object
             //关闭
             $this->statement->closeCursor();
 
-            return $result;
+
 
         } catch ( \PDOException $e ){
-            //$message = $e->getMessage() . "\nFailed to query SQL: $sql";
+            $message = $e->getMessage() . "\nFailed to query SQL: $sql";
             //$errorInfo = $e instanceof \PDOException ? $e->errorInfo : null;
             //throw new \Exception($message, $errorInfo, (int) $e->getCode(), $e);
             throw $e;
         }
+
+        return $result;
     }
 
     /**
@@ -262,7 +258,7 @@ class Command extends Object
      */
     public function query()
     {
-        return $this->queryInterval('fetch');
+        return $this->queryInterval('fetchAll');
     }
 
     /**
@@ -293,4 +289,15 @@ class Command extends Object
     {
         return $this->queryInterval('fetchColumn',\PDO::FETCH_COLUMN);
     }
+
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function queryScalar()
+    {
+        $result = $this->queryInterval('fetchColumn',0);
+        return $result;
+    }
+
 }

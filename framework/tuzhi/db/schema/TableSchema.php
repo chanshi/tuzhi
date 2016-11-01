@@ -8,17 +8,21 @@
 
 namespace tuzhi\db\schema;
 
+/**
+ * Class TableSchema
+ * @package tuzhi\db\schema
+ */
 class TableSchema
 {
 
     protected $columnSchema = 'tuzhi\db\schema\ColumnSchema';
     /**
-     * @var 表名
+     * @var
      */
     public $name;
 
     /**
-     * @var 字段
+     * @var array
      */
     public $columns = [];
 
@@ -33,32 +37,40 @@ class TableSchema
     public $foreignKey = [];
 
 
-
     /**
      * @return array
      */
-    public function getPrimaryKey()
+    public function primary()
     {
         return $this->primaryKey;
     }
 
-    public function getAllColumns()
+    /**
+     * 获取所有的字段
+     * @return array
+     */
+    public function columns()
     {
         return array_keys($this->columns);
     }
 
+    /**
+     * @return mixed
+     */
     public function getNewColumn()
     {
         return  new $this->columnSchema();
     }
 
+    /**
+     * @param $column
+     * @return null
+     */
     public function getColumn($column)
     {
-        if(isset( $this->columns[$column] ) ){
-            return $this->columns[$column];
-        }else{
-            return null;
-        }
+        return isset($this->columns[$column])
+            ? $column
+            : null;
     }
 
 }

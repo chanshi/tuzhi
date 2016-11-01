@@ -12,11 +12,18 @@ use Closure;
 
 class Arr {
 
+    /**
+     * @param array $array
+     * @param Closure $closure
+     */
     public static function each( array $array ,Closure $closure )
     {
         //TODO  array_walk
         foreach( $array as $key=>$value){
-            call_user_func_array( $closure,[$key,$value] );
+            $result = call_user_func_array( $closure,[$key,$value] );
+            if( $result === false ){
+                break;
+            }
         }
     }
 
@@ -88,28 +95,42 @@ class Arr {
     /**
      * @var
      */
-    const FILTER_INCLUDE = '1';
+    const FILTER_INCLUDE = 1;
 
     /**
      * @var
      */
-    const FILTER_DIFF = '2';
+    const FILTER_DIFF = 2;
+
+    const FILTER_NULL = 3;
 
     /**
      * @param $array
      * @param $keys
-     * @param string $type
+     * @param int $filterType
      * @return array
      */
-    public static function filter( $array , $keys , $type = Arr::FILTER_INCLUDE )
+    public static function filter( $array , $keys , $filterType = Arr::FILTER_INCLUDE )
     {
         $result = [];
         foreach( $array as $key => $value ){
 
-            if($type == Arr::FILTER_INCLUDE && in_array($key,$keys)){
-                $result[$key] = $value;
-            }else if( $type == Arr::FILTER_DIFF && !in_array($key,$keys) ){
-                $result[$key] = $value;
+            switch ($filterType){
+                case Arr::FILTER_INCLUDE :
+                    in_array($key,$keys)
+                        ? ($result[$key] = $value)
+                        : null;
+                    break;
+                case Arr::FILTER_DIFF :
+                    ! in_array($key,$keys)
+                        ? ($result[$key] = $value)
+                        : null;
+                    break;
+                case Arr::FILTER_NULL :
+                    $value == null || $value == ''
+                        ?
+                        : ($result[$key] = $value);
+                    break;
             }
         }
         return $result;

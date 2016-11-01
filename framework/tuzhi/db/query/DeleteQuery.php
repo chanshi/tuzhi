@@ -44,8 +44,6 @@ class DeleteQuery extends Query
     {
         $sql = $this->getSqlString();
 
-        return $this->db->transaction(function($db)use($sql){
-            return $db->createCommand($sql)->execute();
-        });
+        return $this->db->createCommand($sql)->execute();
     }
 }

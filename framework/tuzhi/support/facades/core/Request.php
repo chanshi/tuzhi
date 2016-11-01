@@ -10,4 +10,14 @@
 class Request extends \tuzhi\support\facades\Facades
 {
     protected static $serviceName = 'request';
+
+    /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
 }

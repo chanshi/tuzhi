@@ -350,7 +350,7 @@ class Request extends Server implements IRequest
      * @param null $default
      * @return mixed
      */
-    public  function get($field ,$type = 'string',$default = null )
+    public function get($field ,$type = 'string',$default = null )
     {
         $result = $default;
         if(array_key_exists( $field ,$_GET )){
@@ -369,8 +369,12 @@ class Request extends Server implements IRequest
 
         if( is_array($value) ) return $value;
 
+        if( $value === null || $value === ''){
+            return null;
+        }
+
         switch ( strtolower($type) ){
-            case 'int'    :  $value = intval( $value);
+            case 'int'    :  $value = intval( $value) ;
                 break;
             case 'bool'   :  $value = boolval($value);
                 break;

@@ -36,6 +36,17 @@ class Log extends \tuzhi\support\facades\Facades
      */
     protected static $serviceName = 'log';
 
+
+    /**
+     * @var
+     */
+    protected static $service;
+
+    /**
+     * @var bool
+     */
+    protected static $isInit = false;
+
     /**
      * @var
      */

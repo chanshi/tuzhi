@@ -10,6 +10,8 @@ namespace tuzhi\db\query\section;
 
 
 use tuzhi\db\query\Query;
+use tuzhi\db\query\Expression;
+
 
 trait WhereTrait
 {
@@ -30,10 +32,13 @@ trait WhereTrait
      */
     public function where($column, $condition = Query::EQ ,$value = null)
     {
-        if( is_array($column)){
-            foreach($column as $key=>$value){
-                $this->where( $key,Query::EQ,$value );
+        if( is_array($column)) {
+            foreach ($column as $key => $value) {
+                $this->where($key, Query::EQ, $value);
             }
+
+        }else if( $column instanceof Expression){
+            $this->where[] = $column;
         }else{
             $column = $this->db->quoteColumn($column);
             $value = $this->db->quoteValue($value);
@@ -57,7 +62,7 @@ trait WhereTrait
 
         $where = $this->where;
         $this->where = [];
-        $this->where[] = [ $where, Query::AND , [$column , $condition ,$value] ];
+        $this->where[] = [ $where, Query::_AND_ , [$column , $condition ,$value] ];
         return $this;
     }
 
@@ -74,7 +79,7 @@ trait WhereTrait
 
         $where = $this->where;
         $this->where = [];
-        $this->where[] = [ $where, Query::OR , [$column , $condition ,$value] ];
+        $this->where[] = [ $where, Query::_OR_ , [$column , $condition ,$value] ];
 
         return $this;
     }
@@ -112,30 +117,48 @@ trait WhereTrait
         $this->where[] = [$column,Query::IS_NOT_NULL];
         return $this;
     }
-    
-    
+
+
     /**
-     * @param $field
+     * @param $column
      * @param $value
      * @return $this
      */
     public function andIn($column ,$value)
     {
         $column = $this->db->quoteColumn($column);
-        $this->where[] = [$column, Query::IN ,$value];
+
+        if(!is_array($value)){
+            $value = [$value];
+        }
+
+        foreach($value as $i=>$v){
+            $value[$i] = $this->db->quoteValue($v);
+        }
+
+        $this->where[] = [$column, Query::IN ,new Expression( '('.join(',',$value).')' )];
 
         return $this;
     }
 
     /**
-     * @param $field
+     * @param $column
      * @param $value
      * @return $this
      */
     public function andNotIn($column,$value)
     {
         $column = $this->db->quoteColumn($column);
-        $this->where[] =[$column, Query::NOT_IN ,$value];
+
+        if(!is_array($value)){
+            $value = [$value];
+        }
+
+        foreach($value as $i=>$v){
+            $value[$i] = $this->db->quoteValue($v);
+        }
+
+        $this->where[] =[$column, Query::NOT_IN ,new Expression( '('.join(',',$value).')' )];
 
         return $this;
     }

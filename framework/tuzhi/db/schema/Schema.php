@@ -28,33 +28,19 @@ class Schema extends Object
     public $builder;
 
     /**
-     * @var
-     */
-    protected $cache;
-
-    /**
      * @var string
      */
     protected $tableSchemaClass = 'tuzhi\db\schema\TableSchema';
 
 
-    /**
-     *
-     */
-    public function init()
-    {
-        //TODO:: CACHE
-       // $this->cache = Cache::$cache;
-    }
 
-    
     /**
      * @return QueryBuilder
      */
     public function getQueryBuilder()
     {
         if( $this->builder == null ){
-            $this->builder = new QueryBuilder();
+            $this->builder = new QueryBuilder(['db'=>$this->db]);
         }
         return $this->builder;
     }
@@ -79,7 +65,10 @@ class Schema extends Object
         return isset($typeMap[$type]) ? $typeMap[$type] : \PDO::PARAM_STR;
     }
 
-
+    /**
+     * @param null $colums
+     * @return mixed
+     */
     public function getLastInsertId($colums =null )
     {
         return $this->db->getMasterPdo()->lastInsertId($colums);
@@ -95,7 +84,7 @@ class Schema extends Object
         if( !is_string($value) ){
             return $value;
         }
-        //todo::  性能问题  
+        //todo::  性能问题
         //if( ($value = $this->db->getSlave()->quote($value)) !== false ){
         //    return $value;
         //}else{

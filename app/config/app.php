@@ -61,6 +61,18 @@ return
                                     [
                                         PDO::ATTR_TIMEOUT => 10
                                     ]
+                            ],
+                        'module'=>
+                            [
+                                'class'=>'tuzhi\module\ModuleManager',
+                                'modulePath' => MODULE_PATH,
+                                'moduleConfig'=>
+                                    [
+                                        /**
+                                         *  模块配置文件 默认
+                                         */
+                                        'test'=>'/test/config/module.php',
+                                    ]
                             ]
                     ]
             ]

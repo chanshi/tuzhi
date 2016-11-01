@@ -8,7 +8,10 @@
 
 namespace tuzhi\route;
 
-
+/**
+ * Class Route
+ * @package tuzhi\route
+ */
 class Route
 {
     /**
@@ -40,6 +43,11 @@ class Route
      * @var
      */
     public $params;
+
+    /**
+     * @var
+     */
+    public $checkList = [];
 
     /**
      * Route constructor.

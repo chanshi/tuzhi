@@ -11,6 +11,11 @@
  */
 define('APP_PATH', dirname(__DIR__) );
 
+/**
+ * 模块 路径
+ */
+define('MODULE_PATH',__DIR__.'/../../module');
+
 
 /**
  * 加载框架

@@ -31,7 +31,7 @@ class Validator extends Object
     /**
      * @var
      */
-    public $attributes;
+    public $attributes =[];
 
     /**
      * @var array
@@ -87,8 +87,11 @@ class Validator extends Object
         $this->model->setVerifyErrors([]);
         if( $attributes ){
             foreach( $attributes as $attribute ) {
-                if( in_array($attribute,$this->attributes) ){
-                    $this->runAttribute[] = $this->attributes[$attribute];
+                if( in_array($attribute, array_keys( $this->attributes) ) ){
+                    foreach( $this->attributes[$attribute] as $rules ){
+                        $this->runAttribute[] = $rules;
+                    }
+                    //$this->runAttribute[] = $this->attributes[$attribute];
                 }
             }
         }else{
@@ -107,7 +110,7 @@ class Validator extends Object
         $this->beforeVerify( $attributes );
 
         foreach( $this->runAttribute as $object ) {
-            if(  ! $object->verify() && $all  ){
+            if(  $object instanceof Verify && ! $object->verify() && $all  ){
                 break;
             }
         }

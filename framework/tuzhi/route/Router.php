@@ -51,18 +51,29 @@ class Router extends Object implements IRouter
         $this->currentRoute = $this->routeCollection->findRoute( $request );
         if( $this->currentRoute->getAction() instanceof \Closure ){
             $this->dispatch = \Tuzhi::make(
-                'tuzhi\route\ClosureDispatch',
-                [$this->currentRoute]
+                [
+                    'class'=>'tuzhi\route\ClosureDispatch',
+                    'route'=>$this->currentRoute ,
+                    'request' => $request
+                ]
             );
         }else {
             $this->dispatch = \Tuzhi::make(
-                'tuzhi\route\ControllerDispatch',
-                [$this->currentRoute]
+                [
+                    'class'=>'tuzhi\route\ControllerDispatch',
+                    'route'=>$this->currentRoute,
+                    'request' => $request
+                ]
             );
         }
         $this->dispatch->dispatch();
         
         return $this->dispatch->getContent() ;
+    }
+
+    public function getCurrent()
+    {
+
     }
 
     /**

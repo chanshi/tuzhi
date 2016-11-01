@@ -18,17 +18,34 @@ use tuzhi\base\Object;
  */
 class Transaction extends Object
 {
-
+    /**
+     *
+     */
     const READ_UNCOMMITTED = 'READ UNCOMMITTED';
 
+    /**
+     *
+     */
     const READ_COMMITTED = 'READ COMMITTED';
 
+    /**
+     *
+     */
     const REPEATABLE_READ = 'REPEATABLE READ';
 
+    /**
+     *
+     */
     const SERIALIZABLE = 'SERIALIZABLE';
 
+    /**
+     * @var
+     */
     public $db;
 
+    /**
+     * @var int
+     */
     private $level = 0;
 
     /**
@@ -51,7 +68,7 @@ class Transaction extends Object
         }
 
         $this->db->getSchema()
-            ->createSavePoint( 'POINT '.$this->level );
+            ->createSavePoint( 'POINT_'.$this->level );
         $this->level++;
         return true;
     }
@@ -72,7 +89,7 @@ class Transaction extends Object
         }
 
         $this->db->getSchema()
-            ->rollBackSavePoint('POINT '.$this->level);
+            ->rollBackSavePoint('POINT_'.$this->level);
         return true;
     }
 
@@ -92,7 +109,7 @@ class Transaction extends Object
         }
 
         $this->db->getSchema()
-            ->releaseSavePoint('POINT '.$this->level);
+            ->releaseSavePoint('POINT_'.$this->level);
     }
 
     /**
@@ -102,5 +119,4 @@ class Transaction extends Object
     {
         return $this->level;
     }
-
 }

@@ -14,9 +14,14 @@ use tuzhi\model\validators\Verify;
 class ProperValid extends Verify
 {
 
+    /**
+     * @var
+     */
     public $type;
 
-
+    /**
+     * @return bool
+     */
     protected function check()
     {
         if( ($value = $this->getAttribute() )  && $this->type )
@@ -39,12 +44,18 @@ class ProperValid extends Verify
                     break;
                 case 'url' :
                     return $this->checkUrl($value);
+                case 'ip' : break;
+                case 'money' : break;
                 default : return true;
             }
         }
         return true;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function checkUserName( $value )
     {
         if( !preg_match('#^[a-zA-Z0-9\x{4e00}-\x{9fa5}]+$#u',$value) ){
@@ -54,6 +65,10 @@ class ProperValid extends Verify
         return true;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function checkPassword($value)
     {
         if(! ( preg_match('#[\d]+#',$value) &&  preg_match('#[a-z]+#',$value) && preg_match('#[A-Z]+#',$value) ) ){
@@ -70,7 +85,7 @@ class ProperValid extends Verify
      */
     protected function checkEmail( $value )
     {
-        if( ! preg_match('/^(?P<name>(?:"?([^"]*)"?\s)?)(?:\s+)?(?:(?P<open><?)((?P<local>.+)@(?P<domain>[^>]+))(?P<close>>?))$/i', $value) ){
+        if( ! filter_var($value,FILTER_VALIDATE_EMAIL) ){
             $this->addError();
             return false;
         }
@@ -83,7 +98,7 @@ class ProperValid extends Verify
      */
     protected function checkMobile( $value )
     {
-        if(!preg_match('#^1[\d]{10}$#',$value))
+        if(!preg_match('#^[1]{1}[3|5|7|8]{1}[0-9]{9}$#',$value))
         {
             $this->addError();
             return false;
@@ -105,10 +120,23 @@ class ProperValid extends Verify
         return true;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     protected function checkUrl($value)
     {
-        if(!preg_match('#^((http|https)\:\/\/)?[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$#gi',$value))
+        if(! filter_var($value,FILTER_VALIDATE_URL))
         {
+            $this->addError();
+            return false;
+        }
+        return true;
+    }
+
+    protected function checkIP($value)
+    {
+        if( ! filter_var($value,FILTER_VALIDATE_IP) ){
             $this->addError();
             return false;
         }

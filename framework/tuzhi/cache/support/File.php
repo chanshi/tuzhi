@@ -43,6 +43,7 @@ class File extends Object implements ICache
     public function init()
     {
         $this->FileSystem = new FileSystem();
+        // 注意了 
         $this->cacheDir =  rtrim( \Tuzhi::getAlias($this->cacheDir),'/' ).'/';
     }
 

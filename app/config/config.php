@@ -28,5 +28,6 @@ return
                 'app.php',
                 'server.php',
                 'cache.php',
+                'router.php'
             ]
 ];

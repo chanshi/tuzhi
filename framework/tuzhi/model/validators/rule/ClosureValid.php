@@ -28,7 +28,7 @@ class ClosureValid extends Verify
     protected function checkClosure()
     {
 
-        if( $value = $this->getAttribute() ){
+        if( ($value = $this->getAttribute()) !== null ){
             $status = call_user_func($this->closure,$this);
             if($status == false){
                 $this->addError();
@@ -38,6 +38,9 @@ class ClosureValid extends Verify
         return true;
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function verify()
     {
         return $this->checkClosure();

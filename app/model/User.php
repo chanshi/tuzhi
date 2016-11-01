@@ -23,7 +23,7 @@ class User extends ActiveRecord
      */
     public function getLabels()
     {
-        return $this->attributeLabel =
+        return $this->attLabel =
             [
                 'userName'=>'用户名',
                 'password'=>'密码',
@@ -37,6 +37,25 @@ class User extends ActiveRecord
      */
     public function getRules()
     {
+        $ab =
+            [
+                'insert' =>
+                    [
+                        'username' =>
+                            [
+                                ['UserName']
+                            ],
+                        'password'=>
+                            [
+                                ['NotNull'],
+                                ['Password']
+                            ]
+                    ],
+                'update'=>
+                    [
+                        'username' =>[]
+                    ]
+            ];
         return $this->rules =
             [
                 ['userName','null'],

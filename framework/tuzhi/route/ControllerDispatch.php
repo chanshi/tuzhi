@@ -17,18 +17,8 @@ use tuzhi\contracts\route\IDispatch;
  * Class ControllerDispatch
  * @package tuzhi\route
  */
-class ControllerDispatch implements IDispatch
+class ControllerDispatch extends Dispatcher implements IDispatch
 {
-
-    /**
-     * @var
-     */
-    public $route;
-
-    /**
-     * @var
-     */
-    public $content;
 
     /**
      * @var string
@@ -45,19 +35,24 @@ class ControllerDispatch implements IDispatch
      */
     public $controlNamespace = 'app\control';
 
-    /**
-     * ControllerDispatch constructor.
-     * @param $route
-     */
-    public function __construct( $route )
-    {
-        $this->route = $route;
-    }
+
 
     /**
      * @throws NotFoundMethodException
      */
     public function dispatch()
+    {
+        $this->frontCheck();
+
+        if( ! $this->hasContent() ){
+            $this->getControlContent();
+        }
+    }
+
+    /**
+     * @throws NotFoundMethodException
+     */
+    protected function getControlContent()
     {
         list($control ,$action) = explode('@',$this->route->getAction());
 
@@ -105,11 +100,4 @@ class ControllerDispatch implements IDispatch
         return $action.'Action';
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
 }

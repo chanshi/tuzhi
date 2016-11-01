@@ -48,4 +48,15 @@ class Str
     {
         return ucfirst(strtolower($string));
     }
+
+    /**
+     * 字符长度
+     *
+     * @param $string
+     * @return int
+     */
+    public static function length($string)
+    {
+        return mb_strlen($string,\Tuzhi::App()->charset);
+    }
 }

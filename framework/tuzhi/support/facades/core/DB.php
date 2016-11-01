@@ -6,7 +6,50 @@
  * Time: 21:17
  */
 
-
+/**
+ * Class DB
+ */
 class DB
 {
+    /**
+     * @var
+     */
+    protected static $instance;
+
+    /**
+     * @return \tuzhi\db\query\Query
+     */
+    public static function Query()
+    {
+        return new \tuzhi\db\query\Query();
+    }
+
+    /**
+     * @param $sql
+     * @return mixed
+     */
+    public static function SQL( $sql )
+    {
+        return static::getDb()->createCommand($sql);
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getDb()
+    {
+        if( static::$instance == null){
+            static::$instance = Tuzhi::App()->get('db');
+        }
+        return static::$instance;
+    }
+
+    /**
+     * @param $expression
+     * @return \tuzhi\db\query\Expression
+     */
+    public static function Expression( $expression )
+    {
+        return new \tuzhi\db\query\Expression($expression);
+    }
 }

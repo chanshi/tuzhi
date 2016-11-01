@@ -22,6 +22,9 @@ trait TableTrait
      */
     public $table;
 
+    /**
+     * @var
+     */
     public $join;
 
     /**
@@ -33,7 +36,7 @@ trait TableTrait
     {
         $table = $this->db->quoteTable($table);
         $this->table[] = $alias
-            ? [$table, Query::AS ,$alias]
+            ? [$table, Query::_AS_ ,$alias]
             : [$table];
 
         return $this;
@@ -61,7 +64,7 @@ trait TableTrait
     public function join( $table , $alias , $condition = null)
     {
         $table = $this->db->quoteTable($table);
-        $this->join[] =[[$table,Query::AS,$alias] ,Query::JOIN, $condition ];
+        $this->join[] =[[$table,Query::_AS_,$alias] ,Query::JOIN, $condition ];
 
         return $this;
     }
@@ -76,7 +79,7 @@ trait TableTrait
     {
         $table = $this->db->quoteTable($table);
 
-        $this->join[] =[[$table,Query::AS,$alias] ,Query::LEFTJOIN , $condition ];
+        $this->join[] =[[$table,Query::_AS_,$alias] ,Query::LEFT_JOIN , $condition ];
 
         return $this;
     }
@@ -91,9 +94,22 @@ trait TableTrait
     {
         $table = $this->db->quoteTable($table);
 
-        $this->join[] =[[$table,Query::AS,$alias] ,Query::RIGHTJOIN,$condition ];
+        $this->join[] =[[$table,Query::_AS_,$alias] ,Query::RIGHT_JOIN,$condition ];
 
         return $this;
     }
+
+    /**
+     * @param $table
+     * @return mixed
+     */
+    private function quoteTable( $table )
+    {
+        if(is_string($table)){
+            $table = $this->db->quoteTable($table);
+        }
+        return $table;
+    }
+
 
 }

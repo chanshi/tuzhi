@@ -6,10 +6,8 @@
  * Time: 18:00
  */
 
-namespace app\model;
+namespace tuzhi\model;
 
-
-use tuzhi\model\Model;
 
 /**
  * Class Form
@@ -17,5 +15,13 @@ use tuzhi\model\Model;
  */
 class Form extends Model
 {
+
+    public function submit()
+    {
+        if($this->verify()){
+            return $this->add();
+        }
+        return $this->getVerifyFirstError();
+    }
 
 }

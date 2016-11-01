@@ -42,7 +42,12 @@ class Manage extends Object
             'Block',
             'Config',
             'Cookie',
-            'Session'
+            'Session',
+            'ActiveRecord',
+            'Form',
+            'User',
+            'DataCollection',
+            'Module',
         ];
 
     /**
