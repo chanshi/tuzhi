@@ -12,6 +12,8 @@ defined('TUZHI_PATH') or define('TUZHI_PATH',__DIR__);
 use tuzhi\di\Container;
 use tuzhi\base\exception\NotFoundFilesException;
 use tuzhi\base\exception\InvalidParamException;
+use tuzhi\support\profiler\Timer;
+use tuzhi\support\profiler\Memory;
 
 
 //todo::  &tz  这个逻辑需要独立出去
@@ -72,6 +74,12 @@ class Tuzhi {
         spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
 
         /**
+         * 计算起点
+         */
+        Timer::mark('tuzhi.start');
+        Memory::mark('tuzhi.start');
+
+        /**
          *  获取容器
          */
         if( ! static::$container instanceof  Container){
@@ -81,23 +89,42 @@ class Tuzhi {
         /**
          * 启用 Config
          */
+
         static::$configure = Tuzhi::make( $config );
+
 
         /**
          * 配置 别名
          */
 
-        static::$alias  = array_merge( static::$alias , Tuzhi::config( 'alias' ));
+        static::$alias  = array_merge(
+            static::$alias ,
+            ( Tuzhi::config( 'alias' )
+                ? Tuzhi::config( 'alias' )
+                : []
+            )
+        );
 
         /**
          *  配置 自动加载
          */
-        static::$namespace  = array_merge( static::$namespace , Tuzhi::config( 'namespace' ));
+        static::$namespace  = array_merge(
+            static::$namespace,
+            ( Tuzhi::config( 'namespace' )
+                ? Tuzhi::config( 'namespace' )
+                : []
+            )
+        );
+
 
         /**
          * 启用 APP
          */
-        Tuzhi::make( Tuzhi::config('app') );
+
+        if( Tuzhi::config('app')  ){
+            Tuzhi::make( Tuzhi::config('app') );
+        }
+
     }
 
 
@@ -130,7 +157,8 @@ class Tuzhi {
                 return str_replace( '&tz/' ,static::$alias['&tz'] ,$aliasName );
             }else if( ($pos = strpos( $aliasName ,'/' ) ) > 0 ){
                 $alias = substr($aliasName ,0 ,$pos);
-                return str_replace( rtrim( $alias,'/') , static::$alias[$alias] ,$aliasName );
+                //todo
+                return str_replace( $alias, static::$alias[$alias] ,$aliasName );
             }else{
                 return isset( static::$alias[$aliasName] )
                     ? static::$alias[$aliasName]
@@ -287,7 +315,12 @@ class Tuzhi {
      */
     public static function frameVersion()
     {
-        return '1.0 - alpha';
+        return '1.0101 - alpha';
+    }
+
+    public static function tu()
+    {
+        return static::$alias;
     }
 }
 

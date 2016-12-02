@@ -18,6 +18,8 @@ class ErrorHandler extends \tuzhi\base\ErrorHandler
     protected function renderException($exception)
     {
         $message = $exception->getMessage();
-        echo 'Error: '.$message."\n";
+        echo ''.$exception->getName().': '.$message."\n";
+        echo 'File: '.$exception->getFile()."\n";
+        echo 'Line: '.$exception->getLine()."\n";
     }
 }

@@ -24,7 +24,7 @@ class Configure extends Object{
     /**
      * @var string
      */
-    public $path = '&config/';
+    public $path = '';
 
     /**
      * @var array
@@ -37,6 +37,7 @@ class Configure extends Object{
      */
     public function init()
     {
+        if($this->path == '') return;
         $this->path = is_dir($this->path)
             ? $this->path
             : rtrim( \Tuzhi::alias($this->path),'/' ).'/';

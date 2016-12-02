@@ -11,6 +11,7 @@ namespace tuzhi\web;
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\Server;
 use tuzhi\contracts\web\IRequest;
+use tuzhi\support\files\FilesCollect;
 use tuzhi\web\cookie\CookieCollect;
 use tuzhi\web\cookie\Cookie;
 
@@ -51,7 +52,6 @@ class Request extends Server implements IRequest
     protected $httpMethod;
 
 
-
     protected $header;
 
     protected $cookie;
@@ -62,9 +62,20 @@ class Request extends Server implements IRequest
 
     protected $get;
 
+    /**
+     * @var
+     */
     protected $raw;
 
+    /**
+     * @var string
+     */
     protected $viaParam = '__method';
+
+    /**
+     * @var string
+     */
+    protected $fileCollection = null;
 
 
 
@@ -219,7 +230,7 @@ class Request extends Server implements IRequest
      */
     public function getAbsoluteUrl()
     {
-        return $this->getUri();
+        return $this->getAbsoluteHost().$this->getUri();
     }
 
     /**
@@ -434,6 +445,17 @@ class Request extends Server implements IRequest
     public function session()
     {
         return $this->session;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function files()
+    {
+        if(  $this->fileCollection == null  ){
+            $this->fileCollection  = new FilesCollect();
+        }
+        return $this->fileCollection;
     }
 
 }

@@ -23,11 +23,8 @@ class ClosureDispatch  extends Dispatcher  implements IDispatch
      */
     public function dispatch()
     {
-        $this->frontCheck();
-
-        if( !$this->hasContent() ){
-            $this->getCallContent();
-        }
+        $this->prepare()
+        && $this->getCallContent();
     }
 
 

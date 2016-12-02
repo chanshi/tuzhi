@@ -8,7 +8,9 @@
 
 namespace tuzhi\db;
 
+use tuzhi\base\Event;
 use tuzhi\base\Object;
+use tuzhi\support\profiler\Timer;
 
 /**
  * Class Command
@@ -16,6 +18,19 @@ use tuzhi\base\Object;
  */
 class Command extends Object
 {
+    /**
+     *
+     */
+    const EVENT_BEFORE_EXECUTE = 'event.command.before.execute';
+
+    /**
+     *
+     */
+    const EVENT_AFTER_EXECUTE = 'event.command.after.execute';
+
+    const EVENT_BEFORE_QUERY  = 'event.command.before.query';
+
+    const EVENT_AFTER_QUERY   = 'event.command.after.query';
     /**
      * @var
      */
@@ -192,9 +207,21 @@ class Command extends Object
 
         try{
 
+            Event::trigger(Command::className(),Command::EVENT_BEFORE_EXECUTE);
+
+            Timer::mark('tuzhi.command.execute.start');
+
             $this->statement->execute();
 
             $num = $this->statement->rowCount();
+
+            Timer::mark('tuzhi.command.execute.end');
+
+            Event::trigger(
+                Command::className(),
+                Command::EVENT_AFTER_EXECUTE,
+                [Timer::slice('tuzhi.command.execute'),$sql]
+            );
 
             return $num;
 
@@ -226,6 +253,10 @@ class Command extends Object
 
         try{
 
+            Event::trigger(Command::className(),Command::EVENT_BEFORE_QUERY);
+
+            Timer::mark('tuzhi.command.query.start');
+
             $this->statement->execute();
 
             if( $fetchMode === null ){
@@ -240,7 +271,12 @@ class Command extends Object
             //关闭
             $this->statement->closeCursor();
 
+            Timer::mark('tuzhi.command.query.end');
 
+            Event::trigger(
+                Command::className(),
+                Command::EVENT_AFTER_QUERY,
+                [Timer::slice('tuzhi.command.query'),$sql]);
 
         } catch ( \PDOException $e ){
             $message = $e->getMessage() . "\nFailed to query SQL: $sql";

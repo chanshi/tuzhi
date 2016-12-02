@@ -46,7 +46,7 @@ class ActiveRecord extends Model
     /**
      * @var
      */
-    protected $primary;
+    protected $primary=[];
 
     /**
      * @var
@@ -117,7 +117,7 @@ class ActiveRecord extends Model
     {
         foreach($this->primaryKey as $key)
         {
-            if( ! isset( $this->primary[$key] ) || $this->primary[$key] == null ){
+            if( ! isset( $this->primary[$key] ) || $this->primary[$key] === null ){
                 return false;
             }
         }
@@ -155,9 +155,11 @@ class ActiveRecord extends Model
      */
     protected function setPrimary( $attribute,$value )
     {
-        if($this->isPrimaryAtt($attribute) && !isset($this->primary[$attribute])) {
-            $this->primary[$attribute] = $value;
-            return true;
+        if($this->isPrimaryAtt($attribute) ) {
+            if( ! in_array($attribute,$this->primary) ) {
+                $this->primary[$attribute] = $value;
+                return true;
+            }
         }
         return false;
     }
@@ -191,18 +193,20 @@ class ActiveRecord extends Model
                 return false;
             }
 
-            if( isset($this->attributes[$attribute]) && ($this->attributes[$attribute] != $value) ){
+            if( in_array($attribute,array_keys($this->attributes)) && ($this->attributes[$attribute] != $value) ){
                 $this->oldAttr[$attribute] = $this->attributes[$attribute];
                 $this->attributes[$attribute] = $value;
             }
         }else{
-            if( parent::setAttribute($attribute,$value) == false){
+            if( parent::setAttribute($attribute,$value) === false){
                 return false;
             }
 
-            if( $this->setPrimary($attribute,$value) == false) {
+            if( $this->setPrimary($attribute,$value) === false) {
                 return false;
             }
+
+
         }
 
         return true;
@@ -254,6 +258,7 @@ class ActiveRecord extends Model
 
                 return $this->modify();
             }
+
             return true;
         }
         //TODO:: 根据主键 主要根据 主键一般为自增ID

@@ -16,6 +16,8 @@ use tuzhi\cache\Cache;
 use tuzhi\db\query\QueryBuilder;
 use tuzhi\helper\Arr;
 use tuzhi\support\loadBalance\LoadBalance;
+use tuzhi\support\profiler\Counter;
+use tuzhi\support\profiler\Timer;
 
 /**
  * Class Connection
@@ -272,10 +274,12 @@ class Connection extends Server
 
             try{
 
+                Timer::mark('tuzhi.db.connection.start');
                 $pdoInstance = new $this->pdoClass($dsn->getDsn(),$dsn->getUserName() ,$dsn->getPassword() );
 
                 $pdoInstance = $this->initConnection($pdoInstance);
-
+                Timer::mark('tuzhi.db.connection.end');
+                Counter::increment('tuzhi.db.connection');
             }catch(\PDOException $e){
                 //TODO:: 异常捕获 有问题
                 throw $e;

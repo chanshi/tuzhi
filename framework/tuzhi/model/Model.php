@@ -172,7 +172,8 @@ class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggrega
             return false;
         }
 
-        return $this->attributes[$attribute] = $value;
+        $this->attributes[$attribute] = $value;
+        return true;
     }
 
     /**

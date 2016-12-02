@@ -7,45 +7,78 @@
  */
 
 namespace tuzhi\route;
-use tuzhi\base\exception\NotFoundMethodException;
-use tuzhi\base\Object;
 
+use tuzhi\base\Object;
+use tuzhi\route\exception\NotFoundPage;
 
 /**
- * 控制器
- * 
  * Class Controller
  * @package tuzhi\route
  */
 class Controller extends Object
 {
-    protected $front = [];
+    /**
+     * @var array
+     */
+    protected $advanceHandle = [];
+
     /**
      * @var array
      */
     protected $actionClass = [];
 
+
+    /**
+     * @return mixed
+     */
+    public function goHome()
+    {
+        return '/';
+    }
+
+    /**
+     * @param $action
+     * @return array
+     */
+    public function getAdvances( $action )
+    {
+        $common = isset($this->advanceHandle['*'])
+            ? $this->advanceHandle['*']
+            : [];
+
+        $special = isset($this->advanceHandle[$action])
+            ? $this->advanceHandle[$action]
+            : [];
+
+        return array_merge($common,$special);
+    }
+
+    /**
+     * @param $action
+     * @return bool
+     */
+    public function hasAct( $action )
+    {
+        return method_exists( $this , $action)
+        || array_key_exists( $action, $this->actionClass);
+    }
+
     /**
      * @param $action
      * @param $arguments
      * @return mixed
-     * @throws NotFoundMethodException
+     * @throws NotFoundPage
      */
     public function __call( $action,$arguments)
     {
-        //$action = strtolower($action);
         if(array_key_exists($action,$this->actionClass)){
             $action = \Tuzhi::make(
                 $this->actionClass[$action]
             );
             return $action->action();
         }
-        throw new NotFoundMethodException('Not Found Action');
+        throw new NotFoundPage('Not Found Action');
         //TODO:: NOT FOUND
     }
 
-    public function hasAct( $action )
-    {
-        return method_exists($this,$action) || array_key_exists($action,$this->actionClass);
-    }
 }

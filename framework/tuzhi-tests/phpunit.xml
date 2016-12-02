@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpunit bootstrap="bootstrap.php">
+    <testsuites>
+        <testsuites name="Tuzhi FrameWork Unit">
+            <directory>tests</directory>
+        </testsuites>
+    </testsuites>
+</phpunit>

@@ -13,6 +13,8 @@ use tuzhi\base\exception\NotFoundFilesException;
 use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\base\Server;
 use tuzhi\contracts\view\IView;
+use tuzhi\support\profiler\Counter;
+use tuzhi\support\profiler\Timer;
 use tuzhi\web\Application;
 
 /**
@@ -68,7 +70,11 @@ class View  extends Server implements IView
     public function renderFile( $file ,$param = [] )
     {
         if( file_exists( $file ) ){
-            return $this->engine->render( $file ,$param );
+            Timer::mark('tuzhi.view.renderFile.start');
+            $content =$this->engine->render( $file ,$param );
+            Timer::mark('tuzhi.view.renderFile.end');
+            Counter::increment('tuzhi.view.renderFile');
+            return $content;
         }else{
             throw new NotFoundFilesException( 'Not Found View Files '.$file.' ' );
         }

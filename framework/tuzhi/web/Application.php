@@ -8,6 +8,7 @@
 
 namespace tuzhi\web;
 
+use tuzhi\base\Event;
 use tuzhi\helper\Arr;
 
 class Application extends \tuzhi\base\Application {
@@ -24,7 +25,9 @@ class Application extends \tuzhi\base\Application {
      * Run
      */
     public function run(){
+
         try{
+            Event::trigger( $this,static::EVENT_BEFORE_RUN );
 
             $content = static::router()->handler( static::request() );
 
@@ -32,10 +35,15 @@ class Application extends \tuzhi\base\Application {
 
             static::response()->send();
 
+            Event::trigger( Application::className() ,static::EVENT_AFTER_RUN );
+
         }catch(\Exception $e){
             //TODO::
             throw $e;
         }
+
+        Event::trigger($this,static::EVENT_APP_END);
+
     }
 
     /**
@@ -43,10 +51,10 @@ class Application extends \tuzhi\base\Application {
      */
     protected function bootCore()
     {
-        return Arr::marge(
+        return Arr::append(
             parent::bootCore(),
             [
-
+                'tuzhi\web\bootstrap\ProfilerBoot'
             ]
         );
     }

@@ -11,6 +11,7 @@ namespace tuzhi\route;
 use Tuzhi;
 use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\contracts\route\IDispatch;
+use tuzhi\route\exception\NotFoundPage;
 
 /**
  * 
@@ -35,56 +36,77 @@ class ControllerDispatch extends Dispatcher implements IDispatch
      */
     public $controlNamespace = 'app\control';
 
+    /**
+     * @var
+     */
+    protected $control;
 
+    /**
+     * @var
+     */
+    protected $action;
+
+    /**
+     * @return mixed
+     */
+    public function init()
+    {
+        parent::init();
+
+        list($this->control,$this->action) = explode('@',$this->route->getAction());
+        $this->control = $this->createControl($this->control);
+        $this->action  = $this->prepareAction($this->action);
+    }
 
     /**
      * @throws NotFoundMethodException
      */
     public function dispatch()
     {
-        $this->frontCheck();
-
-        if( ! $this->hasContent() ){
-            $this->getControlContent();
-        }
+        $this->prepare()
+        && $this->getControlContent();
     }
 
     /**
-     * @throws NotFoundMethodException
+     * @return mixed
      */
     protected function getControlContent()
     {
-        list($control ,$action) = explode('@',$this->route->getAction());
+        $this->prepare( $this->control->getAdvances( $this->action ) )
+        && $this->getActionContent();
+    }
 
-        $Control = $this->makeControl($control);
-
-        $action  = $this->prepareAction($action);
-
-        if( $Control->hasAct( $action ) ){
+    /**
+     * @throws NotFoundPage
+     */
+    protected function getActionContent()
+    {
+        if( $this->control->hasAct( $this->action ) ){
             //TODO: 匹配参数的问题
-            $this->content = call_user_func_array([$Control ,$action],[]);
+            $this->content = call_user_func_array([$this->control ,$this->action],[]);
         }else{
-            throw new NotFoundMethodException( 'Not Found Action '.$action.' In Control '.$control );
+            //TODO:: Not Found Page
+            throw new NotFoundPage( 'Not Found Action '.$this->action.' In Control '.$this->control );
         }
     }
 
     /**
      * @param $control
      * @return mixed
-     * @throws NotFoundMethodException
+     * @throws NotFoundPage
      */
-    public function makeControl( $control )
+    protected function createControl( $control )
     {
         if( strpos($control ,'<') !== false) {
             $control = $this->defaultControlName;
         }
 
-        $control = $this->controlNamespace.'\\'. ucfirst( strtolower( $control )  );
+        $control = $this->controlNamespace.'\\'. ucfirst(  $control  );
 
         if( class_exists( $control ) ){
             return  Tuzhi::make( $control );
         }else{
-            throw new NotFoundMethodException('Not Found Control '.$control);
+            throw new NotFoundPage('Not Found Control '.$control);
         }
     }
 
@@ -92,7 +114,7 @@ class ControllerDispatch extends Dispatcher implements IDispatch
      * @param $action
      * @return string
      */
-    public function prepareAction( $action )
+    protected function prepareAction( $action )
     {
         if( strpos($action,'<') !== false){
             $action = $this->defaultActionName;

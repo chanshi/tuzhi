@@ -34,20 +34,9 @@ class Dispatcher extends Object
     public $request;
 
     /**
-     * @var array
+     * @var
      */
-    public $checkList = [];
-
-    /**
-     * init
-     */
-    public function init()
-    {
-        //TODO:: 这个
-        if( \Tuzhi::config('router.frontCheck') ){
-            $this->checkList = \Tuzhi::config('router.frontCheck');
-        }
-    }
+    public $advance=[];
 
     /**
      * @return mixed
@@ -57,29 +46,26 @@ class Dispatcher extends Object
         return $this->content;
     }
 
-    protected function hasContent()
-    {
-        return  empty( $this->content )
-            ? false
-            : true;
-    }
-
     /**
+     * @param $advanceList
      * @return bool
      */
-    public function frontCheck()
+    protected function prepare( $advanceList = null )
     {
-        // 合并 checklist;
+        $advanceList = $advanceList == null
+            ? $this->route->advance
+            : $advanceList;
 
-        Arr::each($this->checkList,function($keys,$value){
 
-            $this->content = \Tuzhi::make( $value )->handle( $this->route ,$this->request);
-            if( $this->content ){
+        foreach( $advanceList as $name) {
+            if( !isset($this->advance[$name]) ) continue;
+            $AdvanceClass = \Tuzhi::make($this->advance[$name]);
+            if( ! $AdvanceClass->handler( $this->route ) ){
+                $this->content = $AdvanceClass->getResponse();
                 return false;
             }
-        });
-
+        }
+        return true;
     }
-
 
 }

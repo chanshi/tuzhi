@@ -59,4 +59,16 @@ class Str
     {
         return mb_strlen($string,\Tuzhi::App()->charset);
     }
+
+    /**
+     * @param $bytes
+     * @return string
+     */
+    public static function byteConvert( $bytes )
+    {
+        $s = ['B', 'Kb', 'MB', 'GB', 'TB', 'PB'];
+        $e = (int) floor(log($bytes)/log(1024));
+
+        return sprintf('%.2f ', ($bytes/pow(1024, floor($e)))).$s[$e];
+    }
 }

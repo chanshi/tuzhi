@@ -20,7 +20,22 @@ use tuzhi\helper\Arr;
  */
 abstract class Application extends Object  implements IApplication
 {
-     /**
+    /**
+     * @var
+     */
+    const EVENT_BEFORE_RUN = 'event_before_application_run';
+
+    /**
+     * @var
+     */
+    const EVENT_AFTER_RUN = 'event_after_application_run';
+
+    /**
+     *
+     */
+    const EVENT_APP_END = 'event_application_end';
+
+    /**
       * @var
       */
     public $charset;
@@ -184,6 +199,30 @@ abstract class Application extends Object  implements IApplication
         }else{
             throw new NotFoundMethodException( 'Not Found Services '.$method.' ' );
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDevelopment()
+    {
+        return strtolower( $this->environment ) == 'development';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTesting()
+    {
+        return strtolower( $this->environment ) == 'testing';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isProduction()
+    {
+        return strtolower( $this->environment ) == 'production';
     }
 
     /**

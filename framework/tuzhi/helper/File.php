@@ -8,9 +8,15 @@
 
 namespace tuzhi\helper;
 
-
+/**
+ * Class File
+ * @package tuzhi\helper
+ */
 class File
 {
+    /**
+     * @var
+     */
     const DS = DIRECTORY_SEPARATOR;
 
     /**
@@ -20,7 +26,7 @@ class File
      * @return bool
      * @throws \Exception
      */
-    public static function createDir( $dir, $mode=0777 , $force = true){
+    public static function createDir( $dir, $mode = 0777 , $force = true){
        return File::createDirection($dir ,$mode ,$force);
     }
 
@@ -61,6 +67,40 @@ class File
     }
 
     /**
+     * @param $origin
+     * @param $destination
+     * @return bool
+     * @throws \Exception
+     */
+    public static function copyDirection( $origin , $destination ){
+        if(! is_dir($origin)){
+            throw  new \Exception('Cant copy Direction, '.$origin.' is not dir');
+        }
+
+        if( ! is_dir($destination)){
+            File::createDirection($destination);
+        }
+
+        $dir = opendir($origin);
+        if($dir === false){
+            throw new \Exception('Cant open Dir '.$origin.'!');
+        }
+        while ( ( $file = readdir($dir) ) !== false ){
+            if( $file == '.' || $file == '..' ){
+                continue;
+            }
+
+            if( is_dir($origin.File::DS.$file) ){
+                File::copyDirection( $origin.File::DS.$file , $destination.File::DS.$file  );
+            }else{
+                copy( $origin.File::DS.$file , $destination.File::DS.$file );
+            }
+        }
+        closedir($dir);
+        return true;
+    }
+
+    /**
      * @return bool
      */
     public static function isWindows()
@@ -79,7 +119,6 @@ class File
             ? false
             : true;
     }
-
 
 
     /**

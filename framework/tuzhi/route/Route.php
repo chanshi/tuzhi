@@ -47,7 +47,7 @@ class Route
     /**
      * @var
      */
-    public $checkList = [];
+    public $advance = [];
 
     /**
      * Route constructor.

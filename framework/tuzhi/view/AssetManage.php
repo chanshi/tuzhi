@@ -67,7 +67,7 @@ class AssetManage
         }else if( $asset instanceof Asset) {
             //TODO::
         }else{
-            throw new InvalidParamException( 'Invalid Param Asset '.$asset.' ');
+            throw new InvalidParamException( 'Invalid Params Asset '.$asset.' ');
         }
 
     }
@@ -92,7 +92,7 @@ class AssetManage
      */
     public function publishPath( $path )
     {
-        $dir = $this->hash($path);
+        $dir = 'asset/'.$this->hash($path);
         $path = $this->theme->getWebPath();
         $path = rtrim( $path ,'/' ).'/'.$dir;
 
@@ -101,6 +101,19 @@ class AssetManage
         }
 
         return [ $path , $this->theme->getWebUrl().$dir ];
+    }
+
+    /**
+     * @param $sourceDir
+     * @param $targetDir
+     */
+    public function publishDirection($sourceDir,$targetDir)
+    {
+        if( !is_dir($targetDir) ){
+            //
+            File::copyDirection($sourceDir,$targetDir);
+        }
+
     }
 
     /**

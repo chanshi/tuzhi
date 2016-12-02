@@ -16,12 +16,19 @@ class Application extends \tuzhi\base\Application
 {
 
 
+    /**
+     *
+     */
     public function run()
     {
+        print_r(static::Request()->getParams());
         echo 'Console Well done'."\n";
+        echo PHP_SAPI."\n";
     }
 
-
+    /**
+     * @return array
+     */
     protected function serviceCore()
     {
         return

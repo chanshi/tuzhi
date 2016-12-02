@@ -42,5 +42,23 @@ class Response extends \tuzhi\support\facades\Facades
         );
     }
 
+    /**
+     * @param $resource
+     * @param array $header
+     * @return mixed
+     */
+    public static function to( $resource ,$header =[] )
+    {
+        static::init();
+
+        return Tuzhi::make(
+            [
+                'class' => static::$service->getResponseClass('redirect'),
+                'response' => static::$service,
+                'content' => $resource
+            ]
+        );
+    }
+
 
 }

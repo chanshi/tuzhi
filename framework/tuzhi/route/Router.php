@@ -21,7 +21,7 @@ class Router extends Object implements IRouter
     /**
      * @var null
      */
-    public  $routeCollection = null;
+    protected $routeCollection = null;
 
     /**
      * @var
@@ -34,11 +34,20 @@ class Router extends Object implements IRouter
     protected $dispatch;
 
     /**
+     * @var
+     */
+    protected $advance;
+
+    /**
      * Init
      */
     public function init()
     {
         $this->routeCollection = new RouteCollection();
+
+        if( ( $advance = \Tuzhi::config('router.advance') ) ){
+            $this->advance = $advance;
+        }
     }
 
 
@@ -54,7 +63,8 @@ class Router extends Object implements IRouter
                 [
                     'class'=>'tuzhi\route\ClosureDispatch',
                     'route'=>$this->currentRoute ,
-                    'request' => $request
+                    'request' => $request,
+                    'advance'=>$this->advance
                 ]
             );
         }else {
@@ -62,18 +72,14 @@ class Router extends Object implements IRouter
                 [
                     'class'=>'tuzhi\route\ControllerDispatch',
                     'route'=>$this->currentRoute,
-                    'request' => $request
+                    'request' => $request,
+                    'advance'=>$this->advance
                 ]
             );
         }
         $this->dispatch->dispatch();
         
         return $this->dispatch->getContent() ;
-    }
-
-    public function getCurrent()
-    {
-
     }
 
     /**

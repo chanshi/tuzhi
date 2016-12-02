@@ -148,4 +148,17 @@ class Arr {
         }
         return $source;
     }
+
+    /**
+     * @param $source
+     * @param $array
+     * @return mixed
+     */
+    public static function append( $source ,$array )
+    {
+        foreach ($array as $key=>$value){
+            array_push($source,$value);
+        }
+        return $source;
+    }
 }

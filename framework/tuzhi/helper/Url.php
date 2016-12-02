@@ -9,14 +9,17 @@
 namespace tuzhi\helper;
 
 
-
 use tuzhi\web\Application;
 
+/**
+ * Class Url
+ * @package tuzhi\helper
+ */
 class Url
 {
 
     /**
-     *
+     * 拼接
      * @param array $param
      * @param bool $append
      * @return string
@@ -28,7 +31,7 @@ class Url
             : [] ;
         $GET = array_merge($GET,$param);
 
-        $queryString = $GET ? '?'.http_build_query($GET) : '';
+        $queryString = $GET ? '?'.Http::buildQueryString($GET) : '';
 
         return $queryString;
     }
@@ -41,9 +44,13 @@ class Url
         return  '/'.Application::Request()->getPath();
     }
 
-
-    public static function self( $params = [] , $append )
+    /**
+     * @param array $params
+     * @param $append
+     * @return string
+     */
+    public static function create( $params = [] , $append )
     {
-
+        return static::patten().static::build($params,$append);
     }
 }

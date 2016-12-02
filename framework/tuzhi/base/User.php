@@ -11,17 +11,27 @@ namespace base;
 
 use tuzhi\base\Object;
 
+/**
+ * Class User
+ * @package base
+ */
 class User extends Object
 {
 
+    /**
+     *
+     */
     const GUEST  = 0;
 
+    /**
+     *
+     */
     const MEMBER = 1;
 
     /**
      * @var User Model;
      */
-    protected $model;
+    public $model;
 
     /**
      * @return bool
@@ -36,7 +46,9 @@ class User extends Object
      */
     public function getUserId()
     {
-        return $this->model['uid'];
+        return $this->model
+            ? $this->model->getId()
+            : User::GUEST;
     }
 
 }

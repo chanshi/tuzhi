@@ -18,11 +18,38 @@ use tuzhi\contracts\web\IResponse;
  */
 class Redirect extends Object implements IResponse
 {
+
     /**
-     *
+     * @var
+     */
+    public $response;
+
+    /**
+     * @var
+     */
+    public $content;
+
+    /**
+     * @var int
+     */
+    public $httpStatsCode = 302;
+
+    /**
+     * @return mixed
+     */
+    public function sendHeader()
+    {
+        $this->response->sendStatsCode( $this->httpStatsCode );  //send 302
+        $this->response->sendCookie();
+    }
+
+    /**
+     * @return mixed
      */
     public function send()
     {
-        // TODO: Implement send() method.
+        $this->sendHeader();
+        header("Location: {$this->content}");
+        exit(0);
     }
 }

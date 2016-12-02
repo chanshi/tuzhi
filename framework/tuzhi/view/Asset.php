@@ -21,6 +21,10 @@ class Asset extends Object
     public $sourcePath;
 
     /**
+     * @var bool 还否发布目录
+     */
+    public $publishPath = false;
+    /**
      * @var
      */
     public $webPath;
@@ -53,13 +57,19 @@ class Asset extends Object
         if( $this->webPath && strpos($this->webPath,'&') === 0 ){
             $this->webPath = \Tuzhi::alias($this->webPath);
         }
-        if( $this->sourcePath ) {
+        // 发布目录？
+        //TODO:: 有点绕了
+        if($this->sourcePath && $this->publishPath) {
+
+        }else if( $this->sourcePath ){
+            // 发布文件
             $this->sourcePath = rtrim( $this->sourcePath,'/' ).'/';
             $cssFile = [];
             foreach( $this->cssFile as $css ){
                 $cssFile[] = [ $css ,str_replace('/','-',$css) ];
             }
             $this->cssFile = $cssFile;
+
             $jsFile = [];
             foreach( $this->jsFile as $js ){
                 $jsFile[] = [ $js ,str_replace('/','-',$js)];
@@ -82,7 +92,15 @@ class Asset extends Object
      */
     public function publish( $manage )
     {
-        if( $this->sourcePath !== null && ! isset( $this->webPath ,$this->webUrl ) ){
+        // 发布目录以及文件
+        if( $this->sourcePath && $this->publishPath && $this->webPath && $this->webUrl ){
+            $manage->publishDirection(
+                $this->sourcePath ,
+                rtrim($this->webPath,'/').'/'.ltrim($this->webUrl,'/')
+            );
+        }
+        // 发布路径
+        if( $this->sourcePath !== null && $this->publishPath == false && ! isset( $this->webPath ,$this->webUrl ) ){
             list( $this->webPath ,$this->webUrl ) = $manage->publishPath( $this->sourcePath );
         }
 
