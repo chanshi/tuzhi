@@ -95,8 +95,15 @@ class Event extends Object
         foreach ($classAll as $class){
             if(!empty(self::$events[$eventName][$class])){
                 foreach (self::$events[$eventName][$class] as $handler){
-                  //  call_user_func($handler[0],$handler[1],$data);
-                    call_user_func_array($handler[0],[$data]);
+                    if( is_string($handler[0])){
+
+                        $event = \Tuzhi::make( $handler[0] );
+                        $event->handler( $data );
+
+                    }else{
+                        call_user_func_array($handler[0],[$data]);
+                    }
+
                 }
             }
         }

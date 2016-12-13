@@ -14,7 +14,7 @@ use tuzhi\contracts\base\IBootstrap;
 class FacadeBoot implements IBootstrap
 {
 
-    protected $facade = 'tuzhi\support\facades\Manage';
+    protected $facade = 'tuzhi\facades\Facades';
 
     /**
      * @param $app

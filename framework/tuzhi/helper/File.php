@@ -134,7 +134,6 @@ class File
             $_dir = opendir($dir);
             while( $file = readdir( $_dir ) ){
                 if( $file == '.' || $file =='..') continue;
-                //if( substr($file,0,1) == '.') continue;
                 if( is_dir( $dir.$file ) && $force ) {
                     File::clearDir( $dir.$file ,$force );
                     @rmdir($dir.$file);

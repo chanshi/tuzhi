@@ -14,5 +14,5 @@ namespace tuzhi\contracts\base;
  */
 interface IEvent
 {
-    public function register();
+    public function handler( $data );
 }

@@ -24,7 +24,7 @@ abstract class ImagesServices extends Object
     const EVENT_AFTER_SAVE  = 'event.tuzhi.support.images.services.after.save';
 
     /**
-     * @var 图片服务器域名
+     * @var string 图片服务器域名
      */
     public $domain;
 

@@ -37,7 +37,7 @@ class Timer extends Object
      * @param int $decimals
      * @return int|string
      */
-    public static function slice($tagName ,$decimals=5)
+    public static function slice($tagName ,$decimals = 5)
     {
         $endTagName = strtolower($tagName).'.end';
         $startTagName = strtolower($tagName).'.start';

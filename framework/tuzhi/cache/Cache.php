@@ -38,7 +38,8 @@ class Cache extends Object
     public static $map =
         [
             'file' => 'tuzhi\cache\support\File',
-            'memcached' => 'tuzhi\cache\support\Memcached'
+            'memcached' => 'tuzhi\cache\support\Memcached',
+            'redis'=>'tuzhi\cache\support\Redis'
         ];
 
     /**

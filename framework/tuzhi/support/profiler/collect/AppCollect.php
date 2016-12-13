@@ -20,7 +20,7 @@ use tuzhi\support\profiler\Memory;
  * Class ProgramProfiles
  * @package tuzhi\support\profiles
  */
-class AppCollect extends Collection implements IEvent
+class AppCollect extends Collection
 {
     /**
      *

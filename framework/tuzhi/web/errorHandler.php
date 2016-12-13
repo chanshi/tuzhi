@@ -28,8 +28,6 @@ class ErrorHandler extends \tuzhi\base\ErrorHandler {
     protected $layout = '&tuzhi/resource/view/layout.php';
 
 
-   
-
     /**
      * @param $exception
      * @return mixed

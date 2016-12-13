@@ -1,0 +1,17 @@
+<?php
+/**
+ * Created by Console tu.
+ * User: Tuzhi <wuse@chanshi.me>
+ */
+
+namespace app\control;
+
+use Controller;
+
+class TCName extends Controller
+{
+    public function indexAction()
+    {
+        return 'Welcome Tuzhi!';
+    }
+}

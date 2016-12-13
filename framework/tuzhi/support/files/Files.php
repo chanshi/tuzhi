@@ -56,9 +56,12 @@ class Files extends Object
      */
     public function getSuffix()
     {
-        return isset($this->file['name'])
-            ? strtolower(  end(explode('.',$this->file['name'])) )
-            : '';
+        if(isset( $this->file['name'] )){
+            $exp = explode('.',$this->file['name']);
+            return strtolower(  end($exp) );
+        }else{
+            return '';
+        }
     }
 
     /**

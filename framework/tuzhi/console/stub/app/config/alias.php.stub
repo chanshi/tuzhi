@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by Console tu.
+ * User: Tuzhi <wuse@chanshi.me>
+ */
+
+return
+    [
+        'alias'=>
+            [
+                '&app' => APP_PATH.'/',
+                '&config' => APP_PATH.'/config/',
+                '&public' => APP_PATH.'/public/',
+                '&runtime' => APP_PATH.'/runtime/',
+                '&resource' => APP_PATH.'/resource/',
+                '&view' => APP_PATH.'/resource/view/',
+                '&web' => APP_PATH.'/public/'
+            ]
+    ];

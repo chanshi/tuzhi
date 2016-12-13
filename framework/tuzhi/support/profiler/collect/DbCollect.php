@@ -18,7 +18,7 @@ use tuzhi\support\profiler\Collection;
  * Class Sql
  * @package tuzhi\support\profiler\components
  */
-class DbCollect extends Collection implements IEvent
+class DbCollect extends Collection
 {
 
     public function init()

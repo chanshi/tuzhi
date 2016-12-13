@@ -20,7 +20,22 @@ class BootstrapAsset extends Asset
     /**
      * @var string
      */
-    public $sourcePath = '&tz/bootstrap/';
+    public $sourcePath = '&tz/bootstrap/bootstrap';
+
+    /**
+     * @var bool
+     */
+    public $publishPath = true;
+
+    /**
+     * @var string
+     */
+    public $webPath = '&web/';
+
+    /**
+     * @var string
+     */
+    public $webUrl  = '/bs/';
 
     /**
      * @var array

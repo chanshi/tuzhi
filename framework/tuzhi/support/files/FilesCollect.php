@@ -9,18 +9,19 @@
 namespace tuzhi\support\files;
 
 
+use tuzhi\model\ArrayData;
 use tuzhi\model\Model;
 
 /**
  * Class FilesCollect
  * @package tuzhi\support\files
  */
-class FilesCollect extends Model
+class FilesCollect extends ArrayData
 {
     /**
      * @var array
      */
-    protected $collection = [];
+    //protected $collection = [];
 
 
     /**
@@ -46,9 +47,9 @@ class FilesCollect extends Model
                         'file'=>$value
                     ]);
                 }
-                $this->collection[$name] = $collect;
+                $this->data[$name] = $collect;
             }else{
-                $this->collection[$name] = new Files([
+                $this->data[$name] = new Files([
                     'file'=> $file
                 ]);
             }

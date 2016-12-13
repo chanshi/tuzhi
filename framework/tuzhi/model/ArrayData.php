@@ -84,7 +84,7 @@ class ArrayData extends Object  implements \Countable ,\ArrayAccess, \IteratorAg
     /**
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return count($this->data);
     }
@@ -119,7 +119,7 @@ class ArrayData extends Object  implements \Countable ,\ArrayAccess, \IteratorAg
     /**
      * @return array
      */
-    public function toArray() :array
+    public function toArray()
     {
         return $this->data;
     }

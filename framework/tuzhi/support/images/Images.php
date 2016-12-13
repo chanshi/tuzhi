@@ -45,7 +45,7 @@ class Images extends Object
     }
 
     /**
-     * @param $file
+     * @param $file Request::files()['upload']
      * @return array [ $img ,$url ,$error ]
      */
     public function save( $file )
@@ -60,7 +60,7 @@ class Images extends Object
             if(! $file->isSuccess() ){
                 return [ '', '', $file->getErrorString()];
             }
-            if( ! $file->isImage()) {
+            if( ! $file->isImages()) {
                 return [ '', '' ];
             }
 

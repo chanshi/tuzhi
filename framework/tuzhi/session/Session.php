@@ -51,6 +51,7 @@ class Session extends Object
         if( ! $this->isActive() ){
             @session_start();
         }
+        return true;
     }
 
     /**

@@ -28,9 +28,14 @@ class Location extends ImagesServices
     protected $fileSystem = null;
 
     /**
+     * @var string
+     */
+    public $domain = '/up/img/';
+
+    /**
      * @var
      */
-    public $savePath = '&web/upload/img/';
+    public $savePath = '&web/up/img/';
 
     /**
      *
@@ -63,7 +68,7 @@ class Location extends ImagesServices
         if( ! is_dir( $this->savePath .'/'.$path ) ){
             File::createDirection($this->savePath .'/'.$path );
         }
-        return $path.'/'.strtoupper($path);
+        return $path.'/'.strtoupper($hash);
     }
 
     /**
@@ -76,7 +81,7 @@ class Location extends ImagesServices
 
         $files = $this->getImage($imageFile->getName()).'.'.$imageFile->getSuffix();
 
-        move_uploaded_file($imageFile->getFiles(),$files);
+        move_uploaded_file($imageFile->getFiles(),$this->savePath.'/'.$files);
 
         Event::trigger($this,self::EVENT_AFTER_SAVE,[$files]);
 

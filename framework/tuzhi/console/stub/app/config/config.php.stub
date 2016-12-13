@@ -1,0 +1,28 @@
+<?php
+/**
+ * Created by Console tu.
+ * User: Tuzhi <wuse@chanshi.me>
+ */
+
+return
+    [
+        /**
+         *  定义配置类
+         */
+        'class' => 'tuzhi\base\Configure',
+
+        /**
+         *  配置路径
+         */
+        'path' => __DIR__.'/',
+
+        /**
+         *  配置文件
+         */
+        'files'=>
+            [
+                'alias.php',
+                'namespace.php',
+                'app.php',
+            ]
+    ];

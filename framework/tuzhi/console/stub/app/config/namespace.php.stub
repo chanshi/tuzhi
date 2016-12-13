@@ -1,0 +1,13 @@
+<?php
+/**
+ * Created by Console tu.
+ * User: Tuzhi <wuse@chanshi.me>
+ */
+
+return
+    [
+        'namespace'=>
+            [
+                'app' => APP_PATH,
+            ]
+    ];

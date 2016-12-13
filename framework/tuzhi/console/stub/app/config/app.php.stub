@@ -1,0 +1,74 @@
+<?php
+/**
+ * Created by Console tu.
+ * User: Tuzhi <wuse@chanshi.me>
+ */
+
+return
+    [
+        'app' =>
+            [
+                'class'=>'tuzhi\web\Application',
+
+                /**
+                 * 网站编码
+                 */
+                'charset' => 'utf-8',
+
+                /**
+                 * 时区
+                 */
+                'timezone' => 'PRC' ,
+
+                /**
+                 * 运行环境
+                 */
+                'environment' => 'development',
+
+                /**
+                 * APP服务
+                 */
+                'service' =>
+                    [
+                        /**
+                         * 视图
+                         */
+                        'view'=>
+                            [
+                                'class'=>'tuzhi\view\View',
+                                'theme'=>
+                                    [
+                                        'class'   => 'tuzhi\view\Theme',
+                                        'webPath' => '&web',
+                                        'webUrl'  => '/',
+                                        'basePath'=> '&resource',
+                                        'defaultLayout'=>'H5'
+                                    ]
+                            ],
+                        /**
+                         * 缓存
+                         */
+                        'cache'=>
+                            [
+                                'class'=>'tuzhi\cache\Cache',
+                                'default' => 'file' ,
+                                'support' =>
+                                    [
+                                        'file' =>
+                                            [
+                                                'keyPrefix'  => 'cache_',
+                                                'cacheDir'   => '&runtime/cache',
+                                                'fileSuffix' => '.cache'
+                                            ],
+                                        'memcached' =>
+                                            [
+                                                'keyPrefix' => 'cache_',
+                                                'server' => '@server.memcached.server_1'
+                                            ]
+                                    ]
+                            ]
+
+                    ]
+            ]
+
+    ];

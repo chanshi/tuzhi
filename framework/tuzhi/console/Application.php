@@ -8,6 +8,10 @@
 
 namespace tuzhi\console;
 
+defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
+defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
+defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
+
 /**
  * Class Application
  * @package tuzhi\console
@@ -21,9 +25,12 @@ class Application extends \tuzhi\base\Application
      */
     public function run()
     {
-        print_r(static::Request()->getParams());
-        echo 'Console Well done'."\n";
-        echo PHP_SAPI."\n";
+
+        $content = static::Router()->handler(static::Request());
+
+        static::Response()->content = $content;
+
+        static::Response()->send();
     }
 
     /**
