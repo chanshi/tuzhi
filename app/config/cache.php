@@ -26,6 +26,15 @@ return
                                 //允许多台 并允许使用负载? 或者 一致性哈希
                                 'server'=>'@server.memcached.server_1'
                             ],
+                        'redis'=>
+                            [
+                                'keyPrefix'=>'cache_',
+                                'server'=>
+                                    [
+                                        'host'=>'192.168.56.102',
+                                        'dbIndex'=> 1
+                                    ]
+                            ]
                     ]
                 
             ]

@@ -25,7 +25,7 @@ return
                 /**
                  * 运行环境
                  */
-                'environment' => 'production',
+                'environment' => 'development',
 
                 /**
                  * APP服务
@@ -72,6 +72,52 @@ return
                                          *  模块配置文件 默认
                                          */
                                         'test'=>'/test/config/module.php',
+                                    ]
+                            ],
+                        'redis'=>
+                            [
+                                'class'=>\tuzhi\nosql\redis\Connection::className(),
+                                'redis'=>
+                                    [
+                                        'host'=>'192.168.56.102'
+                                    ]
+                            ],
+                        'cache'=>
+                            [
+                                'class'  =>'tuzhi\cache\Cache',
+                                'default'=>'memcached',
+                                'support'=>
+                                    [
+                                        'file'=>
+                                            [
+                                                'keyPrefix' => 'cache_',
+                                                'cacheDir'  => '&runtime/cache',
+                                                'fileSuffix' => '.cache'
+                                            ],
+                                        'memcached'=>
+                                            [
+                                                'keyPrefix'=>'cache_',
+                                                //允许多台 并允许使用负载? 或者 一致性哈希
+                                                'server'=>'@server.memcached.server_1'
+                                            ],
+                                        'redis'=>
+                                            [
+                                                'keyPrefix'=>'cache_',
+                                                'server'=>
+                                                    [
+                                                        'host'=>'192.168.56.102',
+                                                        'dbIndex'=> 1
+                                                    ]
+                                            ]
+                                    ]
+
+                            ],
+                        'images'=>
+                            [
+                                'class'=>\tuzhi\support\images\Images::className(),
+                                'service'=>
+                                    [
+                                        'class'=> \tuzhi\support\images\services\Location::className()
                                     ]
                             ]
                     ]
