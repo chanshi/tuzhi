@@ -25,10 +25,11 @@ class Json
 
     /**
      * @param $data
+     * @param bool $type
      * @return mixed
      */
-    public static function decode($data)
+    public static function decode($data,$type = true)
     {
-        return json_decode($data, true);
+        return json_decode($data, $type);
     }
 }

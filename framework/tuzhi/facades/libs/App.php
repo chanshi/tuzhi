@@ -17,9 +17,6 @@ class App
     public static function __callStatic($name, $arguments)
     {
         $service = strtolower($name);
-        if( Tuzhi::$app->has($service) ){
-            return Tuzhi::$app->get($service);
-        }
-        throw new \tuzhi\base\exception\NotFoundServersException('Not Found Servers :'.$service.'!');
+        return Tuzhi::$app->get($service);
     }
 }

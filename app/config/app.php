@@ -82,6 +82,15 @@ return
                                         'host'=>'192.168.56.102'
                                     ]
                             ],
+                        'influxdb'=>
+                            [
+                                'class'=>\tuzhi\nosql\influxdb\Connection::className(),
+                                'server'=>
+                                    [
+                                        'uri'=>'http://ts.xiaoyouapp.cn:8086',
+                                        'database'=>'tests'
+                                    ]
+                            ],
                         'cache'=>
                             [
                                 'class'  =>'tuzhi\cache\Cache',
@@ -119,7 +128,24 @@ return
                                     [
                                         'class'=> \tuzhi\support\images\services\Location::className()
                                     ]
-                            ]
+                            ],
+                        'queue'=>
+                            [
+                                'class'=> \tuzhi\queue\QueueManage::className(),
+                                'config'=>
+                                    [
+                                        [
+                                            'queueName'=>'sky',
+                                            'driver'=>'redis',
+                                            'server'=>
+                                                [
+                                                    'host'=>'192.168.56.102',
+                                                    'dbIndex'=>0,
+                                                    'pConnect'=>false
+                                                ]
+                                        ]
+                                    ]
+                            ],
                     ]
             ]
         

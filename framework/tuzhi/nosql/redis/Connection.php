@@ -70,6 +70,7 @@ class Connection extends Object
                     $this->redis->port
                 );
             }
+            $this->service->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);;
         }catch (\Exception $e){
             throw $e;
         }
@@ -103,7 +104,7 @@ class Connection extends Object
             : $dbIndex;
 
         if( ! isset( $this->dbList[$dbIndex] ) ){
-            $this->dbList[$dbIndex] = new Database(['dbIndex'=>$dbIndex,'redis'=>$this->service]);
+            $this->dbList[$dbIndex] = new Database(['dbIndex'=>$dbIndex,'redis'=>$this->service,'connection'=>$this]);
         }
         $this->dbList[$dbIndex]
             ->select();
@@ -115,7 +116,7 @@ class Connection extends Object
      */
     public function getTransaction()
     {
-        return new Transaction(['redis'=>$this->getDb()]);
+        return new Transaction(['redis'=>$this->service]);
     }
 
     /**
@@ -125,9 +126,11 @@ class Connection extends Object
      */
     public function transaction($key,$callback)
     {
-        $transaction = $this->getTransaction()->begin( $key );
+        $transaction = $this->getTransaction();
+        $transaction->begin($key);
+
         try{
-            if( ! call_user_func($callback) ){
+            if( ! call_user_func_array($callback,[$this]) ){
                 $transaction->rollback();
             }
             return $transaction->commit();

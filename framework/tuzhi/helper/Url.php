@@ -27,7 +27,7 @@ class Url
     public static function build( $param = [] , $append = false  )
     {
         $GET = $append
-            ? Application::Request()->all('get')
+            ? \App::Request()->all('get')
             : [] ;
         $GET = array_merge($GET,$param);
 
@@ -41,7 +41,7 @@ class Url
      */
     public static function patten()
     {
-        return  '/'.Application::Request()->getPath();
+        return  '/'.\App::Request()->getPath();
     }
 
     /**

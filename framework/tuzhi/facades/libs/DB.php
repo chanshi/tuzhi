@@ -52,4 +52,43 @@ class DB
     {
         return new \tuzhi\db\query\Expression($expression);
     }
+
+    /**
+     * @return mixed
+     */
+    public static function Begin()
+    {
+        $transaction = DB::getDb()->getTransaction();
+        $transaction->begin();
+        return $transaction->getLevel();
+    }
+
+    /**
+     * @param $transactionLevel
+     * @return bool
+     */
+    public static function Commit( $transactionLevel )
+    {
+        $transaction = DB::getDb()->getTransaction();
+        if( $transaction->getLevel == $transactionLevel ){
+            $transaction->commit();
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * @param $transactionLevel
+     * @return bool
+     */
+    public static function Rollback( $transactionLevel)
+    {
+        $transaction = DB::getDb()->getTransaction();
+        if( $transaction->getLevel() == $transactionLevel ){
+            $transaction->rollback();
+            return true;
+        }
+        return false;
+    }
 }

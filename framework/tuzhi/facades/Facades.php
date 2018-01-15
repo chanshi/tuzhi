@@ -43,6 +43,8 @@ class Facades extends Object
             'DataCollection',
             'Module',
             'Event',
+            'Queue',
+            'Img'
         ];
 
     /**

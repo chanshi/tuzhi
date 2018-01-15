@@ -36,7 +36,7 @@ class Transaction extends Object
      */
     public function commit()
     {
-        return $this->redis->exec();
+        $this->redis->exec();
     }
 
     /**
@@ -44,6 +44,6 @@ class Transaction extends Object
      */
     public function rollback()
     {
-        return $this->redis->discard();
+        $this->redis->discard();
     }
 }

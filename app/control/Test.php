@@ -8,6 +8,7 @@
 
 namespace app\control;
 
+use tuzhi\queue\Task;
 use tuzhi\route\Controller;
 use tuzhi\web\Application;
 
@@ -56,6 +57,56 @@ class Test extends Controller
 //        $db['cost']->Object()->lPush('test');
 //        var_dump($db['cost']->Object()->length());
 //        var_dump($db['cost']->Object()->lPop());
+
+    }
+
+    public function influxdbAction()
+    {
+        $influxdb = \App::Influxdb();
+        return function ()use($influxdb){
+            print_r($influxdb->ping());
+        };
+    }
+
+
+    /**
+     * @return \Closure
+     */
+    public function queueAction()
+    {
+        return function (){
+            echo  \Queue::Sky()->getName();
+            $job = new Task(
+                [
+                    'handler'=> 'app\job\TestJob',
+                    'data'=>
+                        [
+                            'value'=> 2
+                        ]
+                ]
+            );
+            \Queue::Sky()->push($job);
+            \Queue::Sky()->later($job,60);
+        };
+
+    }
+
+    public function queuePopAction()
+    {
+        return function (){
+           // while (true) {
+            try{
+                $job = \Queue::Sky()->pop();
+                $job->do();
+                //unset($job);
+                $job = \Queue::Sky()->pop();
+                $job->do();
+            }catch( \Exception $e){
+                throw $e;
+            }
+
+           // }
+        };
 
     }
 }

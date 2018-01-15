@@ -8,8 +8,8 @@
   <component name="PhpProjectSharedConfiguration" php_language_level="7" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="" />
-      <phpunit_by_interpreter interpreter_id="c1d92e6d-a309-4645-a0d7-d6f70c1b9f48" interpreter_name="Remote PHP 7" load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="/usr/local/php54/bin/phpunit" />
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="https://phar.phpunit.de/phpunit.phar" />
+      <phpunit_by_interpreter interpreter_id="93e5e8ab-36a1-4cc2-bf64-6c5a5b6a855a" load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="/usr/local/php70/bin/phpunit.phar" />
     </phpunit_settings>
   </component>
 </project>

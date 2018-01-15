@@ -90,11 +90,12 @@ class Location extends ImagesServices
 
     /**
      * @param $image
-     * @param null $width
-     * @param null $height
-     * @return mixed
+     * @param int $width
+     * @param int $height
+     * @param string $suffix
+     * @return string
      */
-    public function thumb( $image, $width = null, $height = null)
+    public function thumb( $image, $width = 0, $height = 0,$suffix='.jpg')
     {
         return rtrim(  $this->domain ,'/').'/'. ltrim( $image,'/');
     }

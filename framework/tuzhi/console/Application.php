@@ -8,6 +8,8 @@
 
 namespace tuzhi\console;
 
+use tuzhi\helper\Arr;
+
 defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
 defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
@@ -19,10 +21,6 @@ defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
 class Application extends \tuzhi\base\Application
 {
 
-
-    /**
-     *
-     */
     public function run()
     {
 
@@ -38,14 +36,15 @@ class Application extends \tuzhi\base\Application
      */
     protected function serviceCore()
     {
-        return
+        return Arr::marge(
             [
                 'request'=>'tuzhi\console\Request',
                 'response'=>'tuzhi\console\Response',
                 'router'=>'tuzhi\console\Router',
                 'errorHandler'=>'tuzhi\console\ErrorHandler',
                 'log'=>'tuzhi\log\Log',
-            ];
+            ],$this->service
+        );
     }
 
     /**
@@ -53,11 +52,12 @@ class Application extends \tuzhi\base\Application
      */
     protected function bootCore()
     {
-        return
+        return Arr::marge(
             [
-                'tuzhi\base\bootstrap\ApplicationBoot'
-            ]
-        ;
+                'tuzhi\base\bootstrap\ApplicationBoot',
+                'tuzhi\base\bootstrap\FacadeBoot'
+            ],$this->bootstrap
+        );
     }
 
 

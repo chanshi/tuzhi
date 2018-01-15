@@ -16,16 +16,19 @@ interface IQueue
 {
     /**
      * @param $job
-     * @param null $data
-     * @param null $queue
-     * @param array $options
      * @return mixed
      */
-    public function push($job, $data = null, $queue = null, $options = []);
+    public function push($job);
 
     /**
-     * @param $queue
+     * @param $job
+     * @param $time
      * @return mixed
      */
-    public function pop($queue);
+    public function later($job,$time);
+
+    /**
+     * @return mixed
+     */
+    public function pop();
 }

@@ -3,90 +3,79 @@
 namespace tuzhi\queue;
 
 use \tuzhi\base\Object;
-use \tuzhi\contracts\queue\IQueue;
-use \tuzhi\helper\Json;
-use tuzhi\helper\Str;
 
 /**
  * Class Queue
  * @package tuzhi\queue
  */
-abstract class Queue extends Object
+class Queue extends Object
 {
     /**
-     * @var int
+     * @var
      */
-    protected $prefix = 'queue';
+    public $queueName;
+
+    /**
+     * @var
+     */
+    public $driver;
 
     /**
      * @param $name
-     * @return string
      */
-    public function buildPrefix($name)
+    public function setName($name)
     {
-        if (empty($name)) {
-            $name = 'default';
-        } else {
-            $name = md5($name);
-        }
-        return $this->prefix . ":" . $name;
+        $this->queueName = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->queueName;
     }
 
     /**
      * @param $job
-     * @param $data
      * @return string
      */
-    protected function createPayload($job, $data)
+    protected function createPayload( $job )
     {
-        return $this->setMeta([
-            'job' => $job,
-            'data' => $data
-        ], 'id', $this->getRandomId());
+        $Payload = new Payload();
+        $Payload['job'] = $job;
+        return $Payload->toEncode();
     }
 
     /**
-     * @param $queue
-     * @return string
+     * @param $payload
+     * @return mixed
      */
-    protected function getQueue($queue)
+    protected function getMetaId($payload)
     {
-        return $this->buildPrefix($queue);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getRandomId()
-    {
-        return Str::random(32);
+        return Payload::decode($payload)['id'];
     }
 
     /**
      * @param $payload
      * @param $key
      * @param $value
-     * @return string
+     * @return mixed
      */
-    protected function setMeta($payload, $key, $value)
+    protected function setMeta($payload,$key,$value)
     {
-        $payload[$key] = $value;
-        return Json::encode($payload);
+        $Payload = Payload::decode($payload);
+        $Payload[$key]=$value;
+        return $Payload->toEncode();
     }
 
     /**
-     * @param $job
-     * @param null $data
-     * @param null $queue
-     * @param array $options
-     * @return mixed
+     * @return int
      */
-    abstract public function push($job, $data = null, $queue = null, $options = []);
+    protected function getTime()
+    {
+        return time();
+    }
 
-    /**
-     * @param $queue
-     * @return mixed
-     */
-    abstract public function pop($queue);
 
 }

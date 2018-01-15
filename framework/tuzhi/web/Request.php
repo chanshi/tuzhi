@@ -131,7 +131,7 @@ class Request extends Server implements IRequest
     public function getHost()
     {
         if( $this->httpHost == null ){
-            $this->httpHost = $this->getDomain().( $this->getPort() != 80 ? ':'.$this->getPort() : ''  );
+            $this->httpHost = $this->getDomain(); //.( $this->getPort() != 80 ? ':'.$this->getPort() : ''  );
         }
         return $this->httpHost;
     }

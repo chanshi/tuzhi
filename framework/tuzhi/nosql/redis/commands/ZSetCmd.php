@@ -123,6 +123,7 @@ class ZSetCmd extends Object
         if($offset && $count){
             $option['LIMIT'] =[$offset,$count];
         }
+
         return $this->redis()->zRangeByScore($this->key,$min,$max,$option);
     }
 

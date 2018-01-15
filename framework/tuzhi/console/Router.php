@@ -8,6 +8,7 @@
 
 namespace tuzhi\console;
 
+use tuzhi\base\Object;
 use tuzhi\console\exception\NotFoundCommand;
 use tuzhi\contracts\route\IRouter;
 use tuzhi\contracts\web\IRequest;
@@ -16,25 +17,40 @@ use tuzhi\contracts\web\IRequest;
  * Class Router
  * @package tuzhi\console
  */
-class Router implements IRouter
+class Router extends Object  implements IRouter
 {
 
+    /**
+     * @var
+     */
     protected $router;
 
+    /**
+     * @var string
+     */
     protected $defaultRoute = 'help' ;
 
-    protected $namespace = 'tuzhi\console\control';
+    /**
+     * @var string
+     */
+    public $namespace = 'tuzhi\console\control';
 
 
+    /**
+     * @param IRequest $request
+     * @return mixed
+     */
     public function handler( IRequest $request)
     {
         $this->router = $request->getRoute();
 
         $this->prepareRoute();
-        return $this->dispatch();
+        return $this->dispatch( $request );
     }
 
-
+    /**
+     *
+     */
     public function prepareRoute()
     {
         $this->router = empty($this->router)
@@ -46,9 +62,11 @@ class Router implements IRouter
     }
 
     /**
-     * 执行control;
+     * @param $request
+     * @return mixed
+     * @throws NotFoundCommand
      */
-    protected function dispatch()
+    protected function dispatch($request)
     {
         if( !class_exists( $this->router[0] ) ){
             throw new NotFoundCommand('Not Found Command Control '.$this->router[0]);
@@ -58,7 +76,7 @@ class Router implements IRouter
             $this->router[1] = 'helpAct';
             //throw new NotFoundCommand('Not Found Command Action '.$this->router[1]);
         }
-        return call_user_func_array([$control,$this->router[1]],[]);
+        return call_user_func_array([$control,$this->router[1]],[$request]);
     }
 
 }

@@ -16,6 +16,5 @@ return
         'namespace'=>
             [
                 'app' => APP_PATH,
-                'module'=> MODULE_PATH
             ]
     ];

@@ -37,9 +37,10 @@ abstract class ImagesServices extends Object
      * @param $image
      * @param null $width
      * @param null $height
+     * @param string $suffix
      * @return mixed
      */
-    abstract  public function thumb( $image , $width = null  , $height = null );
+    abstract  public function thumb( $image , $width = 0  , $height = 0 ,$suffix='.jpg');
 
     /**
      * @param $image

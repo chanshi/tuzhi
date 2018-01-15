@@ -2,12 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cda6a622-b601-4f1d-b29a-fd2f5de27bd0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/cs.tuzhi.ts.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vender/tuzhi/base/Application.php" afterPath="$PROJECT_DIR$/vender/tuzhi/base/Application.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vender/tuzhi/web/Application.php" afterPath="$PROJECT_DIR$/vender/tuzhi/web/Application.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/config/console.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/config/consoleConfig.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/console/QueueCtl.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/console/TestCtl.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/job/TestJob.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Command.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Connection.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Server.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Querying.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Request.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Results.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Writing.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/RedisQueue.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/sunhaifeng.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/sunhaifeng.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/app.php" afterPath="$PROJECT_DIR$/app/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/namespace.php" afterPath="$PROJECT_DIR$/app/config/namespace.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/control/Test.php" afterPath="$PROJECT_DIR$/app/control/Test.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/base/Application.php" afterPath="$PROJECT_DIR$/framework/tuzhi/base/Application.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/Application.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/Application.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/ErrorHandler.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/ErrorHandler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/Request.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/Request.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/Response.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/Response.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/Router.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/Router.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/console/control/TestCtl.php" afterPath="$PROJECT_DIR$/framework/tuzhi/console/control/TestCtl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/contracts/queue/IQueue.php" afterPath="$PROJECT_DIR$/framework/tuzhi/contracts/queue/IQueue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/facades/Facades.php" afterPath="$PROJECT_DIR$/framework/tuzhi/facades/Facades.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/facades/libs/App.php" afterPath="$PROJECT_DIR$/framework/tuzhi/facades/libs/App.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/facades/libs/DB.php" afterPath="$PROJECT_DIR$/framework/tuzhi/facades/libs/DB.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/helper/Http.php" afterPath="$PROJECT_DIR$/framework/tuzhi/helper/Http.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/helper/Json.php" afterPath="$PROJECT_DIR$/framework/tuzhi/helper/Json.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/helper/Url.php" afterPath="$PROJECT_DIR$/framework/tuzhi/helper/Url.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Connection.php" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Connection.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Database.php" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Database.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Transaction.php" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Transaction.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/commands/ZSetCmd.php" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/commands/ZSetCmd.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/Payload.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/Payload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/Queue.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/Queue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/QueueManage.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/QueueManage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/Task.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/Task.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/Worker.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/Worker.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/driver/RedisQueue.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/driver/RedisQueue.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/job/Job.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/job/Job.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/queue/job/RedisJob.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/job/RedisJob.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/support/images/Images.php" afterPath="$PROJECT_DIR$/framework/tuzhi/support/images/Images.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/support/images/ImagesServices.php" afterPath="$PROJECT_DIR$/framework/tuzhi/support/images/ImagesServices.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/support/images/services/Location.php" afterPath="$PROJECT_DIR$/framework/tuzhi/support/images/services/Location.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/support/profiler/Profiler.php" afterPath="$PROJECT_DIR$/framework/tuzhi/support/profiler/Profiler.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/framework/tuzhi/web/Request.php" afterPath="$PROJECT_DIR$/framework/tuzhi/web/Request.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/ServerMonitoring/bootstrap.php" afterPath="$PROJECT_DIR$/module/ServerMonitoring/bootstrap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/test/config/module.php" afterPath="$PROJECT_DIR$/module/test/config/module.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/test/index.php" afterPath="$PROJECT_DIR$/module/test/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/module/test/model/User.php" afterPath="$PROJECT_DIR$/module/test/model/User.php" />
     </list>
     <ignored path="cs.tuzhi.ts.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,61 +70,326 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ComposerSettings" doNotAsk="true" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="cs.tuzhi.ts" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Tuzhi.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vender/tuzhi/Tuzhi.php">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="169">
+      <file leaf-file-name="Application.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Application.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state relative-caret-position="1260">
+              <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.php">
+      <file leaf-file-name="Event.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/facades/libs/Event.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+            <state relative-caret-position="45">
+              <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Event.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1065">
+              <caret line="76" column="58" lean-forward="false" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Profiler.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Profiler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="945">
+              <caret line="72" column="33" lean-forward="false" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/public/js/common.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/public/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="record.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/public/js/record.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="recorderWorker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/public/js/recorderWorker.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/config/server.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductEnvBoot.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/ProductEnvBoot.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RouterBoot.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/RouterBoot.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Connection.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/db/Connection.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Application.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Application.php">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/console/Application.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375">
-              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+            <state relative-caret-position="255">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DbCollect.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/collect/DbCollect.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="780">
+              <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collection.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Collection.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Counter.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Counter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Memory.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Memory.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Timer.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Timer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Command.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/db/Command.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3210">
+              <caret line="221" column="44" lean-forward="false" selection-start-line="221" selection-start-column="25" selection-end-line="221" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationBoot.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/ApplicationBoot.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfilerBoot.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/web/bootstrap/ProfilerBoot.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Application.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vender/tuzhi/web/Application.php">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/web/Application.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+            <state relative-caret-position="570">
+              <caret line="44" column="52" lean-forward="false" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Object.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Object.php">
+      <file leaf-file-name="Results.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Results.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47182176">
-              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+            <state relative-caret-position="120">
+              <caret line="13" column="1" lean-forward="false" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+              <folding>
+                <element signature="e#6#102#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Server.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="42" lean-forward="false" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+              <folding>
+                <element signature="e#6#102#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/redis/Server.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/memcached/Server.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Object.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Object.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/control/Test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1035">
+              <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+              <folding>
+                <element signature="e#126#147#0#PHP" expanded="true" />
+                <element signature="e#288#585#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/control/Index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="23" column="47" lean-forward="false" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/application.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -81,45 +397,123 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+        <option value="CSS File" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vender/Tuzhi/Tuzhi.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/helper/Array.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/helper/Arr.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/contracts/base/IApplication.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/base/Object.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/Tuzhi.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/base/Application.php" />
-        <option value="$PROJECT_DIR$/vender/tuzhi/web/Application.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/helper/Json.php" />
+        <option value="$PROJECT_DIR$/app/config/consoleConfig.php" />
+        <option value="$PROJECT_DIR$/app/app.php" />
+        <option value="$PROJECT_DIR$/app/config/namespace.php" />
+        <option value="$PROJECT_DIR$/app/app" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/Router.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/Application.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/Response.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/control/TestCtl.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/ErrorHandler.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/facades/libs/App.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/base/Application.php" />
+        <option value="$PROJECT_DIR$/app/console/TestCtl.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/console/Command.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/Queue.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/facades/libs/Queue.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/QueueManage.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/support/profiler/Profiler.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/Task.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/job/Job.php" />
+        <option value="$PROJECT_DIR$/app/config/console.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Transaction.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Database.php" />
+        <option value="$PROJECT_DIR$/app/job/TestJob.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/redis/commands/ZSetCmd.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/support/images/services/Location.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/facades/libs/Img.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/helper/Url.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/support/images/ImagesServices.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/support/images/Images.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/facades/Facades.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/Payload.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/Worker.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/facades/libs/DB.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/web/Request.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Connection.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/job/RedisJob.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/queue/driver/RedisQueue.php" />
+        <option value="$PROJECT_DIR$/app/console/QueueCtl.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Http.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Command.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Results.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Http.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Writing.php" />
+        <option value="$PROJECT_DIR$/app/config/app.php" />
+        <option value="$PROJECT_DIR$/app/control/Test.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Request.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Connection.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/helper/Http.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Server.php" />
+        <option value="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Querying.php" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBowerSettings">
+    <exe-path />
+    <config-path />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NamedScopeManager">
-    <order />
+  <component name="PhpDebugGeneral" xdebug_debug_port="9170" xdebug_show_addresses="true" break_at_first_line="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="cs.tuzhi.ts" id="10c488aa-17ad-4fc0-8fff-b1c203d4aeef" name="cs.tuzhi.ts" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/webroot/cs.tuzhi.ts" />
+          <mapping local-root="$PROJECT_DIR$/app/public/index.php" remote-root="/webroot/cs.tuzhi.ts/app/public/index.php" />
+        </path_mappings>
+      </server>
+    </servers>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1404" />
-    <option name="height" value="877" />
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Remote PHP 7" />
+  <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="192.168.56.102" port="9170" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="y" value="22" />
+    <option name="width" value="1401" />
+    <option name="height" value="878" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Blade files</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="2" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -132,73 +526,99 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cs.tuzhi.ts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vender" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="cs.tuzhi.ts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs.tuzhi.ts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="cs.tuzhi.ts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs.tuzhi.ts" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../big_data" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="recentsLimit" value="5" />
+    <property name="js.eslint.nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="prop_add_unversioned_files" value="true" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http" />
+      <recent name="$PROJECT_DIR$/framework/tuzhi/facades/libs" />
+      <recent name="$PROJECT_DIR$/framework/tuzhi/nosql/redis" />
+      <recent name="$PROJECT_DIR$/framework/tuzhi-bootstrap/bootstrap" />
+      <recent name="$PROJECT_DIR$/framework/tuzhi/support/profiler/components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="PHP Web Application.cs.tuzhi.ts">
+    <configuration name="Container.php" type="JavascriptDebugType" factoryName="JavaScript Debug" nameIsGenerated="true" uri="http://cs.tuzhi.ts/framework/tuzhi/di/Container.php" />
+    <configuration name="Test_Dir" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner directory="$PROJECT_DIR$/app/test" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="8fd380d9-8b7b-47b8-96ea-44a20ccc0cef" server_name="cs.tuzhi.ts" />
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
       <method />
     </configuration>
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -209,23 +629,75 @@
       <BehatRunner />
       <method />
     </configuration>
+    <configuration default="true" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+      <method />
+    </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug">
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
+    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
+      <PhpTestRunnerSettings />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+    <configuration name="cs.tuzhi.ts" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="cs.tuzhi.ts" start_url="/Test/queuePop" />
+    <configuration name="myTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner class="myTest" file="$PROJECT_DIR$/app/test/Test.php" scope="Class" />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.Container.php" />
+      <item index="1" class="java.lang.String" itemvalue="PHP Web Application.cs.tuzhi.ts" />
+      <item index="2" class="java.lang.String" itemvalue="PHPUnit.Test_Dir" />
+      <item index="3" class="java.lang.String" itemvalue="PHPUnit.myTest" />
+    </list>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -234,36 +706,206 @@
       <changelist id="cda6a622-b601-4f1d-b29a-fd2f5de27bd0" name="Default" comment="" />
       <created>1459048775500</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1459048775500</updated>
+      <workItem from="1459414671224" duration="2259000" />
+      <workItem from="1459566895667" duration="25742000" />
+      <workItem from="1459841253461" duration="7889000" />
+      <workItem from="1459867293200" duration="2157000" />
+      <workItem from="1459940049293" duration="813000" />
+      <workItem from="1460124446749" duration="48648000" />
+      <workItem from="1460271979274" duration="4308000" />
+      <workItem from="1460338669559" duration="28000" />
+      <workItem from="1460378734139" duration="10347000" />
+      <workItem from="1460469732492" duration="355000" />
+      <workItem from="1460973484546" duration="2194000" />
+      <workItem from="1461037064841" duration="32921000" />
+      <workItem from="1461206690372" duration="29570000" />
+      <workItem from="1461466668936" duration="58455000" />
+      <workItem from="1461678518340" duration="72053000" />
+      <workItem from="1461915028879" duration="27778000" />
+      <workItem from="1462366425496" duration="8769000" />
+      <workItem from="1462454901666" duration="3675000" />
+      <workItem from="1462523254715" duration="41503000" />
+      <workItem from="1462846644335" duration="7439000" />
+      <workItem from="1462862174030" duration="31644000" />
+      <workItem from="1462969509123" duration="22337000" />
+      <workItem from="1463064875899" duration="23195000" />
+      <workItem from="1463239750323" duration="1371000" />
+      <workItem from="1463242419316" duration="205000" />
+      <workItem from="1463242636901" duration="3007000" />
+      <workItem from="1463283658939" duration="1887000" />
+      <workItem from="1463495858136" duration="419000" />
+      <workItem from="1464319740503" duration="634000" />
+      <workItem from="1465969657683" duration="2052000" />
+      <workItem from="1466048599569" duration="17000" />
+      <workItem from="1468315875213" duration="1821000" />
+      <workItem from="1469692223685" duration="1118000" />
+      <workItem from="1470217360786" duration="1413000" />
+      <workItem from="1471849797543" duration="2332000" />
+      <workItem from="1471919411484" duration="81010000" />
+      <workItem from="1472529925843" duration="140758000" />
+      <workItem from="1473328166630" duration="19823000" />
+      <workItem from="1473754104227" duration="1554000" />
+      <workItem from="1473756668108" duration="294000" />
+      <workItem from="1473756982135" duration="35000" />
+      <workItem from="1473824734956" duration="10411000" />
+      <workItem from="1474273768573" duration="25000" />
+      <workItem from="1474276647351" duration="11319000" />
+      <workItem from="1474536211641" duration="3125000" />
+      <workItem from="1474595367024" duration="3507000" />
+      <workItem from="1474860167669" duration="36306000" />
+      <workItem from="1476435129401" duration="1315000" />
+      <workItem from="1476760876106" duration="691000" />
+      <workItem from="1476775483409" duration="100000" />
+      <workItem from="1476775874952" duration="406000" />
+      <workItem from="1476777814902" duration="5000" />
+      <workItem from="1476871242373" duration="12919000" />
+      <workItem from="1477448029571" duration="292000" />
+      <workItem from="1477448808319" duration="6073000" />
+      <workItem from="1477788173875" duration="6000" />
+      <workItem from="1477792576679" duration="480000" />
+      <workItem from="1477794285579" duration="6225000" />
+      <workItem from="1477988123829" duration="12774000" />
+      <workItem from="1478154385518" duration="6760000" />
+      <workItem from="1478227545613" duration="4516000" />
+      <workItem from="1478484235480" duration="188000" />
+      <workItem from="1478488194585" duration="304000" />
+      <workItem from="1478529445276" duration="6091000" />
+      <workItem from="1478689134129" duration="6779000" />
+      <workItem from="1478830662161" duration="129000" />
+      <workItem from="1478834315608" duration="1980000" />
+      <workItem from="1479112088717" duration="608000" />
+      <workItem from="1479112984705" duration="7000" />
+      <workItem from="1479117502096" duration="891000" />
+      <workItem from="1479199277268" duration="582000" />
+      <workItem from="1479263969785" duration="4250000" />
+      <workItem from="1479998918749" duration="861000" />
+      <workItem from="1480320162675" duration="608000" />
+      <workItem from="1480489989571" duration="11646000" />
+      <workItem from="1480560791227" duration="28981000" />
+      <workItem from="1480643298045" duration="18527000" />
+      <workItem from="1480922425373" duration="100080000" />
+      <workItem from="1482115041709" duration="13968000" />
+      <workItem from="1482719975885" duration="13251000" />
+      <workItem from="1483599969119" duration="2742000" />
+      <workItem from="1486347566251" duration="3830000" />
+      <workItem from="1486953088312" duration="2238000" />
+      <workItem from="1487320426629" duration="580000" />
+      <workItem from="1489717003809" duration="14243000" />
+      <workItem from="1490841969373" duration="759000" />
+      <workItem from="1491789605864" duration="6000" />
+      <workItem from="1492568968404" duration="1866000" />
+      <workItem from="1492589074165" duration="1746000" />
+      <workItem from="1493187479887" duration="94000" />
+      <workItem from="1497513399083" duration="386000" />
+      <workItem from="1498206115826" duration="590000" />
+      <workItem from="1507709247527" duration="600000" />
+      <workItem from="1510502164809" duration="13000" />
+      <workItem from="1510502205505" duration="52000" />
+      <workItem from="1515991002108" duration="45000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Test_Dir - 2016.03.31 at 17h 00m 56s.xml">
+      <configuration name="Test_Dir" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="Test_Dir - 2016.03.31 at 17h 01m 44s.xml">
+      <configuration name="Test_Dir" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1080605000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1404" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="22" width="1401" height="878" extended-state="1" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496329" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32966226" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20044053" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19183168" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20029347" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24650478" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.50293684" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32966226" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47582698" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4254777" sideWeight="0.49706313" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2492647" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.259542" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46310434" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32315522" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18980892" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.50293684" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32315522" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47582698" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4254777" sideWeight="0.49706313" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299363" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.259542" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20029347" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1985294" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32966226" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18980892" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2492647" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46310434" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -274,152 +916,443 @@
     </ignored-roots>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="95" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/Tuzhi.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Object.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="345">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
+    <entry file="file://$PROJECT_DIR$/app/control/Test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        <state relative-caret-position="1035">
+          <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+          <folding>
+            <element signature="e#126#147#0#PHP" expanded="true" />
+            <element signature="e#288#585#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/control/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="47" lean-forward="false" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Application.php">
+    <entry file="file://$PROJECT_DIR$/app/application.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/web/Application.php">
+    <entry file="file://$PROJECT_DIR$/app/console/QueueCtl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="420">
+          <caret line="35" column="31" lean-forward="false" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Configure.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/ErrorException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/redis/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/model/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/model/DataCollection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="63" column="36" lean-forward="false" selection-start-line="63" selection-start-column="36" selection-end-line="63" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/Tuzhi.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="45" column="5" lean-forward="false" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/monitor/memcached/Memcached.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/monitor/server/Memcached.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/monitor/server/Mysql.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Writing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="20" column="33" lean-forward="false" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Querying.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="27" column="35" lean-forward="false" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Connection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/helper/Http.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="82" column="52" lean-forward="false" selection-start-line="82" selection-start-column="47" selection-end-line="82" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="90" column="59" lean-forward="false" selection-start-line="90" selection-start-column="59" selection-end-line="90" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="31" column="29" lean-forward="false" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Results.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="13" column="1" lean-forward="false" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+          <folding>
+            <element signature="e#6#102#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="42" lean-forward="false" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="e#6#102#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/redis/Server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Object.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/nosql/memcached/Server.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        <state relative-caret-position="30">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/Tuzhi.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Object.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="345">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
+    <entry file="file://$PROJECT_DIR$/app/control/Test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        <state relative-caret-position="1035">
+          <caret line="85" column="17" lean-forward="false" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+          <folding>
+            <element signature="e#126#147#0#PHP" expanded="true" />
+            <element signature="e#288#585#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/control/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="47" lean-forward="false" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Application.php">
+    <entry file="file://$PROJECT_DIR$/app/application.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/web/Application.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Timer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Object.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Counter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Memory.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="3" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/contracts/base/IApplication.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/console/Application.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2759527">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        <state relative-caret-position="255">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/helper/Arr.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/facades/libs/Event.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35479632">
-          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/Tuzhi.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        <state relative-caret-position="45">
+          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/web/Application.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Event.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        <state relative-caret-position="1065">
+          <caret line="76" column="58" lean-forward="false" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Application.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/db/Connection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375">
-          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/db/Command.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="3210">
+          <caret line="221" column="44" lean-forward="false" selection-start-line="221" selection-start-column="25" selection-end-line="221" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vender/tuzhi/base/Object.php">
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Collection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47182176">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/collect/DbCollect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="60" column="26" lean-forward="false" selection-start-line="60" selection-start-column="21" selection-end-line="60" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/ProductEnvBoot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/RouterBoot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/bootstrap/ApplicationBoot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" column="5" lean-forward="false" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/web/bootstrap/ProfilerBoot.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/base/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="25" selection-end-line="93" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/web/Application.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="44" column="52" lean-forward="false" selection-start-line="44" selection-start-column="52" selection-end-line="44" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/framework/tuzhi/support/profiler/Profiler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="72" column="33" lean-forward="false" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/js/record.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/js/recorderWorker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="Copyright.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.17302799" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.17302799" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

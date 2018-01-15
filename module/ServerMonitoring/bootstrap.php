@@ -9,3 +9,8 @@
 /**
  * 引导 Module 加载
  */
+
+$ModuleName = '';
+
+
+Module::register();

@@ -165,16 +165,16 @@ abstract class Application extends Object  implements IApplication
         );
     }
 
-    /**
-     * @param $method
-     * @param $arguments
-     * @return mixed
-     * @throws NotFoundMethodException
-     */
-    public static function __callStatic($method, $arguments)
-    {
-        return Tuzhi::$app->magicCall($method);
-    }
+//    /**
+//     * @param $method
+//     * @param $arguments
+//     * @return mixed
+//     * @throws NotFoundMethodException
+//     */
+//    public static function __callStatic($method, $arguments)
+//    {
+//        return Tuzhi::$app->magicCall($method);
+//    }
 
     /**
      * @param $method
@@ -183,23 +183,23 @@ abstract class Application extends Object  implements IApplication
      */
     public function __call($method, $arguments)
     {
-       return $this->magicCall($method);
+       return $this->get(strtolower($method));
     }
 
-    /**
-     * @param $method
-     * @return mixed
-     * @throws NotFoundMethodException
-     */
-    public function magicCall( $method )
-    {
-        $method = strtolower( $method );
-        if( ($server =  Tuzhi::$app->get($method) ) ){
-            return $server;
-        }else{
-            throw new NotFoundMethodException( 'Not Found Services '.$method.' ' );
-        }
-    }
+//    /**
+//     * @param $method
+//     * @return mixed
+//     * @throws NotFoundMethodException
+//     */
+//    public function magicCall( $method )
+//    {
+//        $method = strtolower( $method );
+//        if( ($server =  Tuzhi::$app->get($method) ) ){
+//            return $server;
+//        }else{
+//            throw new NotFoundMethodException( 'Not Found Services '.$method.' ' );
+//        }
+//    }
 
     /**
      * @return bool

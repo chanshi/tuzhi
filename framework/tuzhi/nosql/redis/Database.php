@@ -23,6 +23,11 @@ class Database extends ArrayData
     public $dbIndex;
 
     /**
+     * @var
+     */
+    public $connection;
+
+    /**
      * @var \Redis
      */
     public $redis;
@@ -120,6 +125,34 @@ class Database extends ArrayData
     public function key( $key )
     {
         //return $this->get($key)->
+    }
+
+    /**
+     * @return Transaction
+     */
+    public function getTransaction()
+    {
+        return new Transaction(['redis'=>$this->redis]);
+    }
+
+    /**
+     * @param $key
+     * @param $callback
+     * @return mixed
+     */
+    public function transaction($key,$callback)
+    {
+        $transaction = $this->getTransaction();
+        $transaction->begin($key);
+
+
+            if( ! call_user_func_array($callback,[$this]) ){
+                $transaction->rollback();
+            }else{
+                $transaction->commit();
+            }
+
+
     }
 
 }

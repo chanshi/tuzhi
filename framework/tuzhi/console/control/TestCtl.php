@@ -18,11 +18,12 @@ use tuzhi\console\Control;
 class TestCtl extends Control
 {
     /**
-     *
+     * @param $request
      */
-    public function indexAct()
+    public function indexAct( $request )
     {
         $this->info('======== 测试 =========');
+
 
 //        if( $this->confirm('确定更新？') )
 //        {
@@ -34,12 +35,12 @@ class TestCtl extends Control
 //        $input = $this->ask('请输入用户名');
 //        $this->info($input);
 
-        $select = $this->select('请选择',[
-            '我试试',
-            '你试试'
-        ]);
+//        $select = $this->select('请选择',[
+//            '我试试',
+//            '你试试'
+//        ]);
 
-        $this->info($select);
+//        $this->info($select);
 
     }
 
@@ -53,7 +54,8 @@ class TestCtl extends Control
             $this->info($index);
             $index++;
             sleep(1);
-            die(0);
+            \Response::clear();
+            //die(0);
         }
     }
 }

@@ -63,6 +63,7 @@ class Http
         }
         $responseText = curl_exec($curl);
         $info = curl_getinfo($curl);
+        //print_r($info);
         curl_close($curl);
         return $responseText;
     }

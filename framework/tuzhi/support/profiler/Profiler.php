@@ -13,7 +13,6 @@ use tuzhi\base\Event;
 use tuzhi\base\Object;
 use tuzhi\helper\Arr;
 use tuzhi\helper\Html;
-use tuzhi\web\Response;
 
 /**
  *  分析
@@ -91,7 +90,7 @@ class Profiler extends Object
         //TODO:: 显示逻辑处理掉//
         if( ! \Request::isAjax()
             //&& ! \Request::isPajax()
-            && \tuzhi\web\Application::Response()->content instanceof \tuzhi\web\response\Html
+            && \App::Response()->content instanceof \tuzhi\web\response\Html
         ){
             $this->console();
         }

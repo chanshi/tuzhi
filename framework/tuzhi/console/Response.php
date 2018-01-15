@@ -42,4 +42,12 @@ class Response extends Object implements IResponse
     {
         Console::stdout($info."\n");
     }
+
+    /**
+     *
+     */
+    public function clear()
+    {
+        system('clear');
+    }
 }

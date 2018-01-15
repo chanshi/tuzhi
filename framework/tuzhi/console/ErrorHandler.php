@@ -20,7 +20,11 @@ class ErrorHandler extends \tuzhi\base\ErrorHandler
     {
         $message = $exception->getMessage();
         echo '================Exception================='."\n";
-        echo ''.$exception->getName()."\n";
+        if( method_exists($exception,'getName') ){
+            echo ''.$exception->getName()."\n";
+        }else{
+            echo 'PHP Fatal Error'."\n";
+        }
         echo ''.$message."\n";
         echo 'File: '.$exception->getFile()."\n";
         echo 'Line: '.$exception->getLine()."\n";
