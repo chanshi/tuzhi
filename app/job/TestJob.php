@@ -24,6 +24,8 @@ class TestJob extends Object
     public function done( $job ,$data )
     {
         echo 'do Job';
+
         $job->delete();
+
     }
 }

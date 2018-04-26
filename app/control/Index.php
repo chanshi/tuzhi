@@ -21,7 +21,30 @@ class Index extends Controller
 
     public function IndexAction()
     {
-        return 'This is Control: Hellow Wold;';
+        return function (){
+            set_time_limit(0);
+            $conf = new \RdKafka\Conf();
+            $conf->set('group.id',0);
+            $conf->set('metadata.broker.list','39.105.51.17:9092');
+
+            $topicConf = new \RdKafka\TopicConf();
+            $topicConf->set('auto.offset.reset','smallest');
+
+            $conf->setDefaultTopicConf($topicConf );
+
+
+            $consumer = new \RdKafka\KafkaConsumer($conf);
+
+            $consumer->subscribe(['t3']);
+
+            $message = $consumer->consume(10*1000);
+            switch ($message->err){
+                case RD_KAFKA_RESP_ERR_NO_ERROR:
+                    var_dump($message->payload);
+            }
+            echo 'done';
+
+        };
     }
 
     public function testAction()
