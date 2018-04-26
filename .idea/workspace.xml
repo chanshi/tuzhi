@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cda6a622-b601-4f1d-b29a-fd2f5de27bd0" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/composer.json" />
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Command.php" />
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Connection.php" />
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/Server.php" />
@@ -9,7 +10,7 @@
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Request.php" />
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Results.php" />
       <change beforePath="" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/influxdb/http/Writing.php" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/framework/tuzhi/helper/Http.php" afterPath="$PROJECT_DIR$/framework/tuzhi/helper/Http.php" />
       <change beforePath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Connection.php" afterPath="$PROJECT_DIR$/framework/tuzhi/nosql/redis/Connection.php" />
       <change beforePath="$PROJECT_DIR$/framework/tuzhi/queue/Payload.php" afterPath="$PROJECT_DIR$/framework/tuzhi/queue/Payload.php" />
@@ -47,16 +48,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="169">
-      <file leaf-file-name="Router.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/framework/tuzhi/console/Router.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ClosureDispatch.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/framework/tuzhi/route/ClosureDispatch.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -317,11 +308,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+              <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -369,7 +370,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/framework/tuzhi/console/Application.php" />
         <option value="$PROJECT_DIR$/framework/tuzhi/console/Response.php" />
         <option value="$PROJECT_DIR$/framework/tuzhi/console/control/TestCtl.php" />
         <option value="$PROJECT_DIR$/framework/tuzhi/console/ErrorHandler.php" />
@@ -420,6 +420,7 @@
         <option value="$USER_HOME$/Desktop/config_ucenter.php" />
         <option value="$PROJECT_DIR$/README.MD" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -447,8 +448,8 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Remote PHP 7" />
   <component name="PhpXdebugProxy" ide_key="PHPSTORM" host="192.168.56.102" port="9170" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="49" />
-    <option name="y" value="22" />
+    <option name="x" value="103" />
+    <option name="y" value="39" />
     <option name="width" value="1352" />
     <option name="height" value="878" />
   </component>
@@ -493,6 +494,11 @@
             <path>
               <item name="cs.tuzhi.ts" type="b2602c69:ProjectViewProjectNode" />
               <item name="cs.tuzhi.ts" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="cs.tuzhi.ts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs.tuzhi.ts" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="framework" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -761,7 +767,7 @@
       <workItem from="1520742770341" duration="964000" />
       <workItem from="1522433065223" duration="123000" />
       <workItem from="1524631106004" duration="8585000" />
-      <workItem from="1524747040530" duration="814000" />
+      <workItem from="1524747040530" duration="1008000" />
     </task>
     <servers />
   </component>
@@ -774,7 +780,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1097399000" />
+    <option name="totallyTimeSpent" value="1097593000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -786,15 +792,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="49" y="22" width="1352" height="878" extended-state="0" />
-    <editor active="true" />
+    <frame x="103" y="39" width="1352" height="878" extended-state="0" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.50293684" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3231162" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4254777" sideWeight="0.49706313" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47582698" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31673053" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31673053" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20029347" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19465649" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1230,14 +1235,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/module/ServerMonitoring/bootstrap.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1273,7 +1270,15 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <caret line="4" column="7" lean-forward="true" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="33" lean-forward="false" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
           <folding />
         </state>
       </provider>
