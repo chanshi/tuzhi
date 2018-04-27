@@ -63,7 +63,7 @@ abstract class Application extends Object  implements IApplication
     /**
      * @var
      */
-    public $service;
+    public $service=[]git;
 
     /**
      * @var
