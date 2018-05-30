@@ -38,6 +38,9 @@ class Tuzhi {
      */
     protected static $configure;
 
+
+
+
     /**
      * @var array
      */
@@ -71,7 +74,7 @@ class Tuzhi {
         /**
          *  定义 autoload
          */
-        spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
+        //spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
 
         /**
          * 计算起点

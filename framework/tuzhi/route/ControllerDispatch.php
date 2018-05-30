@@ -34,7 +34,7 @@ class ControllerDispatch extends Dispatcher implements IDispatch
     /**
      * @var string
      */
-    public $controlNamespace = 'app\control';
+    public $controlNamespace = 'app\\control';
 
     /**
      * @var

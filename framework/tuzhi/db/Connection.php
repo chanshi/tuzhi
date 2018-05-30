@@ -377,7 +377,7 @@ class Connection extends Server
             $server->setServer( $instance );
             return $instance;
         }
-        throw new InvalidParamException( 'Invalid Param '.$obj.' type not the PdoClass ,Dsn or LoadBalance ' );
+        throw new InvalidParamException( 'Invalid Param '.$obj.' type not the PdoClass ,Dsn or LoadBalance or Not inclue mysql config' );
     }
 
 
