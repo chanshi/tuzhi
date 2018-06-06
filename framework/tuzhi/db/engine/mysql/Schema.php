@@ -89,7 +89,7 @@ class Schema extends \tuzhi\db\schema\Schema
                 $columns->isUnique  = ($col['Key'] == 'UNI') ;
                 $columns->autoIncrement = $col['Extra'] == 'auto_increment' ;
                 $columns->comment = $col['Comment'];
-                $columns->defaultValue = $col['Default'] ? $col['Default'] : NULL ;
+                $columns->defaultValue = $col['Default'] !== null ? $col['Default'] : NULL ;
                 $columns->unsigned = strpos($col['Type'],'unsigned') !== false ;
 
                 if(preg_match('#^(\w+)(?:\(([^\)]+)\))?#',$col['Type'],$match)){
