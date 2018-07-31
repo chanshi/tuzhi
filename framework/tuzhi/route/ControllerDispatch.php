@@ -47,7 +47,8 @@ class ControllerDispatch extends Dispatcher implements IDispatch
     protected $action;
 
     /**
-     * @return mixed
+     * @return mixed|void
+     * @throws NotFoundPage
      */
     public function init()
     {
@@ -59,7 +60,8 @@ class ControllerDispatch extends Dispatcher implements IDispatch
     }
 
     /**
-     * @throws NotFoundMethodException
+     * @return mixed|void
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function dispatch()
     {
@@ -68,7 +70,8 @@ class ControllerDispatch extends Dispatcher implements IDispatch
     }
 
     /**
-     * @return mixed
+     * @throws NotFoundPage
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     protected function getControlContent()
     {
@@ -94,6 +97,7 @@ class ControllerDispatch extends Dispatcher implements IDispatch
      * @param $control
      * @return mixed
      * @throws NotFoundPage
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     protected function createControl( $control )
     {

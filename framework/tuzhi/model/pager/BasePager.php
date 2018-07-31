@@ -221,7 +221,7 @@ class BasePager extends Object implements IPager
      */
     protected function buildUrl($page)
     {
-        return Url::build([$this->pageGetKey=>$page],true);
+        return Url::create([$this->pageGetKey=>$page],true);
     }
 
     /**

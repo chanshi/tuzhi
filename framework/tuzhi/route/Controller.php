@@ -68,6 +68,7 @@ class Controller extends Object
      * @param $arguments
      * @return mixed
      * @throws NotFoundPage
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function __call( $action,$arguments)
     {

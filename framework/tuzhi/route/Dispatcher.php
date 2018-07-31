@@ -47,8 +47,9 @@ class Dispatcher extends Object
     }
 
     /**
-     * @param $advanceList
+     * @param null $advanceList
      * @return bool
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     protected function prepare( $advanceList = null )
     {
