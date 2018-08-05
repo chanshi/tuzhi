@@ -41,4 +41,9 @@ class Server extends Struct
      */
     public $dbIndex = 0;
 
+    /**
+     * @var string
+     */
+    public $auth = "";
+
 }

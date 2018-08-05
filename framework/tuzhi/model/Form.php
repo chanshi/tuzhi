@@ -15,7 +15,6 @@ namespace tuzhi\model;
  */
 class Form extends Model
 {
-
     public function submit()
     {
         if($this->verify()){

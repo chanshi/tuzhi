@@ -70,7 +70,11 @@ class Connection extends Object
                     $this->redis->port
                 );
             }
-            $this->service->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);;
+            $this->service->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
+
+           ! empty( $this->redis->auth )
+                ? $this->service->auth( $this->redis->auth )
+                :null;
         }catch (\Exception $e){
             throw $e;
         }
@@ -92,8 +96,9 @@ class Connection extends Object
     /**
      * Redis::getDb(0)->string('abc')->set('value');
      * Redis::getDb()['abc']->set('value');
-     * @param int $dbIndex
-     * @return Database
+     * @param null $dbIndex
+     * @return mixed
+     * @throws \Exception
      */
     public function getDb($dbIndex = null)
     {
