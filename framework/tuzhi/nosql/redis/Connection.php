@@ -71,10 +71,6 @@ class Connection extends Object
                 );
             }
             $this->service->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_NONE);
-
-           ! empty( $this->redis->auth )
-                ? $this->service->auth( $this->redis->auth )
-                :null;
         }catch (\Exception $e){
             throw $e;
         }
@@ -111,6 +107,11 @@ class Connection extends Object
         if( ! isset( $this->dbList[$dbIndex] ) ){
             $this->dbList[$dbIndex] = new Database(['dbIndex'=>$dbIndex,'redis'=>$this->service,'connection'=>$this]);
         }
+
+        ! empty( $this->redis->auth )
+            ? $this->service->auth( $this->redis->auth )
+            :null;
+
         $this->dbList[$dbIndex]
             ->select();
         return $this->dbList[$dbIndex];
