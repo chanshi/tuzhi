@@ -39,6 +39,12 @@ class Router extends Object implements IRouter
     protected $advance;
 
     /**
+     * @var string
+     */
+    protected $controlNamespace = 'app\\control';
+
+
+    /**
      * Init
      */
     public function init()
@@ -47,6 +53,10 @@ class Router extends Object implements IRouter
 
         if( ( $advance = \Tuzhi::config('router.advance') ) ){
             $this->advance = $advance;
+        }
+
+        if( ( $controlNamespace = \Tuzhi::config('router.controlNamespace') ) ){
+            $this->controlNamespace = $controlNamespace;
         }
     }
 
@@ -73,7 +83,8 @@ class Router extends Object implements IRouter
                     'class'=>'tuzhi\route\ControllerDispatch',
                     'route'=>$this->currentRoute,
                     'request' => $request,
-                    'advance'=>$this->advance
+                    'advance'=>$this->advance,
+                    'controlNamespace'=>$this->controlNamespace
                 ]
             );
         }
