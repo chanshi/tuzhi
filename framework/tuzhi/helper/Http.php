@@ -23,7 +23,7 @@ class Http
     public static function buildQueryString( $param ,$encode = false )
     {
         $arg = array();
-        while(list( $key,$value ) = each( $param ) ){
+        foreach ($param as $key=>$value){
             $value = trim($value);
             $arg[] = ( $encode ?   $key.'='.urlencode($value)  :  $key.'='.$value);
         }
