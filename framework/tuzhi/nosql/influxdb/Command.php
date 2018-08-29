@@ -8,13 +8,13 @@
 
 namespace tuzhi\nosql\influxdb;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Command
  * @package tuzhi\nosql\influxdb
  */
-class Command extends Object
+class Command extends BObject
 {
     /**
      * @var

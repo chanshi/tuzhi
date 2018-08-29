@@ -10,13 +10,13 @@
 namespace tuzhi\route;
 
 use tuzhi\base\exception\NotFoundMethodException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\base\Server;
 use tuzhi\contracts\route\IRouter;
 use tuzhi\contracts\web\IRequest;
 use tuzhi\contracts\web\IResponse;
 
-class Router extends Object implements IRouter
+class Router extends BObject implements IRouter
 {
     /**
      * @var null

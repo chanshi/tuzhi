@@ -8,14 +8,14 @@
 
 namespace tuzhi\model;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\model\validators\Validator;
 
 /**
  * Class Model
  * @package tuzhi\model
  */
-class Model extends Object implements \Countable ,\ArrayAccess, \IteratorAggregate
+class Model extends BObject implements \Countable ,\ArrayAccess, \IteratorAggregate
 {
 
     /**

@@ -8,14 +8,14 @@
 
 namespace tuzhi\queue;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Queue::Name()->push($job);
  * Class QueueManage
  * @package tuzhi\queue
  */
-class QueueManage extends Object
+class QueueManage extends BObject
 {
 
     protected $maps =

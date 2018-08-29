@@ -9,14 +9,14 @@
 namespace tuzhi\route;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Arr;
 
 /**
  * Class Dispatcher
  * @package tuzhi\route
  */
-class Dispatcher extends Object
+class Dispatcher extends BObject
 {
     /**
      * @var

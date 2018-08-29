@@ -8,9 +8,9 @@
 
 namespace tuzhi\nosql\influxdb;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class Server extends Object
+class Server extends BObject
 {
 
     /**

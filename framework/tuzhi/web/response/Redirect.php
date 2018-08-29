@@ -9,14 +9,14 @@
 namespace tuzhi\web\response;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IResponse;
 
 /**
  * Class Redirect
  * @package tuzhi\web\response
  */
-class Redirect extends Object implements IResponse
+class Redirect extends BObject implements IResponse
 {
 
     /**

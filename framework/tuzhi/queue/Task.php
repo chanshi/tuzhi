@@ -8,13 +8,13 @@
 
 namespace tuzhi\queue;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Task
  * @package tuzhi\queue
  */
-class Task extends Object
+class Task extends BObject
 {
 
     public $handler;

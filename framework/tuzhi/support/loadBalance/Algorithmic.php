@@ -8,13 +8,13 @@
 
 namespace tuzhi\support\loadBalance;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Algorithmic
  * @package tuzhi\support\loadBalance
  */
-abstract class Algorithmic extends Object
+abstract class Algorithmic extends BObject
 {
 
     /**

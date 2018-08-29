@@ -9,13 +9,13 @@
 namespace tuzhi\nosql\redis;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Connection
  * @package tuzhi\nosql\redis
  */
-class Connection extends Object
+class Connection extends BObject
 {
 
     /**

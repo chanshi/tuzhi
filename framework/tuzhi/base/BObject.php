@@ -12,14 +12,14 @@ namespace tuzhi\base;
 use tuzhi\contracts\base\IObject;
 
 /**
- * Class Object
+ * Class BObject
  * @package tuzhi\base
  */
-class Object implements IObject
+class BObject implements IObject
 {
 
     /**
-     * Object constructor.
+     * BObject constructor.
      * @param array $config
      */
     public function __construct( array $config = []  )

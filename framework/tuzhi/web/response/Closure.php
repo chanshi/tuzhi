@@ -8,10 +8,10 @@
 
 namespace tuzhi\web\response;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IResponse;
 
-class Closure extends Object implements IResponse
+class Closure extends BObject implements IResponse
 {
 
     public $response;

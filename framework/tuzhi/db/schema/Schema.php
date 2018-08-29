@@ -9,12 +9,12 @@
 namespace tuzhi\db\schema;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\cache\Cache;
 use tuzhi\db\query\Expression;
 use tuzhi\db\query\QueryBuilder;
 
-class Schema extends Object
+class Schema extends BObject
 {
 
     /**

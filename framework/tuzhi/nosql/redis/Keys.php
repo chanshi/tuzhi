@@ -8,7 +8,7 @@
 
 namespace tuzhi\nosql\redis;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\nosql\redis\commands\HashCmd;
 use tuzhi\nosql\redis\commands\ListCmd;
 use tuzhi\nosql\redis\commands\SetCmd;
@@ -19,7 +19,7 @@ use tuzhi\nosql\redis\commands\ZSetCmd;
  * Class KeysTrait
  * @package tuzhi\nosql\redis\commands
  */
-class Keys extends Object
+class Keys extends BObject
 {
 
     /**

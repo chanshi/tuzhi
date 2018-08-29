@@ -7,14 +7,15 @@
  */
 
 namespace tuzhi\support\loadBalance;
+
 use tuzhi\base\exception\InvalidParamException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class LoadBalance
  * @package tuzhi\support\loadBalances
  */
-class LoadBalance extends Object
+class LoadBalance extends BObject
 {
 
     /**

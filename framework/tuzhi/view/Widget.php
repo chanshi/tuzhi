@@ -10,13 +10,13 @@ namespace tuzhi\view;
 
 use Tuzhi;
 use tuzhi\base\exception\InvalidParamException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Widget
  * @package tuzhi\view
  */
-abstract class Widget extends Object
+abstract class Widget extends BObject
 {
 
     /**

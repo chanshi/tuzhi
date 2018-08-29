@@ -9,13 +9,13 @@
 namespace tuzhi\nosql\redis\commands;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class ZSetCmd
  * @package tuzhi\nosql\redis\commands
  */
-class ZSetCmd extends Object
+class ZSetCmd extends BObject
 {
     public $key;
 

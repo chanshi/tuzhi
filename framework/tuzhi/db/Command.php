@@ -9,14 +9,14 @@
 namespace tuzhi\db;
 
 use tuzhi\base\Event;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\support\profiler\Timer;
 
 /**
  * Class Command
  * @package tuzhi\db
  */
-class Command extends Object
+class Command extends BObject
 {
     /**
      *

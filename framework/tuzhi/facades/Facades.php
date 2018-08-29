@@ -9,13 +9,13 @@
 namespace tuzhi\facades;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Facades
  * @package tuzhi\facades
  */
-class Facades extends Object
+class Facades extends BObject
 {
     /**
      * @var array

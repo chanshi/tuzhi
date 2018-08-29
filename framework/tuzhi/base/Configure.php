@@ -14,7 +14,7 @@ namespace tuzhi\base;
  * Class Configure
  * @package tuzhi\base
  */
-class Configure extends Object{
+class Configure extends BObject{
 
     /**
      * @var string

@@ -9,9 +9,9 @@
 namespace tuzhi\db\query;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class QueryBuilder extends Object
+class QueryBuilder extends BObject
 {
 
     /**

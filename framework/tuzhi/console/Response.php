@@ -8,7 +8,7 @@
 
 namespace tuzhi\console;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IResponse;
 use tuzhi\helper\Console;
 
@@ -16,7 +16,7 @@ use tuzhi\helper\Console;
  * Class Response
  * @package tuzhi\console
  */
-class Response extends Object implements IResponse
+class Response extends BObject implements IResponse
 {
 
     /**

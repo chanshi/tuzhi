@@ -8,7 +8,7 @@
 
 namespace tuzhi\support\images;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  *
@@ -26,7 +26,7 @@ use tuzhi\base\Object;
  * Class Images
  * @package tuzhi\support\images
  */
-class Images extends Object
+class Images extends BObject
 {
     /**
      * @var 图片服务

@@ -8,9 +8,9 @@
 
 namespace tuzhi\db;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class Dsn extends Object
+class Dsn extends BObject
 {
     /**
      * @var

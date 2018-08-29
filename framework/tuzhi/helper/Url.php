@@ -9,7 +9,6 @@
 namespace tuzhi\helper;
 
 
-use tuzhi\web\Application;
 
 /**
  * Class Url

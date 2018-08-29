@@ -8,10 +8,10 @@
 
 namespace tuzhi\web\response;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IResponse;
 
-class Html extends Object implements IResponse
+class Html extends BObject implements IResponse
 {
     /**
      * @var

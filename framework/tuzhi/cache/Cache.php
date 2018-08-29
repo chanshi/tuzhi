@@ -11,7 +11,7 @@ namespace tuzhi\cache;
 
 use tuzhi\base\exception\NotFoundMethodException;
 use tuzhi\base\exception\NotSupportException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\cache\ICache;
 
 /**
@@ -19,7 +19,7 @@ use tuzhi\contracts\cache\ICache;
  * @package tuzhi\cache
  */
 
-class Cache extends Object
+class Cache extends BObject
 {
 
     /**

@@ -8,9 +8,9 @@
 
 namespace tuzhi\nosql\memcached;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class Memcached extends Object
+class Memcached extends BObject
 {
     /**
      * @var

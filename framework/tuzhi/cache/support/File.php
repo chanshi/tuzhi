@@ -9,12 +9,12 @@
 namespace tuzhi\cache\support;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\cache\CacheTrait;
 use tuzhi\contracts\cache\ICache;
 use tuzhi\support\fileStorage\FileSystem;
 
-class File extends Object implements ICache
+class File extends BObject implements ICache
 {
 
     /**

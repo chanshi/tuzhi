@@ -8,13 +8,13 @@
 
 namespace tuzhi\log;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Log
  * @package tuzhi\log
  */
-class Log extends Object
+class Log extends BObject
 {
     /**
      * 类型

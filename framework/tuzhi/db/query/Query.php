@@ -8,7 +8,7 @@
 
 namespace tuzhi\db\query;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\db\query\section\GroupTrait;
 use tuzhi\db\query\section\HavingTrait;
 use tuzhi\db\query\section\LimitTrait;
@@ -18,7 +18,7 @@ use tuzhi\db\query\section\TableTrait;
 use tuzhi\db\query\section\WhereTrait;
 use tuzhi\db\query\Expression;
 
-class Query extends Object
+class Query extends BObject
 {
 
     /**

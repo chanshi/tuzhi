@@ -8,9 +8,9 @@
 
 namespace tuzhi\queue;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class Worker extends Object
+class Worker extends BObject
 {
     /**
      *

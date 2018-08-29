@@ -8,13 +8,13 @@
 
 namespace tuzhi\console;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Command
  * @package tuzhi\console
  */
-class Command extends Object
+class Command extends BObject
 {
 
 }

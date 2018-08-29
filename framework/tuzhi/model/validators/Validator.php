@@ -8,14 +8,14 @@
 
 namespace tuzhi\model\validators;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  *
  * Class Validator
  * @package tuzhi\validators
  */
-class Validator extends Object
+class Validator extends BObject
 {
 
     /**

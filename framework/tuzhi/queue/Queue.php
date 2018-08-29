@@ -2,13 +2,13 @@
 
 namespace tuzhi\queue;
 
-use \tuzhi\base\Object;
+use \tuzhi\base\BObject;
 
 /**
  * Class Queue
  * @package tuzhi\queue
  */
-class Queue extends Object
+class Queue extends BObject
 {
     /**
      * @var

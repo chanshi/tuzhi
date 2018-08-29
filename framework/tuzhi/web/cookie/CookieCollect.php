@@ -9,14 +9,14 @@
 namespace tuzhi\web\cookie;
 
 use tuzhi\base\exception\InvalidParamException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Arr;
 
 /**
  * Class CookieCollect
  * @package tuzhi\web\cookie
  */
-class CookieCollect extends Object implements \ArrayAccess ,\IteratorAggregate,\Countable
+class CookieCollect extends BObject implements \ArrayAccess ,\IteratorAggregate,\Countable
 {
     /**
      * @var

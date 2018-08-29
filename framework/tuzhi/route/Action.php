@@ -8,14 +8,14 @@
 
 namespace tuzhi\route;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\route\IAction;
 
 /**
  * Class Action
  * @package tuzhi\route
  */
-class Action extends Object implements IAction
+class Action extends BObject implements IAction
 {
 
     /**

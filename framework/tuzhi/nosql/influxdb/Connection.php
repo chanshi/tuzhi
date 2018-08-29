@@ -8,14 +8,14 @@
 
 namespace tuzhi\nosql\influxdb;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\nosql\influxdb\http\Request;
 
 /**
  * Class Connection
  * @package tuzhi\nosql\influxdb
  */
-class Connection extends Object
+class Connection extends BObject
 {
     /**
      * @var

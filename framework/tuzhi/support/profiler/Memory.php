@@ -8,13 +8,13 @@
 
 namespace tuzhi\support\profiler;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Memory
  * @package tuzhi\support\profiles
  */
-class Memory extends Object
+class Memory extends BObject
 {
     protected static $memoryMarker;
 

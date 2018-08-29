@@ -12,7 +12,7 @@ namespace tuzhi\base;
  * Class Struct
  * @package tuzhi\base
  */
-class Struct extends Object
+class Struct extends BObject
 {
 
 }

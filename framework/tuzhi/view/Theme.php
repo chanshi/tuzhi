@@ -9,14 +9,14 @@
 namespace tuzhi\view;
 
 use Tuzhi;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * 模板
  * Class Theme
  * @package tuzhi\view
  */
-class Theme extends Object
+class Theme extends BObject
 {
 
     /**

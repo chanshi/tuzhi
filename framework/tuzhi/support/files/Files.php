@@ -8,13 +8,13 @@
 
 namespace tuzhi\support\files;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Files
  * @package tuzhi\support\files
  */
-class Files extends Object
+class Files extends BObject
 {
 
     /**

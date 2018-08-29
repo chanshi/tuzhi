@@ -9,10 +9,10 @@
 namespace tuzhi\support\loadBalance;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\support\loadBalance\IServer;
 
-class Server extends Object implements IServer
+class Server extends BObject implements IServer
 {
 
     /**

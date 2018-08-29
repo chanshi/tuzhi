@@ -9,13 +9,13 @@
 namespace tuzhi\auth;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Auth
  * @package tuzhi\auth
  */
-class Auth extends Object
+class Auth extends BObject
 {
 
 }

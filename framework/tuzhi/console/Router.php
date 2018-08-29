@@ -8,7 +8,7 @@
 
 namespace tuzhi\console;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\console\exception\NotFoundCommand;
 use tuzhi\contracts\route\IRouter;
 use tuzhi\contracts\web\IRequest;
@@ -17,7 +17,7 @@ use tuzhi\contracts\web\IRequest;
  * Class Router
  * @package tuzhi\console
  */
-class Router extends Object  implements IRouter
+class Router extends BObject  implements IRouter
 {
 
     /**

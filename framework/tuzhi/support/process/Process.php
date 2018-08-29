@@ -8,13 +8,13 @@
 
 namespace tuzhi\support\process;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Process
  * @package tuzhi\support\process
  */
-class Process extends Object
+class Process extends BObject
 {
 
 }

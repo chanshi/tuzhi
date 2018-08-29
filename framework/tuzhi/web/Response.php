@@ -9,7 +9,7 @@
 namespace tuzhi\web;
 
 use Tuzhi;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IResponse;
 use Closure;
 use tuzhi\web\cookie\CookieCollect;
@@ -18,7 +18,7 @@ use tuzhi\web\cookie\CookieCollect;
  * Class Response
  * @package tuzhi\web
  */
-class Response extends Object implements IResponse
+class Response extends BObject implements IResponse
 {
 
     /**

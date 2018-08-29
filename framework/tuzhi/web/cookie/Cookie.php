@@ -9,13 +9,13 @@
 namespace tuzhi\web\cookie;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Cookie
  * @package tuzhi\web\cookie
  */
-class Cookie extends Object{
+class Cookie extends BObject{
 
     /**
      * @var

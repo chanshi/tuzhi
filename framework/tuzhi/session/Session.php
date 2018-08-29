@@ -8,14 +8,14 @@
 
 namespace tuzhi\session;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 
 /**
  * Class Session
  * @package tuzhi\session
  */
-class Session extends Object
+class Session extends BObject
 {
     /**
      * @var array

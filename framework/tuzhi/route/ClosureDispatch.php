@@ -8,7 +8,7 @@
 
 namespace tuzhi\route;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\route\IDispatch;
 
 /**

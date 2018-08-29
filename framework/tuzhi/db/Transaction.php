@@ -9,14 +9,14 @@
 namespace tuzhi\db;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Transaction
  * @package tuzhi\db
  * @see Yii2
  */
-class Transaction extends Object
+class Transaction extends BObject
 {
     /**
      *

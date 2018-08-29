@@ -8,14 +8,14 @@
 
 namespace tuzhi\route;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\route\exception\NotFoundPage;
 
 /**
  * Class Controller
  * @package tuzhi\route
  */
-class Controller extends Object
+class Controller extends BObject
 {
     /**
      * @var array

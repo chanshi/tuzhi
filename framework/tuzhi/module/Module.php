@@ -9,14 +9,14 @@
 namespace tuzhi\module;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 
 /**
  * Class Module
  * @package tuzhi\module
  */
-class Module extends Object implements \ArrayAccess
+class Module extends BObject implements \ArrayAccess
 {
     /**
      * @var

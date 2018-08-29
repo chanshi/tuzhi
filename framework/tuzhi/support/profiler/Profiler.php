@@ -10,7 +10,7 @@ namespace tuzhi\support\profiler;
 
 use tuzhi\base\Application;
 use tuzhi\base\Event;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Arr;
 use tuzhi\helper\Html;
 
@@ -25,7 +25,7 @@ use tuzhi\helper\Html;
  * Class Profiles
  * @package tuzhi\support\profiles
  */
-class Profiler extends Object
+class Profiler extends BObject
 {
     /**
      * @var array

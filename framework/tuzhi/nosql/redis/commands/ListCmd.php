@@ -8,13 +8,13 @@
 
 namespace tuzhi\nosql\redis\commands;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class ListCmd
  * @package tuzhi\nosql\redis\commands
  */
-class ListCmd extends Object
+class ListCmd extends BObject
 {
 
     public $key;

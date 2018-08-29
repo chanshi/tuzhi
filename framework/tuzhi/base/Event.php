@@ -12,7 +12,7 @@ namespace tuzhi\base;
  * Class Event
  * @package tuzhi\base
  */
-class Event extends Object
+class Event extends BObject
 {
     /**
      * @var

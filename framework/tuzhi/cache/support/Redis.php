@@ -8,7 +8,7 @@
 
 namespace tuzhi\cache\support;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\cache\CacheTrait;
 use tuzhi\contracts\cache\ICache;
 use tuzhi\nosql\redis\Database;
@@ -17,7 +17,7 @@ use tuzhi\nosql\redis\Database;
  * Class Redis
  * @package tuzhi\cache\support
  */
-class Redis extends Object implements ICache
+class Redis extends BObject implements ICache
 {
     /**
      *

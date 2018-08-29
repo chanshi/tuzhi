@@ -8,7 +8,7 @@
 
 namespace tuzhi\model\pager;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\model\IPager;
 use tuzhi\helper\Url;
 
@@ -16,7 +16,7 @@ use tuzhi\helper\Url;
  * Class BasePager
  * @package tuzhi\model\pager
  */
-class BasePager extends Object implements IPager
+class BasePager extends BObject implements IPager
 {
 
     /**

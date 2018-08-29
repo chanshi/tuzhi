@@ -11,9 +11,9 @@ namespace tuzhi\cache\support;
 
 use tuzhi\contracts\cache\ICache;
 use tuzhi\cache\CacheTrait;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-class Memcached extends Object implements ICache
+class Memcached extends BObject implements ICache
 {
 
     use CacheTrait;

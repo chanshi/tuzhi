@@ -9,14 +9,14 @@
 namespace tuzhi\module;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\module\exception\NotFoundModuleException;
 
 /**
  * Class ModuleManager
  * @package module
  */
-class ModuleManager extends Object
+class ModuleManager extends BObject
 {
     /**
      * @var

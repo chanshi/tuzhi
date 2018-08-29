@@ -8,10 +8,10 @@
 
 namespace tuzhi\nosql\redis;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\nosql\redis\commands\Keys;
 
-class Type extends Object
+class Type extends BObject
 {
     /**
      * @var

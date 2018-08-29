@@ -8,11 +8,11 @@
 
 namespace tuzhi\console;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Console;
 
 
-class Control extends Object
+class Control extends BObject
 {
 
 

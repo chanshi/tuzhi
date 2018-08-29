@@ -8,13 +8,13 @@
 
 namespace tuzhi\auth;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Guard
  * @package tuzhi\auth
  */
-class Guard extends Object
+class Guard extends BObject
 {
     protected $user;
 

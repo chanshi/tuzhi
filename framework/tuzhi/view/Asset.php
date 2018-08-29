@@ -7,13 +7,14 @@
  */
 
 namespace tuzhi\view;
-use tuzhi\base\Object;
+
+use tuzhi\base\BObject;
 
 /**
  * Class Asset
  * @package tuzhi\view
  */
-class Asset extends Object
+class Asset extends BObject
 {
     /**
      * @var

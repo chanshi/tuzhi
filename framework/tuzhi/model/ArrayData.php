@@ -8,14 +8,14 @@
 
 namespace tuzhi\model;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Json;
 
 /**
  * Class ArrayData
  * @package tuzhi\model
  */
-class ArrayData extends Object  implements \Countable ,\ArrayAccess, \IteratorAggregate
+class ArrayData extends BObject  implements \Countable ,\ArrayAccess, \IteratorAggregate
 {
     /**
      * @var array

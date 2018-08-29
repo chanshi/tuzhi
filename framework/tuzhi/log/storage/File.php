@@ -9,7 +9,7 @@
 namespace tuzhi\log\storage;
 
 use Tuzhi;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\log\IStorage;
 use tuzhi\support\fileStorage\FileSystem;
 
@@ -17,7 +17,7 @@ use tuzhi\support\fileStorage\FileSystem;
  * Class File
  * @package tuzhi\log\storage
  */
-class File extends Object implements IStorage
+class File extends BObject implements IStorage
 {
     /**
      * @var string

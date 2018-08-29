@@ -8,14 +8,14 @@
 
 namespace tuzhi\nosql\influxdb\http;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Http;
 
 /**
  * Class Http
  * @package tuzhi\nosql\influxdb
  */
-class Request extends Object
+class Request extends BObject
 {
     /**
      * @var string

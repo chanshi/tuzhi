@@ -8,10 +8,10 @@
 
 namespace tuzhi\support\images;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\support\files\Files;
 
-abstract class ImagesServices extends Object
+abstract class ImagesServices extends BObject
 {
     /**
      *

@@ -8,9 +8,9 @@
 
 namespace tuzhi\model\validators;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
-abstract class Verify extends Object
+abstract class Verify extends BObject
 {
     /**
      * @var Validator;

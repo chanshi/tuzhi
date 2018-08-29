@@ -8,7 +8,7 @@
 
 namespace tuzhi\helper;
 
-use Closure;
+use \Closure;
 
 class Arr {
 

@@ -8,13 +8,13 @@
 
 namespace tuzhi\facades;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Facade
  * @package tuzhi\facades
  */
-class Facade extends Object
+class Facade extends BObject
 {
     /**
      * @var

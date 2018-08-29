@@ -9,13 +9,13 @@
 namespace tuzhi\support\profiler;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Timer
  * @package tuzhi\support\profiles
  */
-class Timer extends Object
+class Timer extends BObject
 {
     /**
      * @var array

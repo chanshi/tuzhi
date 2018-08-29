@@ -18,7 +18,7 @@ use tuzhi\helper\Arr;
  * Class Application
  * @package tuzhi\base
  */
-abstract class Application extends Object  implements IApplication
+abstract class Application extends BObject  implements IApplication
 {
     /**
      * @var

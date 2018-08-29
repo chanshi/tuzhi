@@ -10,10 +10,10 @@ namespace tuzhi\nosql\memcached;
 
 
 use tuzhi\base\exception\InvalidParamException;
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\helper\Arr;
 
-class Connection extends Object
+class Connection extends BObject
 {
 
     /**

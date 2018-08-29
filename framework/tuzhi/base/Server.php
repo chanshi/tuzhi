@@ -15,7 +15,7 @@ namespace tuzhi\base;
  * Class Serve
  * @package tuzhi\base
  */
-class Server extends Object
+class Server extends BObject
 {
     /**
      *

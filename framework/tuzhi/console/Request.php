@@ -8,10 +8,10 @@
 
 namespace tuzhi\console;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\contracts\web\IRequest;
 
-class Request extends Object implements IRequest
+class Request extends BObject implements IRequest
 {
 
     /**

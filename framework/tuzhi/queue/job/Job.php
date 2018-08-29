@@ -8,14 +8,14 @@
 
 namespace tuzhi\queue\job;
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 use tuzhi\queue\Payload;
 
 /**
  * Class Job
  * @package tuzhi\queue\job
  */
-abstract class Job extends Object
+abstract class Job extends BObject
 {
 
     /**

@@ -9,13 +9,13 @@
 namespace tuzhi\nosql\redis;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class Transaction
  * @package tuzhi\nosql\redis
  */
-class Transaction extends Object
+class Transaction extends BObject
 {
     /**
      * @var \Redis

@@ -8,13 +8,13 @@
 namespace tuzhi\nosql\redis\commands;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class StringCmd
  * @package tuzhi\nosql\redis\commands
  */
-class StringCmd extends  Object
+class StringCmd extends  BObject
 {
     /**
      * @var Keys

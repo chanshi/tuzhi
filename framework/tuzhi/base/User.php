@@ -9,13 +9,13 @@
 namespace base;
 
 
-use tuzhi\base\Object;
+use tuzhi\base\BObject;
 
 /**
  * Class User
  * @package base
  */
-class User extends Object
+class User extends BObject
 {
 
     /**

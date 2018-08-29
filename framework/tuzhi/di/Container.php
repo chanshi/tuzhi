@@ -7,6 +7,7 @@
  */
 
 namespace tuzhi\di;
+
 use tuzhi\base\exception\InvalidParamException;
 use tuzhi\base\exception\NotFoundMethodException;
 
@@ -65,6 +66,8 @@ class Container
      * @param array $config
      * @return mixed|null
      * @throws InvalidParamException
+     * @throws NotFoundMethodException
+     * @throws \ReflectionException
      */
     public function get( $name ,$param = [] ,$config= [])
     {
@@ -104,15 +107,9 @@ class Container
     }
 
     /**
-     * set( 'db' ,[] )
-     * set( 'interface' ,'class')
-     * set( 'class' , values)
-     * set( 'name' ,function(){} )
-     *
-     * 设置定义体
-     *
      * @param $class
      * @param array $definition
+     * @throws InvalidParamException
      */
     public function set( $class ,$definition = [] )
     {
@@ -125,6 +122,8 @@ class Container
      * @param $params
      * @param $config
      * @return mixed
+     * @throws NotFoundMethodException
+     * @throws \ReflectionException
      */
     public function build($class ,$params ,$config)
     {
@@ -158,6 +157,7 @@ class Container
     /**
      * @param $class
      * @return array
+     * @throws \ReflectionException
      */
     public function getDependent( $class ) {
         // 缓存
