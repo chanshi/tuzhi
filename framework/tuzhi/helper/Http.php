@@ -24,8 +24,15 @@ class Http
     {
         $arg = array();
         foreach ($param as $key=>$value){
-            $value = trim($value);
-            $arg[] = ( $encode ?   $key.'='.urlencode($value)  :  $key.'='.$value);
+            if (is_array($value)){
+                foreach ( $value as $v ){
+                    $v = trim($v);
+                    $arg[] = ( $encode ?   $key.'='.urlencode($v)  :  $key.'='.$v);
+                }
+            }else{
+                $value = trim($value);
+                $arg[] = ( $encode ?   $key.'='.urlencode($value)  :  $key.'='.$value);
+            }
         }
         $string = join('&',$arg);
         //
