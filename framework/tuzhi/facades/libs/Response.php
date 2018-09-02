@@ -13,6 +13,7 @@ class Response
      * @param $data
      * @param array $header
      * @return mixed
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public static function json( $data ,$header = [] )
     {
@@ -31,6 +32,7 @@ class Response
      * @param $resource
      * @param array $header
      * @return mixed
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public static function to( $resource ,$header =[] )
     {
@@ -45,6 +47,21 @@ class Response
         );
     }
 
+    /**
+     * @return mixed
+     * @throws \tuzhi\base\exception\InvalidParamException
+     */
+    public static function Referer(){
+        return static::to($_SERVER['HTTP_REFERER']);
+    }
+
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     * @throws \tuzhi\base\exception\NotFoundMethodException
+     */
     public static function __callStatic($name, $arguments)
     {
         $Server = Tuzhi::App()->get('response');

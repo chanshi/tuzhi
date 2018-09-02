@@ -27,7 +27,7 @@ class Http
             if (is_array($value)){
                 foreach ( $value as $v ){
                     $v = trim($v);
-                    $arg[] = ( $encode ?   $key.'='.urlencode($v)  :  $key.'='.$v);
+                    $arg[] = ( $encode ?   $key.'[]='.urlencode($v)  :  $key.'[]='.$v);
                 }
             }else{
                 $value = trim($value);
