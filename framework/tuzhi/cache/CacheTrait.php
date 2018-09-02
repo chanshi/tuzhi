@@ -9,6 +9,8 @@
 namespace tuzhi\cache;
 
 
+use tuzhi\helper\Json;
+
 trait CacheTrait
 {
     /**
@@ -42,7 +44,11 @@ trait CacheTrait
     protected function setContent( $content )
     {
         $method = $this->contentEncode;
-        return $method($content);
+        if ($method == 'json'){
+            return Json::encode($content);
+        }else{
+            return $method($content);
+        }
     }
 
     /**
@@ -52,6 +58,10 @@ trait CacheTrait
     protected function getContent( $content )
     {
         $method = $this->contentDecode;
-        return $method( $content );
+        if ($method == 'json'){
+            return Json::decode($content);
+        }else{
+            return $method($content);
+        }
     }
 }

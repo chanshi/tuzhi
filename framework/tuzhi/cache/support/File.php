@@ -50,6 +50,7 @@ class File extends BObject implements ICache
     /**
      * @param $key
      * @return string
+     * @throws \Exception
      */
     public function getPathFile( $key )
     {
@@ -67,6 +68,7 @@ class File extends BObject implements ICache
      * @param null $value
      * @param int $expiry
      * @return mixed
+     * @throws \Exception
      */
     public function set($key, $value = null, $expiry = 0)
     {
@@ -83,7 +85,8 @@ class File extends BObject implements ICache
 
     /**
      * @param $key
-     * @return null
+     * @return mixed|null
+     * @throws \Exception
      */
     public function get($key)
     {
@@ -104,6 +107,7 @@ class File extends BObject implements ICache
     /**
      * @param $key
      * @return mixed
+     * @throws \Exception
      */
     public function delete($key)
     {
@@ -124,7 +128,8 @@ class File extends BObject implements ICache
      * @param $key
      * @param int $step
      * @param int $expiry
-     * @return int|null
+     * @return int|mixed|null
+     * @throws \Exception
      */
     public function increment($key, $step = 1,$expiry = 0)
     {
@@ -141,7 +146,8 @@ class File extends BObject implements ICache
      * @param $key
      * @param int $step
      * @param int $expiry
-     * @return int
+     * @return int|mixed
+     * @throws \Exception
      */
     public function decrement($key, $step = 1,$expiry = 0)
     {

@@ -63,7 +63,7 @@ class Redis extends BObject implements ICache
     public function set($key, $value = null, $expiry = 0)
     {
         $key = $this->getKey($key);
-        $this->redis[$key]->Object()->set($value);
+        $this->redis[$key]->Object()->set( $this->setContent( $value ) );
         $expiry && $this->redis[$key]->expire( $expiry );
         return true;
     }
@@ -74,9 +74,10 @@ class Redis extends BObject implements ICache
      */
     public function get($key)
     {
-        return $this->redis[$this->getKey($key)]->exists()
+         $data = $this->redis[$this->getKey($key)]->exists()
             ? $this->redis[$this->getKey($key)]->Object()->get()
             : null;
+         return $this->getContent( $data );
     }
 
     /**
