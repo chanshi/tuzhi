@@ -16,6 +16,7 @@ namespace tuzhi\helper;
 class Http
 {
     /**
+     * //debug
      * @param $param
      * @param bool $encode
      * @return string
