@@ -80,10 +80,10 @@ class DataCollection extends Model implements IDataCollection
      * @param int $page
      * @param int $pageSize
      */
-    final public function setPage(  $page ,  $pageSize )
+    final public function setPage(  $page = 1,  $pageSize =30)
     {
         $this->page = max(1,$page);
-        $this->pageSize = max(1, min(30,$pageSize) );
+        $this->pageSize = $pageSize;
     }
 
     /**

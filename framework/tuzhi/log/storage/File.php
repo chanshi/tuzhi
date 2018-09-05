@@ -45,7 +45,8 @@ class File extends BObject implements IStorage
     protected $format;
 
     /**
-     * @throws \tuzhi\base\exception\InvalidParamException
+     * @return mixed|void
+     * @throws \Exception
      */
     public function init()
     {
