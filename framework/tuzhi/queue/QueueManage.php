@@ -34,7 +34,8 @@ class QueueManage extends BObject
     public $config;
 
     /**
-     * @return mixed
+     * @return mixed|void
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function init()
     {
@@ -44,6 +45,7 @@ class QueueManage extends BObject
 
     /**
      * @return bool
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function initQueue()
     {

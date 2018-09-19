@@ -59,6 +59,7 @@ class AppCollect extends Collection
 
     /**
      * @return array
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function collect()
     {

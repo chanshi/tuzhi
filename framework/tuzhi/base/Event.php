@@ -71,8 +71,9 @@ class Event extends BObject
     /**
      * @param $class
      * @param $eventName
-     * @param $data
+     * @param null $data
      * @return bool
+     * @throws exception\InvalidParamException
      */
     public static function trigger($class,$eventName,$data = null)
     {

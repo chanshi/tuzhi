@@ -35,8 +35,8 @@ abstract class ImagesServices extends BObject
 
     /**
      * @param $image
-     * @param null $width
-     * @param null $height
+     * @param int $width
+     * @param int $height
      * @param string $suffix
      * @return mixed
      */

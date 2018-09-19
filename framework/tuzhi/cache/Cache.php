@@ -70,6 +70,7 @@ class Cache extends BObject
      * @param null $method
      * @return mixed
      * @throws NotSupportException
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function getInstance( $method = null )
     {
@@ -85,6 +86,8 @@ class Cache extends BObject
      * @param $method
      * @param $args
      * @return mixed
+     * @throws NotSupportException
+     * @throws \tuzhi\base\exception\InvalidParamException
      */
     public function __call( $method ,$args )
     {

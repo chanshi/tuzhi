@@ -10,6 +10,10 @@ namespace tuzhi\queue;
 
 use tuzhi\base\BObject;
 
+/**
+ * Class Worker
+ * @package tuzhi\queue
+ */
 class Worker extends BObject
 {
     /**
