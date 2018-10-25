@@ -127,7 +127,7 @@ class DataCollection extends Model implements IDataCollection
 
            $count =  $this->enableCount
                ? $this->Query->count()
-               : 0;
+               : 1000000000;
 
             $this->Pager->setTotal($count)
                 ->setPage($this->page)
