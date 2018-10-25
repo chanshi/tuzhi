@@ -29,6 +29,9 @@ class DataCollection extends Model implements IDataCollection
      */
     protected $enablePager = true;
 
+
+    protected $enableCount = true;
+
     /**
      * @var
      */
@@ -77,6 +80,17 @@ class DataCollection extends Model implements IDataCollection
     }
 
     /**
+     *
+     * @param bool $enable
+     * @return $this
+     */
+    public function setEnableCount( bool $enable)
+    {
+        $this->enableCount = $enable;
+        return $this;
+    }
+
+    /**
      * @param int $page
      * @param int $pageSize
      */
@@ -111,7 +125,11 @@ class DataCollection extends Model implements IDataCollection
                 $this->pageSize
             );
 
-            $this->Pager->setTotal($this->Query->count())
+           $count =  $this->enableCount
+               ? $this->Query->count()
+               : 0;
+
+            $this->Pager->setTotal($count)
                 ->setPage($this->page)
                 ->setPageSize($this->pageSize)
                 ->build();

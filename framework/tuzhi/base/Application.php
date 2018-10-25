@@ -72,7 +72,8 @@ abstract class Application extends BObject  implements IApplication
 
 
     /**
-     * Init
+     * @return mixed|void
+     * @throws exception\InvalidParamException
      */
     public function init()
     {
@@ -97,6 +98,7 @@ abstract class Application extends BObject  implements IApplication
 
     /**
      * @param $boot
+     * @throws exception\InvalidParamException
      */
     public function bootstrap( $boot )
     {
@@ -129,7 +131,6 @@ abstract class Application extends BObject  implements IApplication
     /**
      * @param $serviceName
      * @param $definition
-     * @return $this
      */
     public function register( $serviceName , $definition )
     {
@@ -180,6 +181,7 @@ abstract class Application extends BObject  implements IApplication
      * @param $method
      * @param $arguments
      * @return mixed
+     * @throws NotFoundServersException
      */
     public function __call($method, $arguments)
     {

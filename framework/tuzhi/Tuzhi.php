@@ -38,9 +38,6 @@ class Tuzhi {
      */
     protected static $configure;
 
-
-
-
     /**
      * @var array
      */
@@ -68,13 +65,8 @@ class Tuzhi {
         /**
          * 添加对插件的支持
          */
-        Tuzhi::$alias['&tz'] = dirname(__DIR__).'/tuzhi-';
-        Tuzhi::$namespace['tz'] = Tuzhi::$alias['&tz'];
-
-        /**
-         *  定义 autoload
-         */
-        //spl_autoload_register([ 'Tuzhi' , 'autoload'],true,true);
+       // Tuzhi::$alias['&tz'] = dirname(__DIR__).'/tuzhi-';
+       // Tuzhi::$namespace['tz'] = Tuzhi::$alias['&tz'];
 
         /**
          * 计算起点
@@ -132,18 +124,19 @@ class Tuzhi {
 
 
     /**
-     * 设置别名
-     *
      * @param $aliasName
      * @param null $aliasValue
+     * @return bool|string
      */
     public static function setAlias( $aliasName ,$aliasValue = null )
     {
         if( is_string($aliasName) && is_dir( $aliasValue ) ){
             $aliasName = '&'.ltrim($aliasName,'&');
             $aliasValue = rtrim($aliasValue,'/').'/';
-            Tuzhi::$alias[$aliasName] = $aliasValue;
+            return Tuzhi::$alias[$aliasName] = $aliasValue;
+
         }
+        return false ;
     }
 
     /**
@@ -156,11 +149,10 @@ class Tuzhi {
     {
         if( strpos($aliasName,'&') === 0 ){
 
-            if( strpos($aliasName,'&tz/') === 0 ){
-                return str_replace( '&tz/' ,static::$alias['&tz'] ,$aliasName );
-            }else if( ($pos = strpos( $aliasName ,'/' ) ) > 0 ){
+            //TODO:: 取消 对 &tz的支持
+            if( ($pos = strpos( $aliasName ,'/' ) ) > 0 ){
                 $alias = substr($aliasName ,0 ,$pos);
-                //todo
+
                 return str_replace( $alias, static::$alias[$alias] ,$aliasName );
             }else{
                 return isset( static::$alias[$aliasName] )
@@ -276,7 +268,8 @@ class Tuzhi {
 
     /**
      * @param $key
-     * @param $value
+     * @param null $value
+     * @return mixed
      */
     public static function config( $key , $value = NULL )
     {
@@ -318,9 +311,12 @@ class Tuzhi {
      */
     public static function frameVersion()
     {
-        return '1.0101 - alpha';
+        return '2.0101 - alpha';
     }
 
+    /**
+     * @return array
+     */
     public static function tu()
     {
         return static::$alias;
