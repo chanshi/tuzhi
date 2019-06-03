@@ -70,7 +70,7 @@ class DB
     public static function Commit( $transactionLevel )
     {
         $transaction = DB::getDb()->getTransaction();
-        if( $transaction->getLevel == $transactionLevel ){
+        if( $transaction->getLevel() == $transactionLevel ){
             $transaction->commit();
             return true;
         }
