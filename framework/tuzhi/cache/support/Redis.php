@@ -86,7 +86,7 @@ class Redis extends BObject implements ICache
      */
     public function delete($key)
     {
-        return $this->redis[$key]->del();
+        return $this->redis[$this->getKey($key)]->del();
     }
 
     /**
